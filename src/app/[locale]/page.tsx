@@ -24,7 +24,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "seoHome" });
 
   const baseUrl = "https://t-mebel.com.ua";
-  const canonical = `${baseUrl}/${locale}`;
+  const canonical = locale === "uk" ? baseUrl + "/" : `${baseUrl}/${locale}`;
 
   return {
     title: t("title"),
@@ -32,17 +32,17 @@ export async function generateMetadata({
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url: `https://t-mebel.com.ua/${locale}`,
+      url: canonical,
       siteName: "T-Mebel",
       locale,
     },
     alternates: {
       canonical,
       languages: {
-        uk: `${baseUrl}`,
+        uk: `${baseUrl}/`,
         en: `${baseUrl}/en`,
         ru: `${baseUrl}/ru`,
-        "x-default": `${baseUrl}`,
+        "x-default": `${baseUrl}/`,
       },
     },
   };

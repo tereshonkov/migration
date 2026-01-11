@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const baseUrl = 'https://t-mebel.com.ua';
   const path = '/service';
-  const canonical = `${baseUrl}/${locale}${path}`;
+  const canonical = locale === 'uk' ? `${baseUrl}${path}` : `${baseUrl}/${locale}${path}`;
 
   return {
     title: t('title'),
@@ -22,17 +22,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('title'),
       description: t('description'),
-      url: `https://t-mebel.com.ua/${locale}`,
+      url: canonical,
       siteName: 'T-Mebel',
       locale,
     },
     alternates: {
       canonical,
       languages: {
-        uk: `${baseUrl}/uk${path}`,
+        uk: `${baseUrl}${path}`,
         en: `${baseUrl}/en${path}`,
         ru: `${baseUrl}/ru${path}`,
-        'x-default': `${baseUrl}/uk${path}`,
+        'x-default': `${baseUrl}${path}`,
       },
     },
   };
@@ -43,7 +43,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'servicePage' });
-  
   return (
     <div className="container">
       <PageHeader 

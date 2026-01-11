@@ -12,12 +12,13 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const locale = "uk"; // Default locale for non-localized routes
+  const locale = "uk";
   const messagesData = messages as any;
   const t = (key: string) => messagesData[`data_${id}`]?.[key] || key;
 
   const baseUrl = "https://t-mebel.com.ua";
   const path = `/product/${id}`;
+  const canonical = `${baseUrl}${path}`;
 
   return {
     title: t("titleSeo"),
@@ -25,12 +26,12 @@ export async function generateMetadata({
     openGraph: {
       title: t("titleSeo"),
       description: t("description"),
-      url: baseUrl + path,
+      url: canonical,
       siteName: "T-Mebel",
       locale,
     },
     alternates: {
-      canonical: `${baseUrl}${path}`,
+      canonical,
       languages: {
         uk: `${baseUrl}${path}`,
         en: `${baseUrl}/en${path}`,

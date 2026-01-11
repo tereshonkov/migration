@@ -17,9 +17,10 @@ import AnimatedSection from "@/components/AnimatedSection/AnimatedSection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = (key: string) => messages.seoHome[key as keyof typeof messages.seoHome];
-  const locale = "uk"; // Default locale for non-localized routes
+  const locale = "uk";
 
   const baseUrl = "https://t-mebel.com.ua";
+  const canonical = `${baseUrl}/`;
 
   return {
     title: t("title"),
@@ -27,17 +28,17 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url: baseUrl + "/",
+      url: canonical,
       siteName: "T-Mebel",
       locale,
     },
     alternates: {
-      canonical: baseUrl + "/",
+      canonical,
       languages: {
-        uk: baseUrl + "/",
-        en: baseUrl + "/en",
-        ru: baseUrl + "/ru",
-        "x-default": baseUrl + "/",
+        uk: `${baseUrl}/`,
+        en: `${baseUrl}/en`,
+        ru: `${baseUrl}/ru`,
+        "x-default": `${baseUrl}/`,
       },
     },
   };

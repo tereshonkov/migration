@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const baseUrl = 'https://t-mebel.com.ua';
   const path = `/product/${id}`;
-  const canonical = `${baseUrl}/${locale}${path}`;
+  const canonical = locale === 'uk' ? `${baseUrl}${path}` : `${baseUrl}/${locale}${path}`;
 
   return {
     title: t('titleSeo'),
@@ -21,17 +21,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('titleSeo'),
       description: t('description'),
-      url: `https://t-mebel.com.ua/${locale}`,
+      url: canonical,
       siteName: 'T-Mebel',
       locale,
     },
     alternates: {
       canonical,
       languages: {
-        uk: `${baseUrl}/uk${path}`,
+        uk: `${baseUrl}${path}`,
         en: `${baseUrl}/en${path}`,
         ru: `${baseUrl}/ru${path}`,
-        'x-default': `${baseUrl}/uk${path}`,
+        'x-default': `${baseUrl}${path}`,
       },
     },
   };
