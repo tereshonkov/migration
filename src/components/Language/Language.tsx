@@ -10,7 +10,7 @@ export default function Language({ mobile = false }: { mobile?: boolean }) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const currentLocale = pathname.split('/')[1];
+    const currentLocale = pathname.split('/')[1]; //test
 
 const supportedLocales = ['uk', 'ru', 'en'];
 
