@@ -19,11 +19,11 @@ export default async function middleware(req: NextRequest): Promise<Response | N
   const section = segments[offset];
   const id = segments[offset + 1];
 
-  // Legacy product -> homepage redirect
+  // Legacy product -> service redirect
   if (section === 'product' && id) {
     const targetPath = locale && locale !== 'uk'
-      ? `/${locale}`
-      : `/`;
+      ? `/${locale}/service/${id}`
+      : `/service/${id}`;
     const targetUrl = new URL(targetPath, req.url);
     return NextResponse.redirect(targetUrl, 301);
   }
