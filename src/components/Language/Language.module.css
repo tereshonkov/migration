@@ -1,7 +1,6 @@
 .langWrapper {
   max-width: 150px;
   max-height: 50px;
-  /* cursor: pointer; */
   display: flex;
   align-items: center;
   gap: 10px;
@@ -32,6 +31,59 @@
   font-size: 14px;
   font-weight: 600;
 }
+
+.langSelect {
+  position: relative;
+  display: inline-flex;
+}
+.trigger {
+  background-color: var(--background-color-primary);
+  color: var(--text-color-secondary);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 50px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.chevron {
+  font-size: 12px;
+  line-height: 1;
+}
+.options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background-color: var(--background-color-primary);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  display: grid;
+  gap: 4px;
+  min-width: 140px;
+  z-index: 100;
+}
+.option {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+}
+.option[aria-selected="true"],
+.option:hover {
+  background-color: rgba(0,0,0,0.06);
+}
+
+/* legacy select styles retained for admin link */
 .select {
   background-color: var(--background-color-primary);
   color: var(--text-color-secondary);

@@ -3,14 +3,32 @@ import styles from './Language.module.css';
 import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Language({ mobile = false }: { mobile?: boolean }) {
 
     const t = useTranslations('header');
     const router = useRouter();
-    const pathname = usePathname();
+    const pathname = usePathname() || '/';
     const searchParams = useSearchParams();
-    const currentLocale = pathname.split('/')[1]; //test
+    const [open, setOpen] = useState(false);
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+const labels: Record<string, string> = {
+  uk: 'Українська',
+  en: 'English',
+  ru: 'Русский',
+};
+
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+      setOpen(false);
+    }
+  };
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => document.removeEventListener('mousedown', handleClickOutside);
+}, []);
 
 const supportedLocales = ['uk', 'ru', 'en'];
 
@@ -20,12 +38,13 @@ const getLocaleFromPath = (pathname: string) => {
   return 'uk'; // default
 };
 
-const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  const selectedLocale = e.target.value;
-  const paramsString = searchParams.toString();
-  const query = paramsString ? `?${paramsString}` : '';
+const currentLocale = getLocaleFromPath(pathname);
 
-  let basePath = pathname;
+const handleChange = (selectedLocale: string) => {
+   const paramsString = searchParams.toString();
+   const query = paramsString ? `?${paramsString}` : '';
+
+   let basePath = pathname;
 
   // Если есть префикс локали в начале — удаляем его
   const current = getLocaleFromPath(pathname);
@@ -42,33 +61,61 @@ const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     newPathname = `/${selectedLocale}${basePath === '/' ? '' : basePath}`;
   }
 
+  setOpen(false);
   router.push(`${newPathname}${query}`);
 };
+
+const handleContainerToggle = (event: React.MouseEvent<HTMLDivElement>) => {
+  const target = event.target as HTMLElement;
+  // Тоглим только по клику на контейнер или иконку, не мешая кнопкам опций
+  if (target.tagName === 'IMG' || target === wrapperRef.current) {
+    setOpen((prev) => !prev);
+  }
+};
+
 const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     return (
       <>
-              <div className={mobile ? styles.langWrapperDark : styles.langWrapper}>
+              <div
+          ref={wrapperRef}
+          className={mobile ? styles.langWrapperDark : styles.langWrapper}
+          onClick={handleContainerToggle}
+        >
             <img src={!mobile ? "/lang.svg" : "/lang-dark.svg"} alt="language" />
-            {/* <p>{t('language')}</p> */}
             <div className={styles.langSelect}>
-                <select
-                    aria-label={t('language') || "Выберите язык"}
-                    className={styles.select}
-                    value={currentLocale === 'uk' ? 'uk' : currentLocale}
-                    onChange={handleChange}
-                    name="language"
-                    id="language"
-                >
-                    <option className={styles.darkItem} value="uk">Українська</option>
-                    <option className={styles.darkItem} value="en">English</option>
-                    <option className={styles.darkItem} value="ru">Русский</option>
-                </select>
+              <button
+                type="button"
+                aria-haspopup="listbox"
+                aria-expanded={open}
+                className={styles.trigger}
+                onClick={() => setOpen((prev) => !prev)}
+              >
+                <span>{labels[currentLocale]}</span>
+                <span className={styles.chevron} aria-hidden="true">▾</span>
+              </button>
+              {open && (
+                <ul className={styles.options} role="listbox">
+                  {supportedLocales.map((locale) => (
+                    <li key={locale}>
+                      <button
+                        type="button"
+                        role="option"
+                        aria-selected={locale === currentLocale}
+                        className={styles.option}
+                        onClick={() => handleChange(locale)}
+                      >
+                        {labels[locale]}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
         </div>
-        {token && (
-          <Link className={styles.select} href="/admin">Админ панель</Link>
-        )}
-      </>
-    )
-}
+         {token && (
+           <Link className={styles.select} href="/admin">Админ панель</Link>
+         )}
+       </>
+     )
+ }
