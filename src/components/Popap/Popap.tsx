@@ -3,7 +3,7 @@ import styles from "./Popap.module.css";
 import { FaTags, FaGift } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useTranslations } from "next-intl";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { sendMessageApi } from "@/api/messages";
 import { reportConversion } from "@/utils/gtagConversion";
@@ -17,6 +17,7 @@ interface InputState {
 export default function Popap() {
   const t = useTranslations("popap");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const toastIdRef = useRef<string | null>(null);
   const [input, setInput] = useState<InputState>({
     name: "",
     phone: "",
@@ -41,22 +42,53 @@ export default function Popap() {
   };
   useEffect(() => {
     if (sessionStorage.getItem("popapShown")) return;
-    
+
     const handleScroll = () => {
       const scrolled = window.scrollY;
       const height = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercentage = (scrolled / height) * 100;
-      
-      if (scrollPercentage >= 50) {
-        setIsOpen(true);
-        sessionStorage.setItem("popapShown", "true");
+
+      if (scrollPercentage >= 50 && !toastIdRef.current) {
+        const id = toast.custom((toastProps) => (
+          <div className={`${styles.toast} ${toastProps.visible ? styles.toastShow : styles.toastHide}`}>
+            <div className={styles.toastText}>
+              <FaGift className={styles.iconGift} />
+              <div>
+                <p>{t("title")}</p>
+                <p>{t("description")}</p>
+              </div>
+            </div>
+            <div className={styles.toastActions}>
+              <button
+                className={styles.button}
+                onClick={() => {
+                  setIsOpen(true);
+                  sessionStorage.setItem("popapShown", "true");
+                  if (toastIdRef.current) toast.dismiss(toastIdRef.current);
+                }}
+              >
+                {t("btn")}
+              </button>
+              <button
+                className={styles.toastClose}
+                onClick={() => {
+                  sessionStorage.setItem("popapShown", "true");
+                  if (toastIdRef.current) toast.dismiss(toastIdRef.current);
+                }}
+              >
+                <IoCloseCircleOutline size={24} />
+              </button>
+            </div>
+          </div>
+        ), { duration: Infinity });
+        toastIdRef.current = id as string;
         window.removeEventListener("scroll", handleScroll);
       }
     };
-    
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [t]);
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await registerConversion();
