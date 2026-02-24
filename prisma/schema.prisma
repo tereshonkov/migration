@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model CallClick {
+  id         String   @id
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("call_click")
+}
+
+model Image {
+  id         String   @id
+  url        String
+  product_id String?
+  reviewId   String?
+  is_cover   Boolean  @default(false)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  product    Product? @relation(fields: [product_id], references: [id])
+  reviews    Review?  @relation(fields: [reviewId], references: [id])
+
+  @@map("image")
+}
+
+model Message {
+  id         String   @id
+  name       String
+  phone      String
+  message    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  read       Boolean  @default(false)
+
+  @@map("messages")
+}
+
+model Product {
+  id          String   @id
+  title       String
+  description String
+  color       String
+  furnitures  String
+  width       Int
+  height      Int
+  rating      Float
+  category    Category @default(OTHER)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  image       Image[]
+  reviews     Review[]
+
+  @@map("product")
+}
+
+model Review {
+  id         String   @id
+  name       String
+  text       String
+  product_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_aproved Boolean  @default(false)
+  image      Image[]
+  product    Product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
+
+model User {
+  id         String   @id @default(cuid())
+  name       String
+  email      String   @unique
+  password   String
+  role       Role     @default(USER)
+  accounts Account[]
+  sessions Session[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("user")
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token       String?
+  access_token        String?
+  expires_at          Int?
+  token_type          String?
+  scope               String?
+  id_token            String?
+  session_state       String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id            String   @id @default(cuid())
+  sessionToken  String   @unique
+  userId        String
+  expires       DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+enum Category {
+  KITCHEN
+  WARDROBE
+  STORE
+  BEDROOM
+  OTHER
+}
+
+enum Role {
+  USER
+  ADMIN
+}
