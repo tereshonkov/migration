@@ -41,5 +41,5 @@ export default async function middleware(req: NextRequest): Promise<Response | N
 }
 
 export const config = {
-  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*|signin).*)'
+  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*|login).*)'
 }
