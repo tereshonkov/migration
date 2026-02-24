@@ -1,20 +1,21 @@
-/// <reference path="../types/next-auth.d.ts" />
-
-import { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import prisma from "./prisma";
+import NextAuth from "next-auth";
+import { prisma } from "./lib/prisma";
 import * as bcrypt from "bcryptjs";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import authConfig from "@/auth.config";
 
-export const authOptions: NextAuthConfig = {
-    adapter: PrismaAdapter(prisma) as any,
-    session: { strategy: "jwt" },
-    pages: {
-        signIn: "/login",
-    },
+export const { handlers, auth, signIn, signOut } = NextAuth({
+    ...authConfig,
+    adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: "credentials",
+            credentials: {
+                email: { label: 'Email', type: 'email' },
+                password: { label: 'Password', type: 'password' },
+            },
+
             async authorize(credentials) {
                 try {
                     const email = credentials?.email as string;
@@ -54,6 +55,9 @@ export const authOptions: NextAuthConfig = {
             },
         }),
     ],
+    session: {
+        strategy: 'jwt',
+    },
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
@@ -69,5 +73,18 @@ export const authOptions: NextAuthConfig = {
             }
             return session;
         },
+        async redirect({ url, baseUrl }) {
+            console.log('Redirect callback:', { url, baseUrl });
+
+            // After sign in, redirect to dashboard
+            if (url.startsWith(baseUrl)) {
+                return `${baseUrl}/admin`;
+            }
+            // After sign out, redirect to home
+            else if (url.startsWith('/')) {
+                return `${baseUrl}${url}`;
+            }
+            return baseUrl;
+        },
     },
-};
+});

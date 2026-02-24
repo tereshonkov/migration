@@ -1,13 +1,18 @@
 import createMiddleware from 'next-intl/middleware';
 import {routing} from './i18n/routing';
 import { NextRequest, NextResponse } from 'next/server';
+import NextAuth from "next-auth";
+import authConfig from "./auth.config";
+import { authProxy } from './auth.proxy';
 
 
 const supportedLocales = new Set(['uk', 'ru', 'en']);
 
+const { auth: getSession } = NextAuth(authConfig);
 const i18nMiddleware = createMiddleware(routing);
 
-export default async function middleware(req: NextRequest): Promise<Response | NextResponse> {
+export default authProxy((req) => {
+  const isLoggedIn = !!req.auth;
   const { pathname } = req.nextUrl;
   const segments = pathname.split('/').filter(Boolean);
 
@@ -18,6 +23,23 @@ export default async function middleware(req: NextRequest): Promise<Response | N
 
   const section = segments[offset];
   const id = segments[offset + 1];
+
+  // 1. ЗАЩИТА АДМИНКИ (Строго /admin)
+  if (pathname.startsWith('/admin')) {
+    if (!isLoggedIn) {
+      return NextResponse.redirect(new URL('/login', req.url));
+    }
+    // Если залогинен — пропускаем в админку, i18n тут не нужен
+    return NextResponse.next();
+  }
+
+  // 2. ИСКЛЮЧЕНИЕ ДЛЯ ЛОГИНА
+  if (pathname === '/login') {
+    if (isLoggedIn) {
+      return NextResponse.redirect(new URL('/admin', req.url));
+    }
+    return NextResponse.next();
+  }
 
   // Legacy product -> service redirect
   if (section === 'product' && id) {
@@ -38,8 +60,8 @@ export default async function middleware(req: NextRequest): Promise<Response | N
   }
 
   return i18nMiddleware(req);
-}
+});
 
 export const config = {
-  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*|login).*)'
+  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)'
 }

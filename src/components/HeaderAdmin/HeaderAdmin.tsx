@@ -3,7 +3,7 @@
 // import Brightness7Icon from "@mui/icons-material/Brightness7";
 import SearchBar from "../SearchAdmin/Search";
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
-import { logout } from "@/api/auth";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "../Header/Header.module.css";
@@ -13,8 +13,9 @@ export default function HeaderAdmin() {
   const router = useRouter();
   const handleLogout = async () => {
     try {
-      await logout();
-      router.push("/signin");
+      await signOut({ redirect: false });
+      router.push("/login"); // Изменено на /login (страница входа NextAuth)
+      router.refresh();
     } catch (error) {
       console.error("Ошибка при выходе:", error);
     }

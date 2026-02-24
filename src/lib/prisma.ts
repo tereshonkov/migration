@@ -1,31 +1,25 @@
+import "dotenv/config";
+import { Pool } from 'pg';
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/generated/prisma/client";
 
-const PRISMA_KEY = Symbol.for('__prisma__');
+// 1. Создаем пул соединений (он должен быть один)
+const connectionString = `${process.env.DATABASE_URL}`;
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
 
-type GlobalWithPrisma = typeof globalThis & {
-  [PRISMA_KEY]?: PrismaClient;
+// 2. Описываем глобальную переменную для TS
+const globalForPrisma = globalThis as unknown as {
+    prisma: PrismaClient | undefined;
 };
 
-const globalWithPrisma = globalThis as GlobalWithPrisma;
+// 3. Инициализируем клиент с адаптером
+export const prisma =
+    globalForPrisma.prisma ??
+    new PrismaClient({
+        adapter,
+        log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+    });
 
-function getPrismaClient(): PrismaClient {
-  const cached = globalWithPrisma[PRISMA_KEY];
-  if (cached) {
-    return cached;
-  }
-  
-  // Используем as any, чтобы обойти проблему с типами в Prisma 7.4.1
-  // Конструктор требует либо adapter, либо accelerateUrl, но при использовании
-  // прямого подключения через DATABASE_URL они не нужны.
-  const client = new PrismaClient({} as any);
-  globalWithPrisma[PRISMA_KEY] = client;
-  
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[prisma] PrismaClient created (singleton)');
-  }
-  
-  return client;
-}
-
-export const prisma = getPrismaClient();
-export default prisma;
+// 4. Сохраняем инстанс в глобальный объект (чтобы не дублировать подключения в dev режиме)
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

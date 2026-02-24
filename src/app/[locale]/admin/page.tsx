@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Box } from "@mui/material";
+import { useSession } from "next-auth/react";
 
 import Sidebar from "@/components/Sidebar/Sidebar";
 import HeaderAdmin from "@/components/HeaderAdmin/HeaderAdmin";
@@ -13,20 +14,40 @@ import UsersPage from "@/components/UsersPage/UsersPage";
 import { useTabContext } from "@/context/TabContext";
 
 export default function Admin() {
-  const [tokenChecked, setTokenChecked] = useState(false);
+  const { data: session, status } = useSession();
   const { page } = useTabContext();
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/signin");
-    } else {
-      setTokenChecked(true);
+    if (status === "unauthenticated") {
+      router.push("/login");
     }
-  }, [router]);
+  }, [status, router]);
 
-  if (!tokenChecked) return null;
+  if (status === "loading") {
+    return (
+      <Box 
+        display="flex" 
+        minHeight="100vh" 
+        alignItems="center" 
+        justifyContent="center"
+        sx={{
+          background: (theme) => 
+            theme.palette.mode === "light"
+              ? "linear-gradient(135deg, rgba(255, 235, 214, 1) 0%, rgba(247, 210, 173, 1) 50%, rgba(255, 235, 214, 1) 100%)"
+              : "#0d0a08",
+        }}
+      >
+        <Box sx={{ color: (theme) => theme.palette.mode === "light" ? "#4a3521" : "#f5e6d3" }}>
+          Загрузка сессии...
+        </Box>
+      </Box>
+    );
+  }
+
+  if (!session) {
+    return null; // Редирект уже сработает
+  }
 
   return (
     <Box 
