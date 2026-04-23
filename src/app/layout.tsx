@@ -5,8 +5,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
-import { NextIntlClientProvider } from 'next-intl';
-import messages from '@/messages/uk.json';
 import JsonLd from "@/components/JsonLd/JsonLd";
 
 const montserrat = Montserrat({
@@ -20,7 +18,7 @@ export const metadata: Metadata = {
     default: "T-Mebel — Меблі на замовлення у Харкові",
     template: "%s | T-Mebel",
   },
-  description: "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний підхід, доступні ціни, власне виробництво.",
+  description: "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний подхід, доступні ціни, власне виробництво.",
   robots: { index: true, follow: true },
   twitter: {
     card: "summary_large_image",
@@ -68,7 +66,7 @@ export default function RootLayout({
   };
 
   return (
-    <>
+    <html lang="uk">
       <head>
         <JsonLd data={organizationJsonLd} />
         {/* Google Tag (gtag.js) */}
@@ -86,12 +84,12 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <NextIntlClientProvider locale="uk" messages={messages}>
+      <body className={`${montserrat.variable}`}>
         <SpeedInsights />
         <Analytics />
         <Toaster position="top-right" reverseOrder={false} />
         {children}
-      </NextIntlClientProvider>
-    </>
+      </body>
+    </html>
   );
 }
