@@ -5,6 +5,8 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
+import Image from 'next/image';
+
 export default function Language({ mobile = false }: { mobile?: boolean }) {
 
     const t = useTranslations('header');
@@ -82,7 +84,7 @@ const token = typeof window !== 'undefined' ? localStorage.getItem('token') : nu
           className={mobile ? styles.langWrapperDark : styles.langWrapper}
           onClick={handleContainerToggle}
         >
-            <img src={!mobile ? "/lang.svg" : "/lang-dark.svg"} alt="language" />
+          <Image src={!mobile ? "/lang.svg" : "/lang-dark.svg"} alt="" width={24} height={24} />
             <div className={styles.langSelect}>
               <button
                 type="button"

@@ -9,7 +9,7 @@ export default async function Footer() {
     <footer className={styles.wrapper}>
         <div className={styles.logoFooter}>
           <div className={styles.logo}>
-          <Image width={60} height={60} src="/logo.png" alt="logo" />
+          <Image width={60} height={60} src="/logo.png" alt="T-Mebel — меблі на замовлення Харків" />
           </div>
           <p>{t('title')}</p>
         </div>

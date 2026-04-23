@@ -172,7 +172,7 @@ export default function FullPage({ id }: { id: string }) {
                 <div key={img?.id} className={styles.sliderMain}>
                   <Image
                     src={img?.url || ""}
-                    alt={data?.title || ""}
+                    alt={`${data?.title || ""} — меблі на замовлення Харків`}
                     width={1024}
                     height={768}
                   />
@@ -190,7 +190,7 @@ export default function FullPage({ id }: { id: string }) {
               >
                 <Image
                   src={image.url || ""}
-                  alt={data?.title || ""}
+                  alt={`${data?.title || ""} — меблі на замовлення Харків`}
                   width={1024}
                   height={768}
                 />
@@ -210,11 +210,11 @@ export default function FullPage({ id }: { id: string }) {
               {t("title")}
             </h2>
             <div className={styles.stars}>
-              <Image width={60} height={60} src="/star.svg" alt="star" />
-              <Image width={60} height={60} src="/star.svg" alt="star" />
-              <Image width={60} height={60} src="/star.svg" alt="star" />
-              <Image width={60} height={60} src="/star.svg" alt="star" />
-              <Image width={60} height={60} src="/star.svg" alt="star" />
+              <Image width={60} height={60} src="/star.svg" alt="" />
+              <Image width={60} height={60} src="/star.svg" alt="" />
+              <Image width={60} height={60} src="/star.svg" alt="" />
+              <Image width={60} height={60} src="/star.svg" alt="" />
+              <Image width={60} height={60} src="/star.svg" alt="" />
             </div>
           </div>
           <p className={styles.subtitle}>
@@ -244,11 +244,11 @@ export default function FullPage({ id }: { id: string }) {
             <div className={styles.reviewsHeading}>
               <h3 className={styles.name}>{review.name}</h3>
               <div className={styles.stars}>
-                <Image width={60} height={60} src="/star.svg" alt="star" />
-                <Image width={60} height={60} src="/star.svg" alt="star" />
-                <Image width={60} height={60} src="/star.svg" alt="star" />
-                <Image width={60} height={60} src="/star.svg" alt="star" />
-                <Image width={60} height={60} src="/star.svg" alt="star" />
+                <Image width={60} height={60} src="/star.svg" alt="" />
+                <Image width={60} height={60} src="/star.svg" alt="" />
+                <Image width={60} height={60} src="/star.svg" alt="" />
+                <Image width={60} height={60} src="/star.svg" alt="" />
+                <Image width={60} height={60} src="/star.svg" alt="" />
               </div>
             </div>
             <p className={styles.body}>{review.text}</p>

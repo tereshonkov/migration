@@ -27,7 +27,7 @@ export default function FurnitureClient({ limit }: { limit: number}) {
           <Link href={`/service/${item.id}`} className={styles.card} key={item.id || index}>
             <Image 
               src={item?.images.find(image => image.isCover)?.url || ''} 
-              alt={`Кухня на замовлення ${index + 1}`} 
+              alt={`${item.title} — кухня на замовлення Харків`} 
               width={1024} 
               height={768}
               quality={85}
@@ -40,7 +40,7 @@ export default function FurnitureClient({ limit }: { limit: number}) {
           <Link href={`/service/${item.id}`} className={styles.card} key={item.id || index}>
             <Image 
               src={item?.images.find(image => image.isCover)?.url || ''} 
-              alt={`Шафа на замовлення ${index + 1}`} 
+              alt={`${item.title} — шафа на замовлення Харків`} 
               width={1024} 
               height={768}
               quality={85}
@@ -53,7 +53,7 @@ export default function FurnitureClient({ limit }: { limit: number}) {
           <Link href={`/service/${item.id}`} className={styles.card} key={item.id ||index}>
             <Image 
               src={item?.images.find(image => image.isCover)?.url || ''} 
-              alt={`Торгові меблі ${index + 1}`} 
+              alt={`${item.title} — торгові меблі Харків`} 
               width={1024} 
               height={768}
               quality={85}
@@ -65,7 +65,7 @@ export default function FurnitureClient({ limit }: { limit: number}) {
           <Link href={`/service/${item.id}`} className={styles.card} key={item.id || index}>
             <Image 
               src={item?.images.find(image => image.isCover)?.url || ''} 
-              alt={`Спальня на замовлення ${index + 1}`} 
+              alt={`${item.title} — спальня на замовлення Харків`} 
               width={1024} 
               height={768}
               quality={85}

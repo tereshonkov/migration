@@ -2,5 +2,8 @@
 
 User-agent: *
 Allow: /
+Disallow: /signin
+Disallow: /*/admin
+Disallow: /admin
 
 Sitemap: https://t-mebel.com.ua/sitemap.xml

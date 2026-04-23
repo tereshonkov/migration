@@ -32,7 +32,7 @@ export default function HeroCarusel({    initialIndex = 0 }: { initialIndex?: nu
                         <div className={styles.emblaSlide} key={index}>
                             <Image
                                 src={item}
-                                alt={`hero-image-${index}`}
+                                alt="меблі на замовлення Харків"
                                 width={1020}
                                 height={768}
                                 priority

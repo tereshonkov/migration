@@ -22,14 +22,13 @@ export function generateStaticParams() {
 
 export async function generateMetadata(props: Omit<Props, 'children'>) {
   const { locale } = await props.params;
-  console.log('locale', locale);
   
-
   const t = await getTranslations({ locale, namespace: 'LocaleLayout' });
-
 
   return {
     title: t('title'),
+    description: "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний підхід, доступні ціни, власне виробництво.",
+    robots: { index: true, follow: true },
   };
 }
 
@@ -44,30 +43,12 @@ export default async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   return (
-    // <html lang={locale}>
-    //   <head>
-    //     {/* Google Tag Manager (отложенная загрузка) */}
-    //     <script>
-    //       {`
-            
-    //         let gtmScript = document.createElement("script");
-    //         gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-DSKK22XDCJ";
-    //         gtmScript.async = true;
-    //         document.head.appendChild(gtmScript);
-
-    //         window.dataLayer = window.dataLayer || [];
-    //         function gtag() { dataLayer.push(arguments); }
-    //         gtag('js', new Date());
-    //         gtag('config', 'G-DSKK22XDCJ');
-        
-    // `}
-    //     </script>
-    //   </head>
-    //   <body className={`${montserrat.variable}`}>
+    <html lang={locale}>
+      <body className={`${montserrat.variable}`}>
         <NextIntlClientProvider locale={locale}>
           {children}
         </NextIntlClientProvider>
-    //   </body>
-    // </html>
+      </body>
+    </html>
   );
 }

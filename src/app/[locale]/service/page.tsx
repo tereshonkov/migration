@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       url: canonical,
       siteName: 'T-Mebel',
       locale,
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
+      type: "website",
     },
     alternates: {
       canonical,

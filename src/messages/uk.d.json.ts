@@ -3,7 +3,7 @@
 
 declare const messages: {
   "LocaleLayout": {
-    "title": "Сторінка макета"
+    "title": "T-Mebel — Меблі на замовлення у Харкові"
   },
   "header": {
     "home": "Головна",
