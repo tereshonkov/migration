@@ -3,10 +3,34 @@ import { Metadata } from "next";
 import { FC } from "react";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "Політика конфіденційності | T-Mebel",
-  description: "Дізнайтеся про політику конфіденційності T-Mebel: як ми збираємо, використовуємо та захищаємо ваші персональні дані.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl = 'https://t-mebel.com.ua';
+  const path = '/privacy-policy';
+  const canonical = `${baseUrl}${path}`;
+
+  return {
+    title: "Політика конфіденційності | T-Mebel",
+    description: "Дізнайтеся про політику конфіденційності T-Mebel: як ми збираємо, використовуємо та захищаємо ваші персональні дані.",
+    openGraph: {
+      title: "Політика конфіденційності | T-Mebel",
+      description: "Дізнайтеся про політику конфіденційності T-Mebel: як ми збираємо, використовуємо та захищаємо ваші персональні дані.",
+      url: canonical,
+      siteName: 'T-Mebel',
+      locale: 'uk',
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
+      type: "website",
+    },
+    alternates: {
+      canonical,
+      languages: {
+        uk: `${baseUrl}${path}`,
+        en: `${baseUrl}/en${path}`,
+        ru: `${baseUrl}/ru${path}`,
+        'x-default': `${baseUrl}${path}`,
+      },
+    },
+  };
+}
 
 const PrivacyPolicy: FC = () => (
   <div className="container">
@@ -19,7 +43,7 @@ const PrivacyPolicy: FC = () => (
         </p>
       </section>
       <section className={styles.section}>
-        <h2 className={styles.subtitle}>2. Збір та використання інформації</h2>
+        <h2 className={styles.subtitle}>2. Збір та використання інформации</h2>
         <p className={styles.text}>
           Ми збираємо лише ті персональні дані, які ви добровільно надаєте при використанні Сайту (наприклад, при оформленні замовлення, реєстрації, підписці на розсилку).
         </p>

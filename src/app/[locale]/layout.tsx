@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Locale, hasLocale, NextIntlClientProvider } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { ReactNode } from 'react';
-import { Montserrat } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 
 type Props = {
@@ -10,26 +9,28 @@ type Props = {
   params: Promise<{ locale: Locale }>;
 };
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin", "cyrillic"],
-});
-
-
 export function generateStaticParams() {
  return routing.locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata(props: Omit<Props, 'children'>) {
   const { locale } = await props.params;
-  console.log('locale', locale);
   
-
   const t = await getTranslations({ locale, namespace: 'LocaleLayout' });
 
-
   return {
-    title: t('title'),
+    metadataBase: new URL("https://t-mebel.com.ua"),
+    title: {
+      default: t('title'),
+      template: "%s | T-Mebel",
+    },
+    description: "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний подхід, доступні ціни, власне виробництво.",
+    robots: { index: true, follow: true },
+    twitter: {
+      card: "summary_large_image",
+      site: "@tmebel",
+      images: ["/og-image.jpg"],
+    },
   };
 }
 
@@ -42,32 +43,11 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   // Enable static rendering
   setRequestLocale(locale);
+  const messages = await getMessages();
 
   return (
-    // <html lang={locale}>
-    //   <head>
-    //     {/* Google Tag Manager (отложенная загрузка) */}
-    //     <script>
-    //       {`
-            
-    //         let gtmScript = document.createElement("script");
-    //         gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-DSKK22XDCJ";
-    //         gtmScript.async = true;
-    //         document.head.appendChild(gtmScript);
-
-    //         window.dataLayer = window.dataLayer || [];
-    //         function gtag() { dataLayer.push(arguments); }
-    //         gtag('js', new Date());
-    //         gtag('config', 'G-DSKK22XDCJ');
-        
-    // `}
-    //     </script>
-    //   </head>
-    //   <body className={`${montserrat.variable}`}>
-        <NextIntlClientProvider locale={locale}>
-          {children}
-        </NextIntlClientProvider>
-    //   </body>
-    // </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      {children}
+    </NextIntlClientProvider>
   );
 }

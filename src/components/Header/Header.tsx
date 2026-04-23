@@ -12,7 +12,7 @@ export default async function Header() {
       <div className={styles.header}>
         <div className={styles.logoWrapper}>
           <Link href="/" className={styles.logo}>
-            <Image src="/logo.png" alt="Logo" width={150} height={50} />
+            <Image src="/logo.png" alt="T-Mebel — меблі на замовлення Харків" width={150} height={50} />
           </Link>
         </div>
         <nav className={styles.nav}>

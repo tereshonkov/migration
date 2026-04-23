@@ -91,7 +91,7 @@ export default function ProductGallery({ id }: ProductGalleryProps) {
           <div className={styles.mainImage}>
             <Image
               src={images[currentIndex]}
-              alt={`${data.title} - фото ${currentIndex + 1}`}
+              alt={`${data.title} — меблі на замовлення Харків, фото ${currentIndex + 1}`}
               fill
               className={styles.image}
               priority

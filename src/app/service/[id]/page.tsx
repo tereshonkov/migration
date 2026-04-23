@@ -17,7 +17,7 @@ export async function generateMetadata({
   const t = (key: string) => messagesData[`data_${id}`]?.[key] || key;
 
   const baseUrl = "https://t-mebel.com.ua";
-  const path = `/product/${id}`;
+  const path = `/service/${id}`;
   const canonical = `${baseUrl}${path}`;
 
   return {
@@ -29,6 +29,8 @@ export async function generateMetadata({
       url: canonical,
       siteName: "T-Mebel",
       locale,
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
+      type: "website",
     },
     alternates: {
       canonical,

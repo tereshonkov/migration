@@ -1,4 +1,3 @@
-import Hero from "@/components/Hero/Hero"
 import Furniture from "@/components/Furniture/Furniture"
 import Form from "@/components/Form/Form"
 import Footer from "@/components/Footer/Footer"
@@ -7,6 +6,7 @@ import { getTranslations } from 'next-intl/server';
 import CtaBlock from "@/components/CtaBlock/CtaBlock"
 import TrustMe from "@/components/TrustMe/TrustMe"
 import PageHeader from "@/components/PageHeader/PageHeader"
+import Header from "@/components/Header/Header"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       url: canonical,
       siteName: 'T-Mebel',
       locale,
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
+      type: "website",
     },
     alternates: {
       canonical,
@@ -44,7 +46,9 @@ export default async function page({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'servicePage' });
   return (
-    <div className="container">
+    <>
+      <Header />
+      <div className="container">
       <PageHeader 
         title={t('title')}
         subtitle={t('subtitle')}
@@ -57,5 +61,6 @@ export default async function page({ params }: { params: Promise<{ locale: strin
       </main>
       <Footer />
     </div>
+    </>
   )
 }

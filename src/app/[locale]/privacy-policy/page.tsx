@@ -2,13 +2,41 @@ import Footer from "@/components/Footer/Footer";
 import { Metadata } from "next";
 import { FC } from "react";
 import styles from "./page.module.css";
+import Header from "@/components/Header/Header";
 
-export const metadata: Metadata = {
-  title: "Політика конфіденційності | T-Mebel",
-  description: "Дізнайтеся про політику конфіденційності T-Mebel: як ми збираємо, використовуємо та захищаємо ваші персональні дані.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = 'https://t-mebel.com.ua';
+  const path = '/privacy-policy';
+  const canonical = locale === 'uk' ? `${baseUrl}${path}` : `${baseUrl}/${locale}${path}`;
+
+  return {
+    title: "Політика конфіденційності | T-Mebel",
+    description: "Дізнайтеся про політику конфіденційності T-Mebel: як ми збираємо, використовуємо та захищаємо ваші персональні дані.",
+    openGraph: {
+      title: "Політика конфіденційності | T-Mebel",
+      description: "Дізнайтеся про політику конфіденційності T-Mebel: як мы збираємо, використовуємо та захищаємо ваші персональні дані.",
+      url: canonical,
+      siteName: 'T-Mebel',
+      locale,
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
+      type: "website",
+    },
+    alternates: {
+      canonical,
+      languages: {
+        uk: `${baseUrl}${path}`,
+        en: `${baseUrl}/en${path}`,
+        ru: `${baseUrl}/ru${path}`,
+        'x-default': `${baseUrl}${path}`,
+      },
+    },
+  };
+}
 
 const PrivacyPolicy: FC = () => (
+  <>
+  <Header />
   <div className="container">
     <main className={styles.main}>
       <h1 className={styles.title}>Політика конфіденційності</h1>
@@ -51,6 +79,7 @@ const PrivacyPolicy: FC = () => (
     </main>
     <Footer />
   </div>
+  </>
 );
 
 export default PrivacyPolicy;
