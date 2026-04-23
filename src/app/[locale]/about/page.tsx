@@ -5,6 +5,7 @@ import Reviews from "@/components/Reviews/Reviews"
 import { Metadata } from "next"
 import { getTranslations } from 'next-intl/server';
 import PageHeader from "@/components/PageHeader/PageHeader"
+import Header from "@/components/Header/Header"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -44,7 +45,9 @@ export default async function page({ params }: { params: Promise<{ locale: strin
   const t = await getTranslations({ locale, namespace: 'aboutUsPage' });
   
   return (
-    <div className="container">
+    <>
+      <Header />
+      <div className="container">
       <PageHeader 
         title={t('title')}
         subtitle={t('text1')}
@@ -56,5 +59,6 @@ export default async function page({ params }: { params: Promise<{ locale: strin
       </main>
       <Footer />
     </div>
+    </>
   )
 }

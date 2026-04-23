@@ -4,7 +4,7 @@ import { Metadata } from "next"
 import { getTranslations } from 'next-intl/server';
 import PageHeader from "@/components/PageHeader/PageHeader"
 import ContactsPage from "@/components/ContactsPage/ContactsPage"
-
+import Header from "@/components/Header/Header"
 import JsonLd from "@/components/JsonLd/JsonLd";
 
 export async function generateMetadata({
@@ -77,7 +77,9 @@ export default async function page({
   };
 
   return (
-    <div className="container">
+    <>
+      <Header />
+      <div className="container">
       <JsonLd data={breadcrumbJsonLd} />
       <PageHeader title={t("contactTitle")} subtitle={subtitle} />
       <main className="main-service">
@@ -86,5 +88,6 @@ export default async function page({
       </main>
       <Footer />
     </div>
+    </>
   )
 }

@@ -2,6 +2,7 @@ import Footer from "@/components/Footer/Footer";
 import { Metadata } from "next";
 import { FC } from "react";
 import styles from "./page.module.css";
+import Header from "@/components/Header/Header";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -34,6 +35,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 const PrivacyPolicy: FC = () => (
+  <>
+  <Header />
   <div className="container">
     <main className={styles.main}>
       <h1 className={styles.title}>Політика конфіденційності</h1>
@@ -76,6 +79,7 @@ const PrivacyPolicy: FC = () => (
     </main>
     <Footer />
   </div>
+  </>
 );
 
 export default PrivacyPolicy;

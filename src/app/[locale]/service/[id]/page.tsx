@@ -5,7 +5,7 @@ import ProductGallery from "@/components/ProductGallery/ProductGallery";
 import { use } from 'react';
 import { Metadata } from "next"
 import { getTranslations } from 'next-intl/server';
-
+import Header from "@/components/Header/Header";
 
 import JsonLd from "@/components/JsonLd/JsonLd";
 
@@ -65,6 +65,7 @@ export default async function FurniturePage({ params }: { params: Promise<{ id: 
 
   return (
     <>
+      <Header />
       <JsonLd data={productJsonLd} />
       <PageHeader 
         title={t('title')}
