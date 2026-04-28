@@ -16,6 +16,15 @@ import { useState } from "react";
 import { uploadImage } from "@/api/images";
 import { createProduct } from "@/api/product";
 
+/** Placeholders until create-product DTO exposes these in the form. */
+const CREATE_PRODUCT_DEFAULTS = {
+  color: "Standard",
+  furnitures: "Standard",
+  width: 100,
+  height: 100,
+  rating: 5,
+} as const;
+
 interface ProductFormData {
   titleRu: string;
   titleUk: string;
@@ -35,7 +44,7 @@ export default function FormAdmin() {
   const { errors } = formState;
 
   const handleImageUpload = async () => {
-    if (files.length === 0) return;
+    if (files.length === 0) return [];
     const formData = new FormData();
     files.forEach((file) => {
       formData.append("files", file);
@@ -52,11 +61,13 @@ export default function FormAdmin() {
 
   const onSubmit = async (data: ProductFormData) => {
     const filesUrls = await handleImageUpload();
-    console.log("OnSubmit", filesUrls);
+    const imageUrlList = Array.isArray(filesUrls) ? filesUrls : [];
+    console.log("OnSubmit", imageUrlList);
     const productData = {
       title: data.titleRu, // основное название (русский по умолчанию)
       description: data.descriptionRu, // основное описание
       category: data.category,
+      ...CREATE_PRODUCT_DEFAULTS,
       translations: {
         ru: {
           title: data.titleRu,
@@ -71,7 +82,10 @@ export default function FormAdmin() {
           description: data.descriptionEn,
         },
       },
-      images: filesUrls.map((url: string, index: number) => ({ url, isCover: index === 0 })),
+      images: imageUrlList.map((url: string, index: number) => ({
+        url,
+        isCover: index === 0,
+      })),
     };
     try {
       const response = await createProduct(productData);
