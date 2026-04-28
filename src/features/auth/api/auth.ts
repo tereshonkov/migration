@@ -1,13 +1,15 @@
-import api from "./api";
+import api from "@/shared/api/base";
 
 export const login = async (email: string, password: string) => {
   try {
-    const response = await api.post(`/auth/login`, {
-      email,
-      password,
-    },
-    { withCredentials: true }
-  );
+    const response = await api.post(
+      `/auth/login`,
+      {
+        email,
+        password,
+      },
+      { withCredentials: true }
+    );
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -36,4 +38,4 @@ export const logout = async () => {
     console.error("Error:", error);
     throw new Error((error as Error)?.message || "Ошибка выхода");
   }
-}
+};

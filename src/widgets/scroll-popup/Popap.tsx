@@ -5,9 +5,9 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
-import { sendMessageApi } from "@/api/messages";
+import { sendMessageApi } from "@/entities/services/messages";
 import { reportConversion } from "@/utils/gtagConversion";
-import { registerConversion } from "@/api/conversion";
+import { registerConversion } from "@/entities/services/conversion";
 
 interface InputState {
   name: string;

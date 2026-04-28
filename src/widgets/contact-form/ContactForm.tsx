@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { reportConversion } from "@/utils/gtagConversion";
-import { registerConversion } from "@/api/conversion";
+import { registerConversion } from "@/entities/services/conversion";
 
 const CONTACT_SIDE_IMAGE =
   "https://storage.googleapis.com/t-mebel/Image/ourPage/modal/kitchen/5384567338008963271.webp";

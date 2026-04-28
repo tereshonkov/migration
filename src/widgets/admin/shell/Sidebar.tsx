@@ -13,11 +13,11 @@ import {
 } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import { useTabContext } from "@/context/TabContext";
-import { getMessages } from "@/api/messages";
+import { getMessages } from "@/entities/admin/api/messages";
 import type { MessagesTypes } from "@/types/messages";
 import type { ReviewsTypes } from "@/types/reviews";
 import { useEffect, useState } from "react";
-import { getReviews } from "@/api/reviews";
+import { getReviews } from "@/entities/admin/api/reviews";
 
 export default function Sidebar() {
   const { setPage } = useTabContext();

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { login } from "@/api/auth";
+import { login } from "@/features/auth/api/auth";
 import styles from "./page.module.css";
 
 interface LoginFormProps {

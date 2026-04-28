@@ -1,6 +1,6 @@
 "use client";
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
-import { logout } from "@/api/auth";
+import { logout } from "@/features/auth/api/auth";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "@/widgets/header/Header.module.css";

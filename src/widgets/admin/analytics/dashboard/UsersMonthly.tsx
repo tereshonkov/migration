@@ -2,7 +2,7 @@
 import { Grid, Paper, Typography , Box} from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import { useState, useEffect } from "react";
-import { getAnalitycsMonth } from "@/api/analitycs";
+import { getAnalitycsMonth } from "@/entities/admin/api/analitycs";
 import type { UserRequest } from "@/types/users";
 
 export default function UsersMonthly() {

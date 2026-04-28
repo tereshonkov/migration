@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Review } from "./Review";
 import { useEffect } from "react";
-import { getReviews, approveReviewApi, cancelReview } from "@/api/reviews";
+import { getReviews, approveReviewApi, cancelReview } from "@/entities/admin/api/reviews";
 import type { ReviewsTypes } from "@/types/reviews";
 
 export default function ReviewsTable() {

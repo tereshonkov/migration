@@ -13,8 +13,8 @@ import {
 import Upload from "./Upload";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { uploadImage } from "@/api/images";
-import { createProduct } from "@/api/product";
+import { uploadImage } from "@/entities/admin/api/images";
+import { createProduct } from "@/entities/product/api/product";
 import type { CreateProductPayload } from "@/types/data";
 
 /** Placeholders until create-product DTO exposes these in the form. */

@@ -9,6 +9,7 @@ import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 import { NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import ukMessages from "@/messages/uk.json";
+import { ReactQueryProvider } from "@/shared/lib/react-query";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -95,7 +96,7 @@ export default function RootLayout({
           locale={routing.defaultLocale}
           messages={ukMessages}
         >
-          {children}
+          <ReactQueryProvider>{children}</ReactQueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

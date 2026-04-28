@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import UserRow from "./UserRow";
 import { useState, useEffect } from "react";
-import { getUsers } from "@/api/users";
+import { getUsers } from "@/entities/admin/api/users";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);

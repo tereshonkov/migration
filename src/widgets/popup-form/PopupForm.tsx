@@ -6,7 +6,7 @@ import styles from './PopupForm.module.css';
 import { toast } from 'react-hot-toast';
 import { useTranslations } from 'next-intl';
 import { reportConversion } from '@/utils/gtagConversion';
-import { registerConversion } from '@/api/conversion';
+import { registerConversion } from "@/entities/services/conversion";
 
 interface PopupFormProps {
   triggerLabel?: string;

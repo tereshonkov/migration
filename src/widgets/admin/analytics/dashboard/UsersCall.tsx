@@ -2,7 +2,7 @@
 import { Grid, Paper, Typography, Box } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import { useState, useEffect } from "react";
-import { getCallClick } from "@/api/analitycs";
+import { getCallClick } from "@/entities/admin/api/analitycs";
 
 export default function UsersCall() {
   const [users, setUsers] = useState<string | null>(null);

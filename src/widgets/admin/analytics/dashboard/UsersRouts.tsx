@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import PageviewIcon from "@mui/icons-material/Pageview";
 import { useState, useEffect } from "react";
-import { getPageVisits } from "@/api/analitycs";
+import { getPageVisits } from "@/entities/admin/api/analitycs";
 
 interface RoutesStats {
   page: string;

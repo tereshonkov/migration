@@ -10,7 +10,7 @@ import {
   Bar,
 } from "recharts";
 import { useState, useEffect } from "react";
-import { getAnalitycsWeek } from "@/api/analitycs";
+import { getAnalitycsWeek } from "@/entities/admin/api/analitycs";
 import { UserRequest } from "@/types/users";
 
 export default function UsersDiagramm() {

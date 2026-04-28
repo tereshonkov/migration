@@ -1,5 +1,5 @@
 import type { CreateProductPayload } from "@/types/data";
-import api from "./api";
+import api from "@/shared/api/base";
 
 export const getProducts = async () => {
   try {

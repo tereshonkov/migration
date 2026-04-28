@@ -11,9 +11,8 @@ import {
 } from "@mui/material";
 import { MessageRow } from "./Message";
 import { useEffect } from "react";
-import { getMessages } from "@/api/messages";
+import { getMessages, markMessageAsRead } from "@/entities/admin/api/messages";
 import { MessagesTypes } from "@/types/messages";
-import { markMessageAsRead } from "@/api/messages";
 
 export default function MessagesTable() {
   const [messages, setMessages] = useState<MessagesTypes[]>([]);
