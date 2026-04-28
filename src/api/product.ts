@@ -1,4 +1,4 @@
-import { Data } from "@/types/data";
+import type { CreateProductPayload } from "@/types/data";
 import api from "./api";
 
 export const getProducts = async () => {
@@ -11,7 +11,7 @@ export const getProducts = async () => {
   }
 };
 
-export const createProduct = async (productData: Data) => {
+export const createProduct = async (productData: CreateProductPayload) => {
   try {
     const response = await api.post("/product/create-product", productData);
     return response.data;

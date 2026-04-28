@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { uploadImage } from "@/api/images";
 import { createProduct } from "@/api/product";
+import type { CreateProductPayload } from "@/types/data";
 
 /** Placeholders until create-product DTO exposes these in the form. */
 const CREATE_PRODUCT_DEFAULTS = {
@@ -63,7 +64,7 @@ export default function FormAdmin() {
     const filesUrls = await handleImageUpload();
     const imageUrlList = Array.isArray(filesUrls) ? filesUrls : [];
     console.log("OnSubmit", imageUrlList);
-    const productData = {
+    const productData: CreateProductPayload = {
       title: data.titleRu, // основное название (русский по умолчанию)
       description: data.descriptionRu, // основное описание
       category: data.category,
