@@ -14,6 +14,9 @@ export type Images = {
   reviewId: string | null;
 };
 
+/** Payload image shape for POST /create-product (server assigns ids). */
+export type CreateProductImage = Pick<Images, "url" | "isCover">;
+
 export type Data = {
   id?: number;
   title: string;
@@ -31,4 +34,8 @@ export type Data = {
     uk?: { title: string; description: string };
     en?: { title: string; description: string };
   };
+};
+
+export type CreateProductPayload = Omit<Data, "images"> & {
+  images: CreateProductImage[];
 };
