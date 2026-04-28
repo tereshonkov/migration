@@ -1,10 +1,8 @@
-import Footer from "@/components/Footer/Footer";
-import Form from "@/components/Form/Form";
-import FullPage from "@/components/FullPageCard/FullPage";
-import Hero from "@/components/Hero/Hero";
-import { use } from "react";
 import { Metadata } from "next";
-import messages from '@/messages/uk.json';
+import { getTranslations } from "next-intl/server";
+import ServicePageDetails from "@/views/ServicePageDetails/ServicePageDetails";
+
+const DEFAULT_LOCALE = "uk";
 
 export async function generateMetadata({
   params,
@@ -12,9 +10,10 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const locale = "uk";
-  const messagesData = messages as any;
-  const t = (key: string) => messagesData[`data_${id}`]?.[key] || key;
+  const t = await getTranslations({
+    locale: DEFAULT_LOCALE,
+    namespace: `data_${id}`,
+  });
 
   const baseUrl = "https://t-mebel.com.ua";
   const path = `/service/${id}`;
@@ -28,7 +27,7 @@ export async function generateMetadata({
       description: t("description"),
       url: canonical,
       siteName: "T-Mebel",
-      locale,
+      locale: DEFAULT_LOCALE,
       images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
       type: "website",
     },
@@ -44,21 +43,11 @@ export async function generateMetadata({
   };
 }
 
-export default function FurniturePage({
+export default async function FurniturePage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = use(params) as { id: string };
-
-  return (
-    <>
-      <Hero startIndex={2} page={true} />
-      <main>
-        <FullPage id={id} />
-        <Form />
-      </main>
-      <Footer />
-    </>
-  );
+  const { id } = await params;
+  return <ServicePageDetails locale={DEFAULT_LOCALE} id={id} />;
 }

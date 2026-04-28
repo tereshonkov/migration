@@ -1,8 +1,8 @@
-import Footer from "@/components/Footer/Footer";
+import Footer from "@/widgets/footer/Footer";
 import { Metadata } from "next";
 import { FC } from "react";
 import styles from "./page.module.css";
-import Header from "@/components/Header/Header";
+import Header from "@/widgets/header/Header";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

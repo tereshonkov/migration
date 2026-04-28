@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { ThemeProviderWrapper } from "@/components/ThemeProviderClient/ThemeProviderClient";
+import { AdminThemeProvider } from "@/widgets/admin/ui/AdminThemeProvider";
 import { TabProvider } from "@/context/TabContext";
 
 interface AdminLayoutProps {
@@ -11,7 +11,7 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return(
   <TabProvider>
-    <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
+    <AdminThemeProvider>{children}</AdminThemeProvider>
   </TabProvider>
   );
 }

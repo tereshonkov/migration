@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import {
   Box
 } from "@mui/material";
-import HeaderAdmin from "@/components/HeaderAdmin/HeaderAdmin";
+import HeaderAdmin from "@/widgets/admin/shell/HeaderAdmin";
 import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import FormAdmin from "@/components/FormAdmin/FormAdmin";
+import FormAdmin from "@/widgets/admin/product-create/FormAdmin";
 
 export default function Admin() {
   const [tokenChecked, setTokenChecked] = useState(false);
@@ -31,10 +31,8 @@ export default function Admin() {
       px={5} 
       py={4}
       sx={{
-        background: (theme) => 
-          theme.palette.mode === "light"
-            ? "linear-gradient(135deg, rgba(255, 235, 214, 1) 0%, rgba(247, 210, 173, 1) 50%, rgba(255, 235, 214, 1) 100%)"
-            : "#0d0a08",
+        background:
+          "linear-gradient(135deg, rgba(255, 235, 214, 1) 0%, rgba(247, 210, 173, 1) 50%, rgba(255, 235, 214, 1) 100%)",
       }}
     >
       {/* Main content */}

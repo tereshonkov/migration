@@ -1,14 +1,10 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
-import Furniture from "@/components/Furniture/Furniture";
-import CtaBlock from "@/components/CtaBlock/CtaBlock";
-import TrustMe from "@/components/TrustMe/TrustMe";
-import Form from "@/components/Form/Form";
-import Footer from "@/components/Footer/Footer";
+import ServicePage from "@/views/ServicePage/ServicePage";
 import { Metadata } from "next";
-import messages from '@/messages/uk.json';
+import messages from "@/messages/uk.json";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = (key: string) => messages.seoPortfolio[key as keyof typeof messages.seoPortfolio];
+  const t = (key: string) =>
+    messages.seoPortfolio[key as keyof typeof messages.seoPortfolio];
   const locale = "uk"; // Default locale for non-localized routes
 
   const baseUrl = "https://t-mebel.com.ua";
@@ -36,20 +32,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function page() {
+export default function ServicePageRoute() {
   return (
-    <div className="container">
-      <PageHeader 
-        title="Наші роботи" 
-        subtitle="Індивідуальні меблі, створені з любов'ю до деталей. Кожен проєкт — унікальний."
-      />
-      <main className="main-service">
-        <Furniture />
-        <TrustMe />
-        <CtaBlock />
-        <Form />
-      </main>
-      <Footer />
-    </div>
+    <ServicePage
+      title="Наші роботи"
+      subtitle="Індивідуальні меблі, створені з любов'ю до деталей. Кожен проєкт — унікальний."
+    />
   );
 }

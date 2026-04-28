@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
-import JsonLd from "@/components/JsonLd/JsonLd";
+import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 import { NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import ukMessages from "@/messages/uk.json";

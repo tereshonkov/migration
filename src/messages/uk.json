@@ -186,6 +186,20 @@
     "messageInput": "Повідомлення",
     "submitButton": "Відправити"
   },
+  "contactTabs": {
+    "tabsRegionLabel": "Способи зв'язку",
+    "tabAddress": "Адреса",
+    "tabPhone": "Телефон",
+    "tabSocial": "Соцмережі",
+    "addressHeading": "Адреси",
+    "addressLine": "м. Харків, проспект Льва Ландау 8",
+    "phoneHeading": "Телефон",
+    "phoneDisplay": "067 - 149 - 67 - 41",
+    "socialHeading": "Соціальні мережі",
+    "ariaInstagram": "Instagram",
+    "ariaTelegram": "Telegram",
+    "ariaFacebook": "Facebook"
+  },
   "aboutUsPage": {
     "title": "Про нас",
     "text1": "Ми — команда фахівців з багаторічним досвідом у виготовленні меблів на замовлення. Працюємо з 2006 року, пропонуючи функціональні, стильні та зручні рішення для дому, офісу та комерційних приміщень.",

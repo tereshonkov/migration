@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Footer from "@/components/Footer/Footer";
+import Footer from "@/widgets/footer/Footer";
 import { FC } from "react";
 
 const NotFound: FC = () => (

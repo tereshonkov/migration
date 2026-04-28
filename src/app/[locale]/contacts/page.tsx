@@ -1,11 +1,9 @@
-import Footer from "@/components/Footer/Footer"
-import Faq from "@/components/Faq/Faq"
+import Footer from "@/widgets/footer/Footer"
 import { Metadata } from "next"
 import { getTranslations } from 'next-intl/server';
-import PageHeader from "@/components/PageHeader/PageHeader"
-import ContactsPage from "@/components/ContactsPage/ContactsPage"
-import Header from "@/components/Header/Header"
-import JsonLd from "@/components/JsonLd/JsonLd";
+import ContactsPage from "@/views/ContactsPage/ContactsPage"
+import Header from "@/widgets/header/Header"
+import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -81,10 +79,8 @@ export default async function page({
       <Header />
       <div className="container">
       <JsonLd data={breadcrumbJsonLd} />
-      <PageHeader title={t("contactTitle")} subtitle={subtitle} />
       <main className="main-service">
-        <ContactsPage />
-        <Faq />
+        <ContactsPage subtitle={subtitle} />
       </main>
       <Footer />
     </div>

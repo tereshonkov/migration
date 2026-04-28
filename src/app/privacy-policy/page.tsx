@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer/Footer";
+import Footer from "@/widgets/footer/Footer";
 import { Metadata } from "next";
 import { FC } from "react";
 import styles from "./page.module.css";

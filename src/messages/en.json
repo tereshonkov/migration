@@ -186,6 +186,20 @@
     "messageInput": "Message",
     "submitButton": "Send"
   },
+  "contactTabs": {
+    "tabsRegionLabel": "Contact methods",
+    "tabAddress": "Address",
+    "tabPhone": "Phone",
+    "tabSocial": "Social",
+    "addressHeading": "Addresses",
+    "addressLine": "Kharkiv, 8 Lev Landau Avenue",
+    "phoneHeading": "Phone",
+    "phoneDisplay": "067 - 149 - 67 - 41",
+    "socialHeading": "Social media",
+    "ariaInstagram": "Instagram",
+    "ariaTelegram": "Telegram",
+    "ariaFacebook": "Facebook"
+  },
   "aboutUsPage": {
     "title": "About Us",
     "text1": "We are a team of specialists with many years of experience in custom furniture manufacturing. Since 2006, we have been offering functional, stylish, and convenient solutions for homes, offices, and commercial spaces.",

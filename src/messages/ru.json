@@ -186,6 +186,20 @@
     "messageInput": "Сообщение",
     "submitButton": "Отправить"
   },
+  "contactTabs": {
+    "tabsRegionLabel": "Способы связи",
+    "tabAddress": "Адрес",
+    "tabPhone": "Телефон",
+    "tabSocial": "Соцсети",
+    "addressHeading": "Адреса",
+    "addressLine": "г. Харьков, проспект Льва Ландау 8",
+    "phoneHeading": "Телефон",
+    "phoneDisplay": "067 - 149 - 67 - 41",
+    "socialHeading": "Социальные сети",
+    "ariaInstagram": "Instagram",
+    "ariaTelegram": "Telegram",
+    "ariaFacebook": "Facebook"
+  },
   "aboutUsPage": {
     "title": "О нас",
     "text1": "Мы — команда специалистов с многолетним опытом в изготовлении мебели на заказ. Работаем с 2006 года, предлагая функциональные, стильные и удобные решения для дома, офиса и коммерческих пространств.",

@@ -1,26 +1,22 @@
-import Form from "@/components/Form/Form"
-import Footer from "@/components/Footer/Footer"
-import About from "@/components/About/About"
-import Reviews from "@/components/Reviews/Reviews"
-import { Metadata } from "next"
-import messages from '@/messages/uk.json';
-import PageHeader from "@/components/PageHeader/PageHeader"
+import { Metadata } from "next";
+import messages from "@/messages/uk.json";
+import AboutPage from "@/views/AboutPage/AboutPage";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = (key: string) => messages.seoAbout[key as keyof typeof messages.seoAbout];
-  const locale = 'uk'; // Default locale for non-localized routes
+  const locale = "uk";
 
-  const baseUrl = 'https://t-mebel.com.ua';
-  const path = '/about';
+  const baseUrl = "https://t-mebel.com.ua";
+  const path = "/about";
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title: t("title"),
+    description: t("description"),
     openGraph: {
-      title: t('title'),
-      description: t('description'),
+      title: t("title"),
+      description: t("description"),
       url: baseUrl + path,
-      siteName: 'T-Mebel',
+      siteName: "T-Mebel",
       locale,
     },
     alternates: {
@@ -29,26 +25,17 @@ export async function generateMetadata(): Promise<Metadata> {
         uk: `${baseUrl}${path}`,
         en: `${baseUrl}/en${path}`,
         ru: `${baseUrl}/ru${path}`,
-        'x-default': `${baseUrl}${path}`,
+        "x-default": `${baseUrl}${path}`,
       },
     },
   };
 }
 
-
-export default async function page() {
+export default function page() {
   return (
-    <div className="container">
-      <PageHeader 
-        title={messages.aboutUsPage.title}
-        subtitle={messages.aboutUsPage.text1}
-      />
-      <main className="main-service">
-        <About />
-        <Reviews />
-        <Form />
-      </main>
-      <Footer />
-    </div>
-  )
+    <AboutPage
+      title={messages.aboutUsPage.title}
+      subtitle={messages.aboutUsPage.text1}
+    />
+  );
 }
