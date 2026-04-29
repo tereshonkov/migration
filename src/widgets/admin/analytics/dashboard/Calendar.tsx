@@ -1,19 +1,15 @@
 "use client";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { Grid, Paper, Typography } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Calendar() {
-  const [currentDate, setCurrentDate] = useState<string>("");
-
-  useEffect(() => {
-    setCurrentDate(
-      new Date().toLocaleDateString("ru-RU", {
-        day: "numeric",
-        month: "short",
-      })
-    );
-  }, []);
+  const [currentDate] = useState(() =>
+    new Date().toLocaleDateString("ru-RU", {
+      day: "numeric",
+      month: "short",
+    })
+  );
 
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
@@ -46,7 +42,7 @@ export default function Calendar() {
           Сегодня
         </Typography>
         <Typography variant="h4" sx={{ fontWeight: "bold", color: "rgba(112, 64, 21, 1)" }}>
-          {currentDate || "..."}
+          {currentDate}
         </Typography>
         <CalendarMonthIcon
           sx={{
