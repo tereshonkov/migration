@@ -4,7 +4,7 @@ import styles from "./SignInForm.module.css";
 import { useSignIn } from "@/features/auth/lib/use-signin";
 
 export default function SignInForm() {
-  const { value, setValue, rememberMe, setRememberMe, onSubmit } = useSignIn();
+  const { value, setValue, onSubmit } = useSignIn();
 
   return (
     <div className={styles.wrapper}>
@@ -51,19 +51,6 @@ export default function SignInForm() {
               placeholder="••••••••"
               required
             />
-          </div>
-
-          <div className={styles.checkboxGroup}>
-            <input
-              id="rememberMe"
-              type="checkbox"
-              className={styles.checkbox}
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-            />
-            <label htmlFor="rememberMe" className={styles.checkboxLabel}>
-              Запомнить меня
-            </label>
           </div>
 
           <button type="submit" className={styles.button}>
