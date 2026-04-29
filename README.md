@@ -37,7 +37,7 @@
 - **Адмінка / аналітика:** у розділі «Аналітика» — дашборд з даними про відвідування, кліки по дзвінках, маршрути сторінок тощо (з бекенду). На публічному сайті підключено **Google tag** (`gtag.js`: GA4 і Google Ads). Для важливих для бізнесу дій налаштовані **кастомні конверсії**: події до Google та реєстрація на бекенді (контактні форми, попапи тощо).
 - **Локалізація:** `defaultLocale: 'uk'`, префікс у URL лише коли не типова локаль; `localeDetection: false`.
 - **SEO:** `metadata` і JSON-LD у кореневому `layout`, `sitemap.ts`.
-- **API:** базовий URL задається в `src/shared/api/base.ts` (зараз прод-інстанс на Render). Для іншого середовища змініть `baseURL` або винесіть у `NEXT_PUBLIC_*` під час рефакторингу.
+- **API:** базовий URL бекенду задається змінною **`NEXT_PUBLIC_API_BASE_URL`** (без сліша в кінці). Шаблон — у **`.env.example`**; для локальної роботи скопіюйте його в **`.env`** або **`.env.local`**. У продакшені (наприклад Vercel) задайте ту саму змінну в налаштуваннях проєкту. Використання: `src/shared/api/base.ts`, `src/utils/refreshToken.ts`.
 - **Auth:** JWT у `localStorage`, refresh через `withCredentials` на `/auth/refresh`; захист сторінок адмінки — на клієнті, реальна безпека — на бекенді.
 - **Збірка:** у `next.config.ts` увімкнено експериментальний `optimizeCss`, ESLint під час build вимкнено (`ignoreDuringBuilds`); зображення з `storage.googleapis.com`.
 - **Pre-commit:** `lint` → `npm audit fix` → `npm audit` → `vitest run` (скрипт `precommit` + Husky).
@@ -63,7 +63,8 @@ npm run test:coverage
 
 ```bash
 npm install
+cp .env.example .env   # Windows PowerShell: Copy-Item .env.example .env
 npm run dev
 ```
 
-Відкрийте [http://localhost:3000](http://localhost:3000). Для повного функціоналу (форми, адмінка) має бути доступний бекенд з тим самим контрактом, що й у вказаного `baseURL`.
+Відкрийте [http://localhost:3000](http://localhost:3000). Для повного функціоналу (форми, адмінка) має бути доступний бекенд за URL з `NEXT_PUBLIC_API_BASE_URL`.

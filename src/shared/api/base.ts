@@ -2,14 +2,22 @@
 
 import axios from "axios";
 import type { AxiosRequestConfig } from "axios";
+import { getPublicApiBaseUrl } from "@/shared/lib/public-api-base-url";
 
 interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
   _retry?: boolean;
 }
 
+const resolvedBaseUrl = getPublicApiBaseUrl();
+
+if (process.env.NODE_ENV === "development" && !resolvedBaseUrl) {
+  console.warn(
+    "[api] NEXT_PUBLIC_API_BASE_URL is empty. Copy .env.example to .env or .env.local.",
+  );
+}
+
 const api = axios.create({
-  baseURL: `https://t-mebel.onrender.com`,
-  // baseURL: `http://localhost:3000`,
+  baseURL: resolvedBaseUrl,
   headers: {
     "Content-Type": "application/json",
   },
