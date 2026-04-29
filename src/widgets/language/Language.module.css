@@ -35,7 +35,9 @@
 .langSelect {
   position: relative;
   display: inline-flex;
+  z-index: 100;
 }
+
 .trigger {
   background-color: var(--background-color-primary);
   color: var(--text-color-secondary);
