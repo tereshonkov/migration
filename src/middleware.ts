@@ -35,6 +35,15 @@ export default async function middleware(
     return NextResponse.redirect(targetUrl, 301);
   }
 
+  // Default locale uses unprefixed URLs (as-needed): /uk/about -> /about
+  if (locale === "uk") {
+    const rest = segments.slice(1);
+    const targetPath = rest.length > 0 ? `/${rest.join("/")}` : "/";
+    const targetUrl = new URL(targetPath, req.url);
+    targetUrl.search = req.nextUrl.search;
+    return NextResponse.redirect(targetUrl, 308);
+  }
+
   return i18nMiddleware(req);
 }
 

@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { FC } from "react";
 import styles from "./page.module.css";
 import Header from "@/widgets/header/Header";
+import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 
 export async function generateMetadata({
   params,
@@ -22,10 +23,10 @@ export async function generateMetadata({
     openGraph: {
       title: "Політика конфіденційності | T-Mebel",
       description:
-        "Дізнайтеся про політику конфіденційності T-Mebel: як мы збираємо, використовуємо та захищаємо ваші персональні дані.",
+        "Дізнайтеся про політику конфіденційності T-Mebel: як ми збираємо, використовуємо та захищаємо ваші персональні дані.",
       url: canonical,
       siteName: "T-Mebel",
-      locale,
+      locale: openGraphAlternateLocale(locale),
       images: [
         { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
       ],

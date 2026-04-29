@@ -2,6 +2,7 @@ import Footer from "@/widgets/footer/Footer";
 import { Metadata } from "next";
 import { FC } from "react";
 import styles from "./page.module.css";
+import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = "https://t-mebel.com.ua";
@@ -18,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "Дізнайтеся про політику конфіденційності T-Mebel: як ми збираємо, використовуємо та захищаємо ваші персональні дані.",
       url: canonical,
       siteName: "T-Mebel",
-      locale: "uk",
+      locale: openGraphAlternateLocale("uk"),
       images: [
         { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
       ],

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 import HomePage from "@/views/HomePage/HomePage";
 
 export async function generateMetadata({
@@ -21,7 +22,7 @@ export async function generateMetadata({
       description: t("description"),
       url: canonical,
       siteName: "T-Mebel",
-      locale,
+      locale: openGraphAlternateLocale(locale),
       images: [
         { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
       ],
