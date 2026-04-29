@@ -92,13 +92,21 @@
   font-size: 48px;
   color: var(--text-color-secondary);
   padding: 20px;
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(80, 227, 194, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(80, 227, 194, 0.1)
+  );
   border-radius: 50%;
   transition: all 0.3s ease;
 }
 .card:hover .icon {
   transform: scale(1.1) rotate(5deg);
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.15), rgba(80, 227, 194, 0.15));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.15),
+    rgba(80, 227, 194, 0.15)
+  );
 }
 @media (max-width: 600px) {
   .icon {

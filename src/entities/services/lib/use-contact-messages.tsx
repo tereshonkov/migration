@@ -10,7 +10,7 @@ export function useSendContactMessageMutation(
     Awaited<ReturnType<typeof sendMessageApi>>,
     Error,
     SendPayload
-  >
+  >,
 ) {
   return useMutation({
     ...options,

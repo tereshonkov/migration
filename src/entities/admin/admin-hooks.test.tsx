@@ -53,7 +53,9 @@ import { useAdminUsersQuery } from "./lib/use-users";
 
 function wrap(client: ReturnType<typeof createTestQueryClient>) {
   return function W({ children }: { children: ReactNode }) {
-    return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
+    return (
+      <QueryClientProvider client={client}>{children}</QueryClientProvider>
+    );
   };
 }
 
@@ -118,10 +120,9 @@ describe("admin hooks", () => {
   it("useCancelReviewMutation", async () => {
     const client = createTestQueryClient();
     reviewsAdminApi.cancelReview.mockResolvedValue({});
-    const { result } = renderHook(
-      () => useCancelReviewMutation(),
-      { wrapper: wrap(client) }
-    );
+    const { result } = renderHook(() => useCancelReviewMutation(), {
+      wrapper: wrap(client),
+    });
     result.current.mutate("3");
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(reviewsAdminApi.cancelReview.mock.calls[0]?.[0]).toBe("3");
@@ -144,7 +145,9 @@ describe("admin hooks", () => {
     analyticsApi.getAnalitycsDay.mockResolvedValue({});
     analyticsApi.getCallClick.mockResolvedValue({});
 
-    const day = renderHook(() => useAnalyticsDayQuery(), { wrapper: wrap(client) });
+    const day = renderHook(() => useAnalyticsDayQuery(), {
+      wrapper: wrap(client),
+    });
     await waitFor(() => expect(day.result.current.isSuccess).toBe(true));
 
     const cc = renderHook(() => useCallClickQuery(), { wrapper: wrap(client) });
@@ -160,13 +163,19 @@ describe("admin hooks", () => {
     analyticsApi.getAnalitycsMonth.mockResolvedValue({ m: 1 });
     analyticsApi.getPageVisits.mockResolvedValue({ p: 1 });
 
-    const week = renderHook(() => useAnalyticsWeekQuery(), { wrapper: wrap(client) });
+    const week = renderHook(() => useAnalyticsWeekQuery(), {
+      wrapper: wrap(client),
+    });
     await waitFor(() => expect(week.result.current.isSuccess).toBe(true));
 
-    const month = renderHook(() => useAnalyticsMonthQuery(), { wrapper: wrap(client) });
+    const month = renderHook(() => useAnalyticsMonthQuery(), {
+      wrapper: wrap(client),
+    });
     await waitFor(() => expect(month.result.current.isSuccess).toBe(true));
 
-    const pv = renderHook(() => usePageVisitsQuery(), { wrapper: wrap(client) });
+    const pv = renderHook(() => usePageVisitsQuery(), {
+      wrapper: wrap(client),
+    });
     await waitFor(() => expect(pv.result.current.isSuccess).toBe(true));
 
     expect(analyticsApi.getAnalitycsWeek).toHaveBeenCalled();

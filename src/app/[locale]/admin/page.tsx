@@ -29,10 +29,10 @@ export default function Admin() {
   if (!tokenChecked) return null;
 
   return (
-    <Box 
-      display="flex" 
-      minHeight="100vh" 
-      px={5} 
+    <Box
+      display="flex"
+      minHeight="100vh"
+      px={5}
       py={4}
       sx={{
         background:
@@ -41,9 +41,9 @@ export default function Admin() {
     >
       {/* Main content */}
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-      <HeaderAdmin />
+        <HeaderAdmin />
         <Box sx={{ mb: 2, display: "flex", flexDirection: "row", gap: 3 }}>
-        <Sidebar />
+          <Sidebar />
           <Box
             sx={{
               backgroundColor: "rgba(254, 247, 240, 0.6)",

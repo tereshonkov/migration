@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, ReactNode } from 'react';
-import styles from './AnimatedSection.module.css';
+import { useEffect, useRef, ReactNode } from "react";
+import styles from "./AnimatedSection.module.css";
 
 interface AnimatedSectionProps {
   children: ReactNode;
   delay?: number;
 }
 
-export default function AnimatedSection({ children, delay = 0 }: AnimatedSectionProps) {
+export default function AnimatedSection({
+  children,
+  delay = 0,
+}: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,8 +29,8 @@ export default function AnimatedSection({ children, delay = 0 }: AnimatedSection
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      }
+        rootMargin: "0px 0px -50px 0px",
+      },
     );
 
     if (el) {

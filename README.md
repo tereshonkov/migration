@@ -4,16 +4,16 @@
 
 ## Стек
 
-| Шар | Технології |
-|-----|------------|
-| Framework | **Next.js 15** (App Router), **React 19**, **TypeScript** |
-| UI | **MUI 7**, Emotion, CSS Modules (частина віджетів) |
-| Дані | **TanStack Query v5**, **Axios** |
-| i18n | **next-intl** (локалі `uk`, `ru`, `en`) |
-| Форми / UX | react-hook-form, react-hot-toast |
-| Медіа / графіки | embla-carousel, recharts |
-| Аналітика | **Google tag** (GA4 + Google Ads), кастомні конверсії на ключові події; **Vercel Analytics**, Speed Insights |
-| Якість | ESLint (eslint-config-next), **Vitest**, Testing Library, **Husky** (pre-commit) |
+| Шар             | Технології                                                                                                   |
+| --------------- | ------------------------------------------------------------------------------------------------------------ |
+| Framework       | **Next.js 15** (App Router), **React 19**, **TypeScript**                                                    |
+| UI              | **MUI 7**, Emotion, CSS Modules (частина віджетів)                                                           |
+| Дані            | **TanStack Query v5**, **Axios**                                                                             |
+| i18n            | **next-intl** (локалі `uk`, `ru`, `en`)                                                                      |
+| Форми / UX      | react-hook-form, react-hot-toast                                                                             |
+| Медіа / графіки | embla-carousel, recharts                                                                                     |
+| Аналітика       | **Google tag** (GA4 + Google Ads), кастомні конверсії на ключові події; **Vercel Analytics**, Speed Insights |
+| Якість          | ESLint (eslint-config-next), **Prettier**, **Vitest**, Testing Library, **Husky** (pre-commit)               |
 
 ## Структура `src/`
 
@@ -40,7 +40,7 @@
 - **API:** базовий URL бекенду задається змінною **`NEXT_PUBLIC_API_BASE_URL`** (без сліша в кінці). Шаблон — у **`.env.example`**; для локальної роботи скопіюйте його в **`.env`** або **`.env.local`**. У продакшені (наприклад Vercel) задайте ту саму змінну в налаштуваннях проєкту. Використання: `src/shared/api/base.ts`, `src/utils/refreshToken.ts`.
 - **Auth:** JWT у `localStorage`, refresh через `withCredentials` на `/auth/refresh`; захист сторінок адмінки — на клієнті, реальна безпека — на бекенді.
 - **Збірка:** у `next.config.ts` увімкнено експериментальний `optimizeCss`, ESLint під час build вимкнено (`ignoreDuringBuilds`); зображення з `storage.googleapis.com`.
-- **Pre-commit:** `lint` → `npm audit fix` → `npm audit` → `vitest run` (скрипт `precommit` + Husky).
+- **Pre-commit:** `format:check` → `lint` → `vitest run` (скрипт `precommit` + Husky). Форматування: **Prettier** (`npm run format`).
 
 ## Скрипти
 
@@ -48,6 +48,8 @@
 npm run dev          # next dev --turbopack
 npm run build
 npm run start
+npm run format       # prettier --write .
+npm run format:check # перевірка без запису
 npm run lint
 npm test             # vitest run
 npm run test:watch

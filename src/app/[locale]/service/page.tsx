@@ -24,7 +24,9 @@ export async function generateMetadata({
       url: canonical,
       siteName: "T-Mebel",
       locale,
-      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
+      images: [
+        { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
+      ],
       type: "website",
     },
     alternates: {
@@ -46,11 +48,5 @@ export default async function ServiceLocalePage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "servicePage" });
-  return (
-    <ServicePage
-      title={t("title")}
-      subtitle={t("subtitle")}
-      showHeader
-    />
-  );
+  return <ServicePage title={t("title")} subtitle={t("subtitle")} showHeader />;
 }

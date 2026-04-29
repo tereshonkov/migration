@@ -20,8 +20,7 @@ export default function MessagesTable() {
   const { data: messages = [] } = useAdminMessagesQuery<MessagesTypes[]>();
 
   const markRead = useMarkMessageReadMutation({
-    onError: (error) =>
-      console.error("Failed to mark message as read:", error),
+    onError: (error) => console.error("Failed to mark message as read:", error),
   });
 
   const readMessage = (id: string) => {
@@ -41,11 +40,7 @@ export default function MessagesTable() {
         </TableHead>
         <TableBody>
           {messages.map((m) => (
-            <MessageRow
-              key={m.id}
-              msg={m}
-              onMarkRead={readMessage}
-            />
+            <MessageRow key={m.id} msg={m} onMarkRead={readMessage} />
           ))}
         </TableBody>
       </Table>

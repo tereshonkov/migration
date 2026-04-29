@@ -151,7 +151,7 @@
     width: 60px;
     height: 60px;
     background-color: transparent;
-    background-image: url('/close.svg');
+    background-image: url("/close.svg");
     border: none;
     cursor: pointer;
     position: fixed;

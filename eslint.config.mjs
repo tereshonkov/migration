@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import eslintConfigPrettier from "eslint-config-prettier";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -36,6 +37,7 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
+  eslintConfigPrettier,
 ];
 
 export default eslintConfig;

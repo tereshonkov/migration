@@ -1,23 +1,23 @@
 import { createContext, useState, useContext } from "react";
 
 interface TabContextType {
-    page: {
-        analitycs: boolean;
-        messages: boolean;
-        reviews: boolean;
-        products: boolean;
-        users: boolean;
-    };
-    setPage: React.Dispatch<
-        React.SetStateAction<{
-        analitycs: boolean;
-        messages: boolean;
-        reviews: boolean;
-        products: boolean;
-        users: boolean;
-        }>
-    >;
-    }
+  page: {
+    analitycs: boolean;
+    messages: boolean;
+    reviews: boolean;
+    products: boolean;
+    users: boolean;
+  };
+  setPage: React.Dispatch<
+    React.SetStateAction<{
+      analitycs: boolean;
+      messages: boolean;
+      reviews: boolean;
+      products: boolean;
+      users: boolean;
+    }>
+  >;
+}
 
 const TabContext = createContext<TabContextType>(null!);
 

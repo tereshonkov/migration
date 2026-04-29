@@ -13,7 +13,11 @@
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(155deg, rgba(255, 244, 232, 0.97), rgba(247, 210, 173, 0.9));
+  background: linear-gradient(
+    155deg,
+    rgba(255, 244, 232, 0.97),
+    rgba(247, 210, 173, 0.9)
+  );
   box-sizing: border-box;
 }
 
@@ -109,7 +113,11 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--text-color-primary);
-  background: linear-gradient(135deg, rgba(112, 64, 21, 1), rgba(66, 35, 19, 1));
+  background: linear-gradient(
+    135deg,
+    rgba(112, 64, 21, 1),
+    rgba(66, 35, 19, 1)
+  );
   border: none;
   border-radius: 999px;
   cursor: pointer;

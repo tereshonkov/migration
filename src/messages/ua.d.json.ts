@@ -2,18 +2,18 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-    "LocaleLayout": {
-        "title": "Головна",
-        "description": "Це головна сторінка нашого сайту.",
-        "welcomeMessage": "Вітаю на нашому сайті!"
-    },
-    "Navigation": {
-        "home": "Головна",
-        "ourWorks": "Наші роботи",
-        "about": "Про нас",
-        "contacts": "Контакти",
-        "blog": "Блог",
-        "reviews": "Відгуки"
-    }
+  LocaleLayout: {
+    title: "Головна";
+    description: "Це головна сторінка нашого сайту.";
+    welcomeMessage: "Вітаю на нашому сайті!";
+  };
+  Navigation: {
+    home: "Головна";
+    ourWorks: "Наші роботи";
+    about: "Про нас";
+    contacts: "Контакти";
+    blog: "Блог";
+    reviews: "Відгуки";
+  };
 };
 export default messages;

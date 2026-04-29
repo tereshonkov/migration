@@ -16,7 +16,11 @@ const ctx = vi.hoisted(() => {
     requestOnFulfilled: null as ((config: Req) => Req) | null,
     responseOnRejected: null as ((error: unknown) => unknown) | null,
   };
-  type Req = { headers?: Record<string, string>; _retry?: boolean; url?: string };
+  type Req = {
+    headers?: Record<string, string>;
+    _retry?: boolean;
+    url?: string;
+  };
 
   const instance = vi.fn();
 
@@ -77,7 +81,10 @@ describe("shared api base interceptors", () => {
     localStorage.setItem("token", "old");
     refreshToken.mockResolvedValue("newtok");
 
-    const originalRequest = { headers: {} as Record<string, string>, url: "/x" };
+    const originalRequest = {
+      headers: {} as Record<string, string>,
+      url: "/x",
+    };
     const error = {
       response: { status: 401 },
       config: originalRequest,
@@ -107,7 +114,10 @@ describe("shared api base interceptors", () => {
   });
 
   it("response: 401 when already retried rejects without refresh", async () => {
-    const originalRequest = { _retry: true, headers: {} as Record<string, string> };
+    const originalRequest = {
+      _retry: true,
+      headers: {} as Record<string, string>,
+    };
     const error = { response: { status: 401 }, config: originalRequest };
 
     const p = ctx.state.responseOnRejected!(error) as Promise<unknown>;

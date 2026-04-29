@@ -1,32 +1,31 @@
-
 .main {
-	padding: 3rem 0 2rem 0;
-	max-width: 900px;
-	margin: 0 auto;
+  padding: 3rem 0 2rem 0;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .title {
-	font-size: 2.5rem;
-	margin-bottom: 2rem;
-	color: var(--primary, #222);
-	text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--primary, #222);
+  text-align: center;
 }
 
 .section {
-	margin-bottom: 2.5rem;
-	background: var(--background-secondary, #fafafa);
-	border-radius: 12px;
-	padding: 1.5rem 2rem;
-	box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  margin-bottom: 2.5rem;
+  background: var(--background-secondary, #fafafa);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .subtitle {
-	font-size: 1.3rem;
-	margin-bottom: 0.7rem;
-	color: var(--primary, #222);
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+  color: var(--primary, #222);
 }
 
 .text {
-	color: var(--muted-foreground, #555);
-	line-height: 1.7;
+  color: var(--muted-foreground, #555);
+  line-height: 1.7;
 }

@@ -9,6 +9,7 @@ export const adminQueryKeys = {
     week: () => [...adminQueryKeys.analytics.all(), "week"] as const,
     month: () => [...adminQueryKeys.analytics.all(), "month"] as const,
     callClick: () => [...adminQueryKeys.analytics.all(), "callClick"] as const,
-    pageVisits: () => [...adminQueryKeys.analytics.all(), "pageVisits"] as const,
+    pageVisits: () =>
+      [...adminQueryKeys.analytics.all(), "pageVisits"] as const,
   },
 };

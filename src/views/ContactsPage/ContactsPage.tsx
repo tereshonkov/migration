@@ -5,7 +5,11 @@ import PageHeader from "@/widgets/page-title-section/PageHeader";
 import Faq from "@/widgets/fiq/Faq";
 import ContactTabs from "@/widgets/contact-tabs/ContactTabs";
 
-export default async function ContactsPage({ subtitle }: { subtitle?: string }) {
+export default async function ContactsPage({
+  subtitle,
+}: {
+  subtitle?: string;
+}) {
   const t = await getTranslations("contactPage");
 
   return (

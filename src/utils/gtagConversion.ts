@@ -9,7 +9,7 @@ declare global {
         value?: number;
         currency?: string;
         event_callback?: () => void;
-      }
+      },
     ) => void;
     dataLayer?: unknown[];
   }
@@ -21,16 +21,16 @@ declare global {
  */
 export function reportConversion(url?: string): boolean {
   const callback = () => {
-    if (typeof url !== 'undefined') {
+    if (typeof url !== "undefined") {
       window.location.href = url;
     }
   };
 
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'conversion', {
-      send_to: 'AW-16643061743/tRMkCOKrntgbEO_vg4A-',
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", "conversion", {
+      send_to: "AW-16643061743/tRMkCOKrntgbEO_vg4A-",
       value: 1.0,
-      currency: 'UAH',
+      currency: "UAH",
       event_callback: callback,
     });
   }

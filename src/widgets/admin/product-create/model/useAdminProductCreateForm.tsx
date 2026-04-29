@@ -50,7 +50,7 @@ export function useAdminProductCreateForm() {
     if (files.length > 0) {
       try {
         const filesUrls = await uploadImageMutation.mutateAsync(
-          buildUploadFormData(files)
+          buildUploadFormData(files),
         );
         imageUrlList = Array.isArray(filesUrls) ? filesUrls : [];
       } catch (error) {

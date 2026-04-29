@@ -13,8 +13,7 @@ export default function UsersDaily() {
     enabled: Boolean(token),
   });
 
-  const activeUsers =
-    users && users.length > 0 ? users[0].activeUsers : 0;
+  const activeUsers = users && users.length > 0 ? users[0].activeUsers : 0;
 
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4 }}>

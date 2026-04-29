@@ -36,7 +36,7 @@ describe("auth api", () => {
     expect(api.post).toHaveBeenCalledWith(
       "/auth/login",
       { email: "a@b.c", password: "secret" },
-      { withCredentials: true }
+      { withCredentials: true },
     );
     expect(r).toEqual({ token: "t" });
   });
@@ -44,7 +44,9 @@ describe("auth api", () => {
   it("refreshToken GET /auth/refresh", async () => {
     api.get.mockResolvedValue({ data: { accessToken: "at" } });
     const token = await refreshToken();
-    expect(api.get).toHaveBeenCalledWith("/auth/refresh", { withCredentials: true });
+    expect(api.get).toHaveBeenCalledWith("/auth/refresh", {
+      withCredentials: true,
+    });
     expect(token).toBe("at");
   });
 
@@ -52,7 +54,11 @@ describe("auth api", () => {
     api.post.mockResolvedValue({ data: { ok: true } });
     localStorage.setItem("token", "x");
     const r = await logout();
-    expect(api.post).toHaveBeenCalledWith("/auth/logout", {}, { withCredentials: true });
+    expect(api.post).toHaveBeenCalledWith(
+      "/auth/logout",
+      {},
+      { withCredentials: true },
+    );
     expect(localStorage.clear).toHaveBeenCalled();
     expect(r).toEqual({ ok: true });
   });

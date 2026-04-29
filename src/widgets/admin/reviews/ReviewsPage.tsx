@@ -21,8 +21,7 @@ export default function ReviewsTable() {
   const { data: reviews = [] } = useAdminReviewsQuery<ReviewsTypes[]>();
 
   const approveMutation = useApproveReviewMutation({
-    onError: (error) =>
-      console.error("Ошибка подтверждения отзыва", error),
+    onError: (error) => console.error("Ошибка подтверждения отзыва", error),
   });
 
   const cancelMutation = useCancelReviewMutation({

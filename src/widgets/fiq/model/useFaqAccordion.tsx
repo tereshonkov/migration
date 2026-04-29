@@ -25,7 +25,7 @@ export function useFaqAccordion() {
       { question: t("question5"), answer: t("answer5") },
       { question: t("question6"), answer: t("answer6") },
     ],
-    [t]
+    [t],
   );
 
   return {

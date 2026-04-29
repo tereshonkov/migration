@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 
 export default function WhyYou() {
   const t = useTranslations("whyYou");
-  
+
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.title}>{t("title")}</h2>
@@ -46,10 +46,8 @@ export default function WhyYou() {
       </div>
       <div className={styles.bottom}>
         <div className={styles.noteWrapper}>
-          <p className={styles.note}>
-            {t("note")}
-          </p>
-          <PopupForm 
+          <p className={styles.note}>{t("note")}</p>
+          <PopupForm
             triggerLabel={t("ctaButton")}
             useDefaultTriggerStyles={false}
             triggerClassName={styles.ctaButton}

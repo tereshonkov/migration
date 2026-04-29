@@ -10,7 +10,7 @@ export function useSendTelegramMessageMutation(
     Awaited<ReturnType<typeof sendTelegramMessageApi>>,
     Error,
     SendTelegramPayload
-  >
+  >,
 ) {
   return useMutation({
     ...options,

@@ -42,7 +42,13 @@ describe("getSliderReviews", () => {
         title: "P",
         description: "",
         images: [
-          { url: "cover.webp", id: "i1", isCover: true, productId: "10", reviewId: null },
+          {
+            url: "cover.webp",
+            id: "i1",
+            isCover: true,
+            productId: "10",
+            reviewId: null,
+          },
         ],
       },
     ];

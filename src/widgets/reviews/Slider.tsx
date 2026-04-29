@@ -23,11 +23,11 @@ export default function Slider({ reviews }: Props) {
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
+    [emblaApi],
   );
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
+    [emblaApi],
   );
 
   useEffect(() => {
@@ -36,7 +36,11 @@ export default function Slider({ reviews }: Props) {
 
   return (
     <div className={styles.sliderWrapper}>
-      <button onClick={scrollPrev} className={styles.prev} aria-label={t("prev")}></button>
+      <button
+        onClick={scrollPrev}
+        className={styles.prev}
+        aria-label={t("prev")}
+      ></button>
       <div className={styles.cards} ref={emblaRef}>
         <div className={styles.emblaTrack}>
           {reviews.map((review) => (
@@ -65,7 +69,11 @@ export default function Slider({ reviews }: Props) {
           ))}
         </div>
       </div>
-      <button onClick={scrollNext} className={styles.next} aria-label={t("next")}></button>
+      <button
+        onClick={scrollNext}
+        className={styles.next}
+        aria-label={t("next")}
+      ></button>
     </div>
   );
 }

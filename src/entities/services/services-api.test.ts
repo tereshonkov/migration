@@ -34,7 +34,9 @@ describe("entities/services API", () => {
   it("sendTelegramMessageApi POST /telegram/send-message", async () => {
     post.mockResolvedValue({ data: { sent: true } });
     const result = await sendTelegramMessageApi({ message: "hi" });
-    expect(post).toHaveBeenCalledWith("/telegram/send-message", { message: "hi" });
+    expect(post).toHaveBeenCalledWith("/telegram/send-message", {
+      message: "hi",
+    });
     expect(result).toEqual({ sent: true });
   });
 
@@ -64,7 +66,7 @@ describe("entities/services API", () => {
     post.mockRejectedValue(err);
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     await expect(
-      sendMessageApi({ name: "a", phone: "1", message: "m" })
+      sendMessageApi({ name: "a", phone: "1", message: "m" }),
     ).rejects.toBe(err);
     spy.mockRestore();
   });
@@ -79,7 +81,7 @@ describe("entities/services API", () => {
         name: "n",
         text: "t",
         isAproved: true,
-      })
+      }),
     ).rejects.toBe(err);
     spy.mockRestore();
   });

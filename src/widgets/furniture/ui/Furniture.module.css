@@ -59,7 +59,7 @@
   transition: box-shadow 0.3s ease;
 }
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -71,7 +71,7 @@
   pointer-events: none;
 }
 .card::after {
-  content: '👁️';
+  content: "👁️";
   position: absolute;
   top: 50%;
   left: 50%;

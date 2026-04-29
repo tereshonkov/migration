@@ -4,14 +4,14 @@ import useDataFurniture from "../model/useDataFurniture";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
-
 type ActiveTab = 1 | 2 | 3 | 4;
 
 export default function FurnitureClient({ limit }: { limit: number }) {
+  const { selected, active, setActive, kitchens, wardrobe, bedrooms, store } =
+    useDataFurniture();
 
-  const { selected, active, setActive, kitchens, wardrobe, bedrooms, store } = useDataFurniture();
-
-  const tabConfig: Record<ActiveTab,
+  const tabConfig: Record<
+    ActiveTab,
     { items: typeof kitchens; altTail: string }
   > = {
     1: { items: kitchens, altTail: "кухня на замовлення Харків" },
@@ -28,7 +28,7 @@ export default function FurnitureClient({ limit }: { limit: number }) {
         {selected.map((item) => (
           <li
             key={item.id}
-            className={`${styles.navItem} ${item.id === active ? styles.active : "" }`}
+            className={`${styles.navItem} ${item.id === active ? styles.active : ""}`}
             onClick={() => setActive(item.id)}
           >
             {item.name}
@@ -54,6 +54,4 @@ export default function FurnitureClient({ limit }: { limit: number }) {
       </div>
     </div>
   );
-
 }
-

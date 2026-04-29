@@ -12,7 +12,8 @@ export async function generateMetadata({
 
   const baseUrl = "https://t-mebel.com.ua";
   const path = "/about";
-  const canonical = locale === "uk" ? `${baseUrl}${path}` : `${baseUrl}/${locale}${path}`;
+  const canonical =
+    locale === "uk" ? `${baseUrl}${path}` : `${baseUrl}/${locale}${path}`;
 
   return {
     title: t("title"),
@@ -23,7 +24,9 @@ export async function generateMetadata({
       url: canonical,
       siteName: "T-Mebel",
       locale,
-      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
+      images: [
+        { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
+      ],
       type: "website",
     },
     alternates: {
@@ -38,11 +41,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function page({ params }: { params: Promise<{ locale: string }> }) {
+export default async function page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "aboutUsPage" });
 
-  return (
-    <AboutPage title={t("title")} subtitle={t("text1")} showHeader />
-  );
+  return <AboutPage title={t("title")} subtitle={t("text1")} showHeader />;
 }

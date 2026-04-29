@@ -8,7 +8,7 @@ export default function Calendar() {
     new Date().toLocaleDateString("ru-RU", {
       day: "numeric",
       month: "short",
-    })
+    }),
   );
 
   return (
@@ -23,8 +23,8 @@ export default function Calendar() {
           boxShadow: "0 8px 24px rgba(56, 29, 12, 0.12)",
           background: (theme) =>
             theme.palette.mode === "light"
-          ? "linear-gradient(155deg, rgba(255, 244, 232, 0.97), rgba(247, 210, 173, 0.9))"
-          : "linear-gradient(135deg, #2a1f18 0%, #1a1410 100%)",
+              ? "linear-gradient(155deg, rgba(255, 244, 232, 0.97), rgba(247, 210, 173, 0.9))"
+              : "linear-gradient(135deg, #2a1f18 0%, #1a1410 100%)",
           color: (theme) => theme.palette.text.primary,
           display: "flex",
           flexDirection: "column",
@@ -41,7 +41,10 @@ export default function Calendar() {
         <Typography variant="subtitle2" sx={{ fontWeight: 600, opacity: 0.8 }}>
           Сегодня
         </Typography>
-        <Typography variant="h4" sx={{ fontWeight: "bold", color: "rgba(112, 64, 21, 1)" }}>
+        <Typography
+          variant="h4"
+          sx={{ fontWeight: "bold", color: "rgba(112, 64, 21, 1)" }}
+        >
           {currentDate}
         </Typography>
         <CalendarMonthIcon

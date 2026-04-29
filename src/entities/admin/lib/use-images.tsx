@@ -8,7 +8,7 @@ export function useUploadImageMutation(
     Awaited<ReturnType<typeof uploadImage>>,
     Error,
     FormData
-  >
+  >,
 ) {
   return useMutation({
     ...options,

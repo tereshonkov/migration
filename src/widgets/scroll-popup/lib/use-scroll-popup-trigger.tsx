@@ -31,8 +31,7 @@ export function useScrollPopupTrigger({
       if (toastIdRef.current) return;
 
       const scrolled = window.scrollY;
-      const height =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
       if (height <= 0) return;
 
       const scrollPercentage = (scrolled / height) * 100;
@@ -75,7 +74,7 @@ export function useScrollPopupTrigger({
             </div>
           </div>
         ),
-        { duration: Infinity }
+        { duration: Infinity },
       );
 
       toastIdRef.current = id as string;

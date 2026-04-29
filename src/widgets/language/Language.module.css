@@ -63,7 +63,7 @@
   background-color: var(--background-color-primary);
   border-radius: 12px;
   padding: 6px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   display: grid;
   gap: 4px;
   min-width: 140px;
@@ -82,7 +82,7 @@
 }
 .option[aria-selected="true"],
 .option:hover {
-  background-color: rgba(0,0,0,0.06);
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 /* legacy select styles retained for admin link */

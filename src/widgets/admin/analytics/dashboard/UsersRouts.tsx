@@ -30,9 +30,8 @@ export default function UsersRouts() {
   });
 
   const visibleRoutes = useMemo(
-    () =>
-      (routes ?? []).filter((rout) => !HIDDEN_PAGES.has(rout.page)),
-    [routes]
+    () => (routes ?? []).filter((rout) => !HIDDEN_PAGES.has(rout.page)),
+    [routes],
   );
 
   return (

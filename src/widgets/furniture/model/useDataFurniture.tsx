@@ -20,7 +20,7 @@ export default function useDataFurniture() {
       { name: t("stores"), id: 3 },
       { name: t("bedrooms"), id: 4 },
     ],
-    [t]
+    [t],
   );
 
   const [active, setActive] = useState<number>(1);

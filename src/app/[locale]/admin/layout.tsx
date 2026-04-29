@@ -9,9 +9,9 @@ interface AdminLayoutProps {
 }
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
-  return(
-  <TabProvider>
-    <AdminThemeProvider>{children}</AdminThemeProvider>
-  </TabProvider>
+  return (
+    <TabProvider>
+      <AdminThemeProvider>{children}</AdminThemeProvider>
+    </TabProvider>
   );
 }

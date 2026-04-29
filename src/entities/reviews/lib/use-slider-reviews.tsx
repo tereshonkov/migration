@@ -10,7 +10,7 @@ export function useSliderReviewsQuery<
   options?: Omit<
     UseQueryOptions<Awaited<ReturnType<typeof getSliderReviews>>, Error, TData>,
     "queryKey" | "queryFn"
-  >
+  >,
 ) {
   return useQuery({
     queryKey: reviewsQueryKeys.slider(),

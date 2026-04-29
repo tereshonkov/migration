@@ -44,7 +44,7 @@ export function usePopap() {
         loading: "Отправка сообщения...",
         success: "Сообщение отправлено!",
         error: "Ошибка при отправке",
-      }
+      },
     );
     setInput({ name: "", phone: "" });
     setIsOpen(false);

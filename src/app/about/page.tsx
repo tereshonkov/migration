@@ -3,7 +3,8 @@ import messages from "@/messages/uk.json";
 import AboutPage from "@/views/AboutPage/AboutPage";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = (key: string) => messages.seoAbout[key as keyof typeof messages.seoAbout];
+  const t = (key: string) =>
+    messages.seoAbout[key as keyof typeof messages.seoAbout];
   const locale = "uk";
 
   const baseUrl = "https://t-mebel.com.ua";

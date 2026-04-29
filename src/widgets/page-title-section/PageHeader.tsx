@@ -17,8 +17,8 @@ export default function PageHeader({ title, subtitle }: PageHeaderProps) {
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
-        <button 
-          onClick={() => router.back()} 
+        <button
+          onClick={() => router.back()}
           className={styles.backButton}
           aria-label={t("backButton")}
         >

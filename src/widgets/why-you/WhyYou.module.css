@@ -62,13 +62,21 @@
   font-size: 48px;
   color: var(--text-color-secondary);
   padding: 20px;
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(80, 227, 194, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(80, 227, 194, 0.1)
+  );
   border-radius: 50%;
   transition: all 0.3s ease;
 }
 .card:hover .icon {
   transform: scale(1.1) rotate(5deg);
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.15), rgba(80, 227, 194, 0.15));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.15),
+    rgba(80, 227, 194, 0.15)
+  );
 }
 @media (max-width: 600px) {
   .icon {
@@ -127,11 +135,11 @@
     padding: 24px 20px;
     gap: 20px;
   }
-  
+
   .note {
     font-size: var(--text-small);
   }
-  
+
   .ctaButton {
     width: 100%;
     padding: 14px 28px;
@@ -149,7 +157,11 @@
   padding: 32px 28px;
   border: 2px solid rgba(112, 64, 21, 0.25);
   border-radius: 20px;
-  background: linear-gradient(155deg, rgba(255, 244, 232, 0.5), rgba(247, 210, 173, 0.4));
+  background: linear-gradient(
+    155deg,
+    rgba(255, 244, 232, 0.5),
+    rgba(247, 210, 173, 0.4)
+  );
   backdrop-filter: blur(10px);
 }
 
@@ -173,11 +185,17 @@
   font-weight: 600;
   font-size: 16px;
   letter-spacing: 0.02em;
-  background: linear-gradient(135deg, rgba(112, 64, 21, 1), rgba(66, 35, 19, 1));
+  background: linear-gradient(
+    135deg,
+    rgba(112, 64, 21, 1),
+    rgba(66, 35, 19, 1)
+  );
   color: var(--text-color-primary);
   cursor: pointer;
   box-shadow: 0 18px 35px rgba(66, 35, 19, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .ctaButton:hover {
@@ -190,11 +208,11 @@
     padding: 24px 20px;
     gap: 20px;
   }
-  
+
   .note {
     font-size: var(--text-small);
   }
-  
+
   .ctaButton {
     width: 100%;
     padding: 14px 28px;

@@ -14,7 +14,9 @@ import { useLogoutMutation } from "./lib/use-logout";
 
 function wrap(client: ReturnType<typeof createTestQueryClient>) {
   return function W({ children }: { children: ReactNode }) {
-    return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
+    return (
+      <QueryClientProvider client={client}>{children}</QueryClientProvider>
+    );
   };
 }
 

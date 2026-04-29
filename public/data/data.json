@@ -6,7 +6,9 @@
     "color": "gray",
     "furnitures": "blum, hpl, mdf",
     "image": "https://storage.googleapis.com/t-mebel/Image/ourPage/modal/kitchen/1/tablet.webp",
-    "images": ["https://storage.googleapis.com/t-mebel/Image/ourPage/modal/kitchen/1/tablet.webp"],
+    "images": [
+      "https://storage.googleapis.com/t-mebel/Image/ourPage/modal/kitchen/1/tablet.webp"
+    ],
     "width": 120,
     "height": 80,
     "rating": 5,
@@ -116,9 +118,9 @@
     "categories": ["wardrobe"],
     "reviews": [
       {
-      "name": "Александр",
-      "text": "Заказывал встроенный шкаф в детскую комнату. Сначала думал, что будет сложно выбрать дизайн, но менеджер помог подобрать идеальный вариант. Замеры сделали быстро, а сам шкаф изготовили и установили всего за две недели! Качество на высоте, всё сделано аккуратно, и ребёнок теперь в восторге от своего нового шкафа. Спасибо за отличную работу!",
-      "image": "https://storage.googleapis.com/t-mebel/Image/ourPage/modal/shafa/1/tablet.webp"
+        "name": "Александр",
+        "text": "Заказывал встроенный шкаф в детскую комнату. Сначала думал, что будет сложно выбрать дизайн, но менеджер помог подобрать идеальный вариант. Замеры сделали быстро, а сам шкаф изготовили и установили всего за две недели! Качество на высоте, всё сделано аккуратно, и ребёнок теперь в восторге от своего нового шкафа. Спасибо за отличную работу!",
+        "image": "https://storage.googleapis.com/t-mebel/Image/ourPage/modal/shafa/1/tablet.webp"
       }
     ]
   },
@@ -287,9 +289,7 @@
     "color": "white",
     "furnitures": "blum, hpl, mdf",
     "image": "https://storage.googleapis.com/t-mebel/Image/wall.jpg",
-    "images": [
-      "https://storage.googleapis.com/t-mebel/Image/wall.jpg"
-    ],
+    "images": ["https://storage.googleapis.com/t-mebel/Image/wall.jpg"],
     "width": 120,
     "height": 80,
     "rating": 5,

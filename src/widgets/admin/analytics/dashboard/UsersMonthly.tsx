@@ -16,10 +16,7 @@ export default function UsersMonthly() {
 
   const totalActiveUsers = useMemo(() => {
     if (!data?.length) return 0;
-    return data.reduce(
-      (acc, item) => acc + Number(item.activeUsers),
-      0
-    );
+    return data.reduce((acc, item) => acc + Number(item.activeUsers), 0);
   }, [data]);
 
   return (

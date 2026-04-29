@@ -30,11 +30,7 @@ export default function PopupForm({
 
   return (
     <>
-      <button
-        type="button"
-        className={triggerClasses}
-        onClick={openForm}
-      >
+      <button type="button" className={triggerClasses} onClick={openForm}>
         {triggerLabel || t("triggerButton")}
       </button>
 
@@ -47,7 +43,7 @@ export default function PopupForm({
             onChange={handleChange}
             onSubmit={handleSubmit}
           />,
-          document.body
+          document.body,
         )}
     </>
   );

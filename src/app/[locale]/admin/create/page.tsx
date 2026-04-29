@@ -1,9 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  Box
-} from "@mui/material";
+import { Box } from "@mui/material";
 import HeaderAdmin from "@/widgets/admin/shell/HeaderAdmin";
 import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -25,10 +23,10 @@ export default function Admin() {
   if (!tokenChecked) return null;
 
   return (
-    <Box 
-      display="flex" 
-      minHeight="100vh" 
-      px={5} 
+    <Box
+      display="flex"
+      minHeight="100vh"
+      px={5}
       py={4}
       sx={{
         background:
@@ -39,8 +37,8 @@ export default function Admin() {
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
         <HeaderAdmin />
         <Button
-          sx={{ 
-            mb: 3, 
+          sx={{
+            mb: 3,
             width: "fit-content",
             borderRadius: "999px",
             px: 3,

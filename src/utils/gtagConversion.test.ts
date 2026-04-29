@@ -21,7 +21,7 @@ describe("reportConversion", () => {
         send_to: "AW-16643061743/tRMkCOKrntgbEO_vg4A-",
         value: 1.0,
         currency: "UAH",
-      })
+      }),
     );
     expect(result).toBe(false);
   });

@@ -22,7 +22,8 @@ export const metadata: Metadata = {
     default: "T-Mebel — Меблі на замовлення у Харкові",
     template: "%s | T-Mebel",
   },
-  description: "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний подхід, доступні ціни, власне виробництво.",
+  description:
+    "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний подхід, доступні ціни, власне виробництво.",
   robots: { index: true, follow: true },
   twitter: {
     card: "summary_large_image",
@@ -39,34 +40,34 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "FurnitureStore",
-    "name": "T-Mebel",
-    "url": "https://t-mebel.com.ua",
-    "logo": "https://t-mebel.com.ua/logo.svg",
-    "telephone": "+380671496741",
-    "address": {
+    name: "T-Mebel",
+    url: "https://t-mebel.com.ua",
+    logo: "https://t-mebel.com.ua/logo.svg",
+    telephone: "+380671496741",
+    address: {
       "@type": "PostalAddress",
-      "streetAddress": "проспект Льва Ландау 8",
-      "addressLocality": "Харків",
-      "addressCountry": "UA"
+      streetAddress: "проспект Льва Ландау 8",
+      addressLocality: "Харків",
+      addressCountry: "UA",
     },
-    "geo": {
+    geo: {
       "@type": "GeoCoordinates",
-      "latitude": "49.9935",
-      "longitude": "36.2304"
+      latitude: "49.9935",
+      longitude: "36.2304",
     },
-    "openingHoursSpecification": {
+    openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
+      dayOfWeek: [
         "Monday",
         "Tuesday",
         "Wednesday",
         "Thursday",
         "Friday",
-        "Saturday"
+        "Saturday",
       ],
-      "opens": "09:00",
-      "closes": "19:00"
-    }
+      opens: "09:00",
+      closes: "19:00",
+    },
   };
 
   return (

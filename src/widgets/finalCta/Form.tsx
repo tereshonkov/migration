@@ -11,21 +11,19 @@ export default function Form() {
       <div className={styles.container}>
         <div className={styles.content}>
           <h2 className={styles.title}>
-            {t('titleRegular')} <span>{t('titleBold')}</span>{t('titleRegularTwo')}<span>{t('titleBoldTwo')}</span>
+            {t("titleRegular")} <span>{t("titleBold")}</span>
+            {t("titleRegularTwo")}
+            <span>{t("titleBoldTwo")}</span>
           </h2>
-          <p className={styles.subtitle}>
-            {t('subtitle')}
-          </p>
+          <p className={styles.subtitle}>{t("subtitle")}</p>
         </div>
         <div className={styles.buttonWrapper}>
-          <PopupForm 
-            triggerLabel={t('ctaButton')}
+          <PopupForm
+            triggerLabel={t("ctaButton")}
             useDefaultTriggerStyles={false}
             triggerClassName={styles.ctaButton}
           />
-          <p className={styles.note}>
-            {t('note')}
-          </p>
+          <p className={styles.note}>{t("note")}</p>
         </div>
       </div>
     </section>

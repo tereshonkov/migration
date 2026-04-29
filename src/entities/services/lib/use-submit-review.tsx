@@ -9,7 +9,7 @@ export function useSubmitReviewMutation(
     Awaited<ReturnType<typeof sendReviewApi>>,
     Error,
     ReviewsTypes
-  >
+  >,
 ) {
   return useMutation({
     ...options,

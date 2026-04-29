@@ -17,7 +17,7 @@ export default function ContactTabs() {
         id,
         label: t(labelKey),
       })),
-    [t]
+    [t],
   );
 
   return (

@@ -1,6 +1,9 @@
 import type { Data } from "@/entities/product/model/type";
 import { getProducts } from "@/entities/product/api/product";
-import type { ReviewListItem, SliderReview } from "@/entities/reviews/model/type";
+import type {
+  ReviewListItem,
+  SliderReview,
+} from "@/entities/reviews/model/type";
 import api from "@/shared/api/base";
 
 const FALLBACK_IMAGE =
@@ -33,7 +36,9 @@ export async function getSliderReviews(): Promise<SliderReview[]> {
     .filter((r) => r.isApproved)
     .map((r) => {
       const product = productById.get(r.productId);
-      const image = product ? coverUrl(product) ?? FALLBACK_IMAGE : FALLBACK_IMAGE;
+      const image = product
+        ? (coverUrl(product) ?? FALLBACK_IMAGE)
+        : FALLBACK_IMAGE;
       return {
         id: r.id,
         name: r.name,

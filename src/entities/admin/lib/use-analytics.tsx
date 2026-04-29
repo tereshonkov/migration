@@ -10,11 +10,13 @@ import {
 } from "@/entities/admin/api/analitycs";
 import { adminQueryKeys } from "@/entities/admin/model/query-keys";
 
-export function useAnalyticsDayQuery<TData = Awaited<ReturnType<typeof getAnalitycsDay>>>(
+export function useAnalyticsDayQuery<
+  TData = Awaited<ReturnType<typeof getAnalitycsDay>>,
+>(
   options?: Omit<
     UseQueryOptions<Awaited<ReturnType<typeof getAnalitycsDay>>, Error, TData>,
     "queryKey" | "queryFn"
-  >
+  >,
 ) {
   return useQuery({
     queryKey: adminQueryKeys.analytics.day(),
@@ -23,11 +25,13 @@ export function useAnalyticsDayQuery<TData = Awaited<ReturnType<typeof getAnalit
   });
 }
 
-export function useAnalyticsWeekQuery<TData = Awaited<ReturnType<typeof getAnalitycsWeek>>>(
+export function useAnalyticsWeekQuery<
+  TData = Awaited<ReturnType<typeof getAnalitycsWeek>>,
+>(
   options?: Omit<
     UseQueryOptions<Awaited<ReturnType<typeof getAnalitycsWeek>>, Error, TData>,
     "queryKey" | "queryFn"
-  >
+  >,
 ) {
   return useQuery({
     queryKey: adminQueryKeys.analytics.week(),
@@ -36,11 +40,17 @@ export function useAnalyticsWeekQuery<TData = Awaited<ReturnType<typeof getAnali
   });
 }
 
-export function useAnalyticsMonthQuery<TData = Awaited<ReturnType<typeof getAnalitycsMonth>>>(
+export function useAnalyticsMonthQuery<
+  TData = Awaited<ReturnType<typeof getAnalitycsMonth>>,
+>(
   options?: Omit<
-    UseQueryOptions<Awaited<ReturnType<typeof getAnalitycsMonth>>, Error, TData>,
+    UseQueryOptions<
+      Awaited<ReturnType<typeof getAnalitycsMonth>>,
+      Error,
+      TData
+    >,
     "queryKey" | "queryFn"
-  >
+  >,
 ) {
   return useQuery({
     queryKey: adminQueryKeys.analytics.month(),
@@ -49,11 +59,13 @@ export function useAnalyticsMonthQuery<TData = Awaited<ReturnType<typeof getAnal
   });
 }
 
-export function useCallClickQuery<TData = Awaited<ReturnType<typeof getCallClick>>>(
+export function useCallClickQuery<
+  TData = Awaited<ReturnType<typeof getCallClick>>,
+>(
   options?: Omit<
     UseQueryOptions<Awaited<ReturnType<typeof getCallClick>>, Error, TData>,
     "queryKey" | "queryFn"
-  >
+  >,
 ) {
   return useQuery({
     queryKey: adminQueryKeys.analytics.callClick(),
@@ -62,11 +74,13 @@ export function useCallClickQuery<TData = Awaited<ReturnType<typeof getCallClick
   });
 }
 
-export function usePageVisitsQuery<TData = Awaited<ReturnType<typeof getPageVisits>>>(
+export function usePageVisitsQuery<
+  TData = Awaited<ReturnType<typeof getPageVisits>>,
+>(
   options?: Omit<
     UseQueryOptions<Awaited<ReturnType<typeof getPageVisits>>, Error, TData>,
     "queryKey" | "queryFn"
-  >
+  >,
 ) {
   return useQuery({
     queryKey: adminQueryKeys.analytics.pageVisits(),

@@ -86,7 +86,9 @@
   color: var(--text-color-primary);
   border: none;
   box-shadow: 0 12px 25px rgba(66, 35, 19, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   width: 100%;
   max-width: 320px;
   text-align: center;
@@ -109,7 +111,7 @@
     min-height: 320px;
     height: 320px;
   }
-  
+
   .photo {
     min-height: 320px;
   }

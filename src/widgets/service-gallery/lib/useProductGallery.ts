@@ -9,7 +9,7 @@ export function useProductGallery(productId: string) {
 
   const imageUrls = useMemo(
     () => (data?.images ?? []).map((img) => img.url),
-    [data?.images]
+    [data?.images],
   );
 
   useEffect(() => {

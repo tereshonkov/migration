@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-} from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
 import { reportConversion } from "@/utils/gtagConversion";

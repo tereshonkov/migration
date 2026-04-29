@@ -10,7 +10,7 @@ const CTA_IMAGE =
 
 export default function CtaBlock() {
   const t = useTranslations("ctaBlock");
-  
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
@@ -25,9 +25,7 @@ export default function CtaBlock() {
         </div>
         <div className={styles.content}>
           <h2>{t("title")}</h2>
-          <p>
-            {t("description")}
-          </p>
+          <p>{t("description")}</p>
           <PopupForm
             triggerClassName={styles.ctaButton}
             triggerLabel={t("button")}

@@ -34,7 +34,9 @@ import { useSendTelegramMessageMutation } from "./lib/use-telegram-message";
 
 function wrap(client: ReturnType<typeof createTestQueryClient>) {
   return function W({ children }: { children: ReactNode }) {
-    return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
+    return (
+      <QueryClientProvider client={client}>{children}</QueryClientProvider>
+    );
   };
 }
 

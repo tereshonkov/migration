@@ -9,7 +9,9 @@ export const getToken = async (): Promise<string | null> => {
 
   const baseUrl = getPublicApiBaseUrl();
   if (!baseUrl) {
-    console.error("[api] NEXT_PUBLIC_API_BASE_URL is required for token refresh");
+    console.error(
+      "[api] NEXT_PUBLIC_API_BASE_URL is required for token refresh",
+    );
     return null;
   }
 

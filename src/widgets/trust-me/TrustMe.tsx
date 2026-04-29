@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 
 export default function TrustMe() {
   const t = useTranslations("trustMe");
-  
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.card}>

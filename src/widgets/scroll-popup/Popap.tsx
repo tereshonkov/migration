@@ -5,18 +5,11 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { usePopap } from "./lib/use-popap";
 
 export default function Popap() {
-  const {
-    t,
-    isOpen,
-    setIsOpen,
-    input,
-    setInput,
-    onSubmit,
-    isSubmitPending,
-  } = usePopap();
+  const { t, isOpen, setIsOpen, input, setInput, onSubmit, isSubmitPending } =
+    usePopap();
 
   if (!isOpen) return null;
-  
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.popapWrapper}>

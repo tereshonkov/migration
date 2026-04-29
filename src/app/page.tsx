@@ -3,7 +3,8 @@ import messages from "@/messages/uk.json";
 import HomePage from "@/views/HomePage/HomePage";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = (key: string) => messages.seoHome[key as keyof typeof messages.seoHome];
+  const t = (key: string) =>
+    messages.seoHome[key as keyof typeof messages.seoHome];
   const locale = "uk";
 
   const baseUrl = "https://t-mebel.com.ua";
@@ -18,7 +19,9 @@ export async function generateMetadata(): Promise<Metadata> {
       url: canonical,
       siteName: "T-Mebel",
       locale,
-      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
+      images: [
+        { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
+      ],
       type: "website",
     },
     alternates: {

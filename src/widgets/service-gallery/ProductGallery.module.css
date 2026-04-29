@@ -165,11 +165,17 @@
   font-weight: 600;
   font-size: 16px;
   letter-spacing: 0.02em;
-  background: linear-gradient(135deg, rgba(112, 64, 21, 1), rgba(66, 35, 19, 1));
+  background: linear-gradient(
+    135deg,
+    rgba(112, 64, 21, 1),
+    rgba(66, 35, 19, 1)
+  );
   color: var(--text-color-primary);
   cursor: pointer;
   box-shadow: 0 18px 35px rgba(66, 35, 19, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
   width: 100%;
 }
 

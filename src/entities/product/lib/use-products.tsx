@@ -8,14 +8,20 @@ import {
   type UseQueryOptions,
 } from "@tanstack/react-query";
 import type { CreateProductPayload } from "@/entities/product/model/type";
-import { createProduct, getProductById, getProducts } from "@/entities/product/api/product";
+import {
+  createProduct,
+  getProductById,
+  getProducts,
+} from "@/entities/product/api/product";
 import { productQueryKeys } from "@/entities/product/model/query-keys";
 
-export function useProductsQuery<TData = Awaited<ReturnType<typeof getProducts>>>(
+export function useProductsQuery<
+  TData = Awaited<ReturnType<typeof getProducts>>,
+>(
   options?: Omit<
     UseQueryOptions<Awaited<ReturnType<typeof getProducts>>, Error, TData>,
     "queryKey" | "queryFn"
-  >
+  >,
 ) {
   return useQuery({
     queryKey: productQueryKeys.list(),
@@ -24,12 +30,14 @@ export function useProductsQuery<TData = Awaited<ReturnType<typeof getProducts>>
   });
 }
 
-export function useProductQuery<TData = Awaited<ReturnType<typeof getProductById>>>(
+export function useProductQuery<
+  TData = Awaited<ReturnType<typeof getProductById>>,
+>(
   id: string,
   options?: Omit<
     UseQueryOptions<Awaited<ReturnType<typeof getProductById>>, Error, TData>,
     "queryKey" | "queryFn"
-  >
+  >,
 ) {
   return useQuery({
     queryKey: productQueryKeys.detail(id),
@@ -44,14 +52,16 @@ export function useCreateProductMutation(
     Awaited<ReturnType<typeof createProduct>>,
     Error,
     CreateProductPayload
-  >
+  >,
 ) {
   const queryClient = useQueryClient();
   return useMutation({
     ...options,
     mutationFn: createProduct,
     onSuccess: async (data, variables, onMutateResult, context) => {
-      await queryClient.invalidateQueries({ queryKey: productQueryKeys.list() });
+      await queryClient.invalidateQueries({
+        queryKey: productQueryKeys.list(),
+      });
       await options?.onSuccess?.(data, variables, onMutateResult, context);
     },
   });

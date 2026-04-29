@@ -65,7 +65,8 @@ export default function ProductsPage() {
               px: 3,
               py: 1.2,
               fontWeight: 600,
-              background: "linear-gradient(135deg, rgba(112, 64, 21, 1), rgba(66, 35, 19, 1))",
+              background:
+                "linear-gradient(135deg, rgba(112, 64, 21, 1), rgba(66, 35, 19, 1))",
               color: "rgba(254, 247, 240, 1)",
               boxShadow: "0 4px 12px rgba(66, 35, 19, 0.3)",
               "&:hover": {
@@ -127,7 +128,8 @@ export default function ProductsPage() {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                background: "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
                 padding: 2,
                 opacity: 0,
                 transition: "opacity 0.3s ease",

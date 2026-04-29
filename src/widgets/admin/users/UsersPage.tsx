@@ -15,8 +15,7 @@ import { useAdminUsersQuery } from "@/entities/admin/lib/use-users";
 type AdminUserRow = { name: string; email: string; role: string };
 
 export default function UsersPage() {
-  const { data: users = [] } =
-    useAdminUsersQuery<AdminUserRow[]>();
+  const { data: users = [] } = useAdminUsersQuery<AdminUserRow[]>();
 
   return (
     <TableContainer component={Paper}>

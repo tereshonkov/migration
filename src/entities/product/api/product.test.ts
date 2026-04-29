@@ -11,11 +11,7 @@ vi.mock("@/shared/api/base", () => ({
   default: { get, post },
 }));
 
-import {
-  createProduct,
-  getProductById,
-  getProducts,
-} from "./product";
+import { createProduct, getProductById, getProducts } from "./product";
 
 describe("product api", () => {
   beforeEach(() => {

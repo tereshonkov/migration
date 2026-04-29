@@ -8,7 +8,7 @@ export const login = async (email: string, password: string) => {
         email,
         password,
       },
-      { withCredentials: true }
+      { withCredentials: true },
     );
     return response.data;
   } catch (error) {
@@ -31,7 +31,11 @@ export const refreshToken = async () => {
 
 export const logout = async () => {
   try {
-    const response = await api.post(`/auth/logout`, {}, { withCredentials: true });
+    const response = await api.post(
+      `/auth/logout`,
+      {},
+      { withCredentials: true },
+    );
     localStorage.clear();
     return response.data;
   } catch (error) {
