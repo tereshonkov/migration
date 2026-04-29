@@ -1,155 +1,36 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import styles from "./ContactTabs.module.css";
-
-const PHONE_E164 = "+380671496741";
-
-type TabKey = "address" | "phone" | "social";
+import { CONTACT_TAB_DEFS, type TabKey } from "./model/types";
+import { ContactTabsList } from "./ui/ContactTabsList";
+import { ContactTabPanels } from "./ui/ContactTabPanels";
 
 export default function ContactTabs() {
   const t = useTranslations("contactTabs");
   const [active, setActive] = useState<TabKey>("address");
 
-  const tabs: { id: TabKey; labelKey: "tabAddress" | "tabPhone" | "tabSocial" }[] = [
-    { id: "address", labelKey: "tabAddress" },
-    { id: "phone", labelKey: "tabPhone" },
-    { id: "social", labelKey: "tabSocial" },
-  ];
-
-  const visible = (key: TabKey) =>
-    `${styles.infoCard} ${active === key ? styles.infoCardVisible : ""}`;
+  const tabItems = useMemo(
+    () =>
+      CONTACT_TAB_DEFS.map(({ id, labelKey }) => ({
+        id,
+        label: t(labelKey),
+      })),
+    [t]
+  );
 
   return (
     <div className={styles.wrapper}>
-      <ul className={styles.tabList} role="tablist" aria-label={t("tabsRegionLabel")}>
-        {tabs.map(({ id, labelKey }) => (
-          <li key={id} role="none" className={styles.tabItem}>
-            <button
-              type="button"
-              role="tab"
-              id={`contact-tab-${id}`}
-              aria-selected={active === id}
-              aria-controls={`contact-panel-${id}`}
-              className={styles.tab}
-              onClick={() => setActive(id)}
-            >
-              {t(labelKey)}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <ContactTabsList
+        items={tabItems}
+        active={active}
+        onSelect={setActive}
+        regionAriaLabel={t("tabsRegionLabel")}
+      />
 
       <div className={styles.infoSection}>
-        <div
-          id="contact-panel-address"
-          role="tabpanel"
-          aria-labelledby="contact-tab-address"
-          className={visible("address")}
-        >
-          <div className={styles.iconWrapper}>
-            <svg className={styles.icon} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-          </div>
-          <div className={styles.infoContent}>
-            <h3 className={styles.infoTitle}>{t("addressHeading")}</h3>
-            <p className={styles.infoText}>{t("addressLine")}</p>
-          </div>
-        </div>
-
-        <div
-          id="contact-panel-phone"
-          role="tabpanel"
-          aria-labelledby="contact-tab-phone"
-          className={visible("phone")}
-        >
-          <div className={styles.iconWrapper}>
-            <svg className={styles.icon} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              />
-            </svg>
-          </div>
-          <div className={styles.infoContent}>
-            <h3 className={styles.infoTitle}>{t("phoneHeading")}</h3>
-            <a href={`tel:${PHONE_E164}`} className={styles.phoneLink}>
-              {t("phoneDisplay")}
-            </a>
-          </div>
-        </div>
-
-        <div
-          id="contact-panel-social"
-          role="tabpanel"
-          aria-labelledby="contact-tab-social"
-          className={visible("social")}
-        >
-          <div className={styles.iconWrapper}>
-            <svg className={styles.icon} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-              />
-            </svg>
-          </div>
-          <div className={styles.infoContent}>
-            <h3 className={styles.infoTitle}>{t("socialHeading")}</h3>
-            <div className={styles.socialLinks}>
-              <Link
-                href="https://www.instagram.com/tereshonkov.alexander/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label={t("ariaInstagram")}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                </svg>
-              </Link>
-              <Link
-                href="https://t.me/+380980276709"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label={t("ariaTelegram")}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z" />
-                </svg>
-              </Link>
-              <Link
-                href="https://www.facebook.com/tmebelsite?locale=ru_RU"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label={t("ariaFacebook")}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
+        <ContactTabPanels active={active} t={t} />
       </div>
     </div>
   );
