@@ -16,7 +16,14 @@ export default function Logo() {
         <div className={styles.logos}>
            {[...logos, ...logos].map((src: string, index: number) => (
             <div className={styles.logo} key={`logo-${index}-${src}`}>
-                <Image width={100} height={100} src={src} alt="" className={styles.image} />
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 120px, 188px"
+                  className={styles.image}
+                  unoptimized
+                />
             </div>
            ))}
         </div>
