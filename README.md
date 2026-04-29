@@ -12,7 +12,7 @@
 | i18n | **next-intl** (локалі `uk`, `ru`, `en`) |
 | Форми / UX | react-hook-form, react-hot-toast |
 | Медіа / графіки | embla-carousel, recharts |
-| Аналітика | Vercel Analytics, Speed Insights |
+| Аналітика | **Google tag** (GA4 + Google Ads), кастомні конверсії на ключові події; **Vercel Analytics**, Speed Insights |
 | Якість | ESLint (eslint-config-next), **Vitest**, Testing Library, **Husky** (pre-commit) |
 
 У `package.json` також є `mongodb`, `bcrypt` / `bcryptjs` — за потреби для скриптів або майбутнього серверного коду; основний застосунок — клієнт до зовнішнього API.
@@ -36,6 +36,7 @@
 
 ## Особливості
 
+- **Адмінка / аналітика:** у розділі «Аналітика» — дашборд з даними про відвідування, кліки по дзвінках, маршрути сторінок тощо (з бекенду). На публічному сайті підключено **Google tag** (`gtag.js`: GA4 і Google Ads). Для важливих для бізнесу дій налаштовані **кастомні конверсії**: події до Google та реєстрація на бекенді (контактні форми, попапи тощо).
 - **Локалізація:** `defaultLocale: 'uk'`, префікс у URL лише коли не типова локаль; `localeDetection: false`.
 - **SEO:** `metadata` і JSON-LD у кореневому `layout`, `sitemap.ts`.
 - **API:** базовий URL задається в `src/shared/api/base.ts` (зараз прод-інстанс на Render). Для іншого середовища змініть `baseURL` або винесіть у `NEXT_PUBLIC_*` під час рефакторингу.
