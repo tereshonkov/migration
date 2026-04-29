@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# T-Mebel — фронтенд (Next.js)
 
-## Getting Started
+Публічний сайт меблевої студії та клієнтська адмін-панель. Дані й авторизація — через окремий HTTP API (див. нижче).
 
-First, run the development server:
+## Стек
+
+| Шар | Технології |
+|-----|------------|
+| Framework | **Next.js 15** (App Router), **React 19**, **TypeScript** |
+| UI | **MUI 7**, Emotion, CSS Modules (частина віджетів) |
+| Дані | **TanStack Query v5**, **Axios** |
+| i18n | **next-intl** (локалі `uk`, `ru`, `en`) |
+| Форми / UX | react-hook-form, react-hot-toast |
+| Медіа / графіки | embla-carousel, recharts |
+| Аналітика | Vercel Analytics, Speed Insights |
+| Якість | ESLint (eslint-config-next), **Vitest**, Testing Library, **Husky** (pre-commit) |
+
+У `package.json` також є `mongodb`, `bcrypt` / `bcryptjs` — за потреби для скриптів або майбутнього серверного коду; основний застосунок — клієнт до зовнішнього API.
+
+## Структура `src/`
+
+Орієнтація на **Feature-Sliced Design** (логічний поділ, не офіційний FSD-тулінг):
+
+- **`app/`** — маршрути Next (`[locale]/…` для локалізованих сторінок, окремо `signin`, дублікати без префікса локалі для типового `uk` за правилами `localePrefix: 'as-needed'`).
+- **`entities/`** — доменні сутності (product, reviews, admin API hooks, services).
+- **`features/`** — сценарії (наприклад `auth`: вхід, refresh, вихід).
+- **`widgets/`** — великі блоки UI (шапка, адмін-оболонка, форми, галереї).
+- **`shared/`** — багаторазовий UI, `api/base` (axios), React Query provider.
+- **`views/`** — композиція сторінок з віджетів.
+- **`i18n/`**, **`messages/`** — маршрутизація локалей і JSON-повідомлення (джерело типів для `uk.json` у `next.config.ts`).
+- **`context/`** — React context (наприклад таби адмінки).
+- **`middleware.ts`** — i18n + legacy-редиректи (`/product/:id` → `/service/:id`, `/blog` → головна).
+- **`test/`** — спільний setup і обгортки для тестів.
+
+Аліас імпортів: `@/*` → `src/*` (див. `tsconfig.json`).
+
+## Особливості
+
+- **Локалізація:** `defaultLocale: 'uk'`, префікс у URL лише коли не типова локаль; `localeDetection: false`.
+- **SEO:** `metadata` і JSON-LD у кореневому `layout`, `sitemap.ts`.
+- **API:** базовий URL задається в `src/shared/api/base.ts` (зараз прод-інстанс на Render). Для іншого середовища змініть `baseURL` або винесіть у `NEXT_PUBLIC_*` під час рефакторингу.
+- **Auth:** JWT у `localStorage`, refresh через `withCredentials` на `/auth/refresh`; захист сторінок адмінки — на клієнті, реальна безпека — на бекенді.
+- **Збірка:** у `next.config.ts` увімкнено експериментальний `optimizeCss`, ESLint під час build вимкнено (`ignoreDuringBuilds`); зображення з `storage.googleapis.com`.
+- **Pre-commit:** `lint` → `npm audit fix` → `npm audit` → `vitest run` (скрипт `precommit` + Husky).
+
+## Скрипти
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev          # next dev --turbopack
+npm run build
+npm run start
+npm run lint
+npm test             # vitest run
+npm run test:watch
+npm run test:coverage
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Вимоги
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js, сумісний із Next 15 (рекомендовано актуальний LTS)
+- npm (або сумісний клієнт)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Локальний запуск
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Відкрийте [http://localhost:3000](http://localhost:3000). Для повного функціоналу (форми, адмінка) має бути доступний бекенд з тим самим контрактом, що й у вказаного `baseURL`.
