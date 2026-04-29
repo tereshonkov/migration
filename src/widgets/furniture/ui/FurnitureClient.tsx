@@ -47,7 +47,6 @@ export default function FurnitureClient({ limit }: { limit: number }) {
               alt={`${item.title} — ${altTail}`}
               width={1024}
               height={768}
-              quality={85}
               loading={index < 3 ? "eager" : "lazy"}
             />
           </Link>

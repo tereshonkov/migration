@@ -1,9 +1,9 @@
 import type { CreateProductPayload, Data } from "@/entities/product/model/type";
 import api from "@/shared/api/base";
 
-export const getProducts = async () => {
+export const getProducts = async (): Promise<Data[]> => {
   try {
-    const response = await api.get("/product/products");
+    const response = await api.get<Data[]>("/product/products");
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);

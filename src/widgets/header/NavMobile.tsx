@@ -1,19 +1,25 @@
 "use client";
 import styles from './Header.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Language from '../language/Language';
 
+const noopSubscribe = () => () => {};
+
+function useClientReady() {
+  return useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false
+  );
+}
+
 export default function NavMobile() {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const clientReady = useClientReady();
   
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -40,7 +46,7 @@ export default function NavMobile() {
         <Image src="/menu-dark.svg" alt="" width={24} height={24} />
         <p>{t('menu')}</p>
       </div>
-      {mounted && mobileMenu && createPortal(mobileMenu, document.body)}
+      {clientReady && mobileMenu && createPortal(mobileMenu, document.body)}
     </>
   )
 }
