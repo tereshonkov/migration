@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/widgets/footer/Footer";
 import { FC } from "react";
+
+export const metadata: Metadata = {
+  title: "404 | T-Mebel",
+  robots: { index: false, follow: false },
+};
 
 const NotFound: FC = () => (
   <div className="container">

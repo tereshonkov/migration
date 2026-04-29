@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { getCatalogPrimaryImageUrl } from "@/shared/lib/productCatalog";
+import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 import ServicePageDetails from "@/views/ServicePageDetails/ServicePageDetails";
 
 export async function generateMetadata({
@@ -14,6 +16,7 @@ export async function generateMetadata({
   const path = `/service/${id}`;
   const canonical =
     locale === "uk" ? `${baseUrl}${path}` : `${baseUrl}/${locale}${path}`;
+  const heroImage = getCatalogPrimaryImageUrl(id);
 
   return {
     title: t("titleSeo"),
@@ -23,10 +26,17 @@ export async function generateMetadata({
       description: t("description"),
       url: canonical,
       siteName: "T-Mebel",
-      locale,
-      images: [
-        { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
-      ],
+      locale: openGraphAlternateLocale(locale),
+      images: heroImage
+        ? [
+            {
+              url: heroImage,
+              width: 1200,
+              height: 630,
+              alt: t("title"),
+            },
+          ]
+        : [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
       type: "website",
     },
     alternates: {

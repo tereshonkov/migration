@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import messages from "@/messages/uk.json";
+import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 import AboutPage from "@/views/AboutPage/AboutPage";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -18,7 +19,11 @@ export async function generateMetadata(): Promise<Metadata> {
       description: t("description"),
       url: baseUrl + path,
       siteName: "T-Mebel",
-      locale,
+      locale: openGraphAlternateLocale(locale),
+      images: [
+        { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
+      ],
+      type: "website",
     },
     alternates: {
       canonical: `${baseUrl}${path}`,

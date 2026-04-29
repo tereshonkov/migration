@@ -28,8 +28,7 @@ export async function generateMetadata(props: Omit<Props, "children">) {
       default: t("title"),
       template: "%s | T-Mebel",
     },
-    description:
-      "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний подхід, доступні ціни, власне виробництво.",
+    description: t("description"),
     robots: { index: true, follow: true },
     twitter: {
       card: "summary_large_image",

@@ -4,6 +4,7 @@
 declare const messages: {
   LocaleLayout: {
     title: "T-Mebel — Меблі на замовлення у Харкові";
+    description: "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний підхід, доступні ціни, власне виробництво.";
   };
   header: {
     home: "Головна";
@@ -331,6 +332,7 @@ declare const messages: {
     backButton: "Назад";
   };
   productGallery: {
+    imageAlt: "{title} — меблі на замовлення Харків, фото {photoNumber}";
     loading: "Завантаження...";
     loadError: "Не вдалося завантажити товар";
     prevPhoto: "Попереднє фото";

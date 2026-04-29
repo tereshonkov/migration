@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { getCatalogPrimaryImageUrl } from "@/shared/lib/productCatalog";
+import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 import ServicePageDetails from "@/views/ServicePageDetails/ServicePageDetails";
 
 const DEFAULT_LOCALE = "uk";
@@ -18,6 +20,7 @@ export async function generateMetadata({
   const baseUrl = "https://t-mebel.com.ua";
   const path = `/service/${id}`;
   const canonical = `${baseUrl}${path}`;
+  const heroImage = getCatalogPrimaryImageUrl(id);
 
   return {
     title: t("titleSeo"),
@@ -27,10 +30,17 @@ export async function generateMetadata({
       description: t("description"),
       url: canonical,
       siteName: "T-Mebel",
-      locale: DEFAULT_LOCALE,
-      images: [
-        { url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" },
-      ],
+      locale: openGraphAlternateLocale(DEFAULT_LOCALE),
+      images: heroImage
+        ? [
+            {
+              url: heroImage,
+              width: 1200,
+              height: 630,
+              alt: t("title"),
+            },
+          ]
+        : [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "T-Mebel" }],
       type: "website",
     },
     alternates: {

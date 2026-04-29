@@ -1,6 +1,7 @@
 {
   "LocaleLayout": {
-    "title": "T-Mebel — Custom Furniture in Kharkiv"
+    "title": "T-Mebel — Custom Furniture in Kharkiv",
+    "description": "Custom kitchens, wardrobes, and furniture in Kharkiv. Individual approach, fair prices, own production."
   },
   "header": {
     "home": "Home",
@@ -328,6 +329,7 @@
     "backButton": "Back"
   },
   "productGallery": {
+    "imageAlt": "{title} — custom furniture Kharkiv, photo {photoNumber}",
     "loading": "Loading...",
     "loadError": "Could not load product",
     "prevPhoto": "Previous photo",

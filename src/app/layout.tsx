@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import ukMessages from "@/messages/uk.json";
 import { ReactQueryProvider } from "@/shared/lib/react-query";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | T-Mebel",
   },
   description:
-    "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний подхід, доступні ціни, власне виробництво.",
+    "Виготовляємо кухні, шафи та меблі на замовлення у Харкові. Індивідуальний підхід, доступні ціни, власне виробництво.",
   robots: { index: true, follow: true },
   twitter: {
     card: "summary_large_image",
@@ -32,11 +33,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "FurnitureStore",
@@ -71,7 +73,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="uk">
+    <html lang={locale}>
       <head>
         <JsonLd data={organizationJsonLd} />
         {/* Google Tag (gtag.js) */}

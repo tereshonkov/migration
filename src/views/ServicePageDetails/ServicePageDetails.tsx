@@ -4,6 +4,7 @@ import PageHeader from "@/widgets/page-title-section/PageHeader";
 import ProductGallery from "@/widgets/service-gallery/ProductGallery";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Header from "@/widgets/header/Header";
+import { getCatalogPrimaryImageUrl } from "@/shared/lib/productCatalog";
 import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 
 type ServicePageDetailsProps = {
@@ -17,12 +18,14 @@ export default async function ServicePageDetails({
 }: ServicePageDetailsProps) {
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: `data_${id}` });
+  const previewImage = getCatalogPrimaryImageUrl(id);
 
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: t("title"),
     description: t("description"),
+    ...(previewImage ? { image: previewImage } : {}),
     brand: {
       "@type": "Brand",
       name: "T-Mebel",
