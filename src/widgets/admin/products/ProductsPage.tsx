@@ -10,29 +10,20 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import type { Data } from "@/entities/product/model/type";
-import { getProducts } from "@/entities/product/api/product";
+import { useProductsQuery } from "@/entities/product/lib/use-products";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Data[]>([]);
   const [filter, setFilter] = useState<string>("");
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await getProducts();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-    fetchProducts();
-  }, []);
-  const filteredProducts = filter
-    ? products.filter((item: Data) => item?.category?.toString() === filter)
-    : products;
+  const { data: products = [] } = useProductsQuery<Data[]>();
+
+  const filteredProducts = useMemo(() => {
+    if (!filter) return products;
+    return products.filter((item) => item?.category?.toString() === filter);
+  }, [filter, products]);
   return (
     <Box>
       <Box
