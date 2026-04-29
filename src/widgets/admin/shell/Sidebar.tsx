@@ -13,20 +13,15 @@ import {
 } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import { useTabContext } from "@/context/TabContext";
-import { getMessages } from "@/entities/admin/api/messages";
 import type { MessagesTypes } from "@/entities/admin/model/type";
 import type { ReviewsTypes } from "@/entities/services/model/review";
-import { useEffect, useState } from "react";
-import { getReviews } from "@/entities/admin/api/reviews";
+import { useAdminMessagesQuery } from "@/entities/admin/lib/use-messages";
+import { useAdminReviewsQuery } from "@/entities/admin/lib/use-reviews";
 
 export default function Sidebar() {
   const { setPage } = useTabContext();
-  const [messages, setMessages] = useState<MessagesTypes[]>([]);
-  const [reviews, setReviews] = useState<ReviewsTypes[]>([]);
-  useEffect(() => {
-    getMessages().then((data) => setMessages(data));
-    getReviews().then((data) => setReviews(data));
-  }, []);
+  const { data: messages = [] } = useAdminMessagesQuery<MessagesTypes[]>();
+  const { data: reviews = [] } = useAdminReviewsQuery<ReviewsTypes[]>();
   return (
     <>
       <Box

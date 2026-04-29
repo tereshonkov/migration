@@ -1,21 +1,22 @@
 "use client";
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
-import { logout } from "@/features/auth/api/auth";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "@/widgets/header/Header.module.css";
 import Link from "next/link";
+import { useLogoutMutation } from "@/features/auth/lib/use-logout";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function HeaderAdmin() {
   const router = useRouter();
-  const handleLogout = async () => {
-    try {
-      await logout();
+  const queryClient = useQueryClient();
+  const logoutMutation = useLogoutMutation({
+    onSuccess: () => {
+      queryClient.clear();
       router.push("/signin");
-    } catch (error) {
-      console.error("Ошибка при выходе:", error);
-    }
-  };
+    },
+    onError: (error) => console.error("Ошибка при выходе:", error),
+  });
   return (
     <AppBar
       position="static"
@@ -42,8 +43,9 @@ export default function HeaderAdmin() {
         </div>
         <Box sx={{ flexGrow: 1 }} />
         <Button
-          onClick={handleLogout}
+          onClick={() => logoutMutation.mutate()}
           variant="contained"
+          disabled={logoutMutation.isPending}
           sx={{
             ml: 2,
             borderRadius: "999px",

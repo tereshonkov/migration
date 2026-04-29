@@ -10,22 +10,14 @@ import {
   TableBody,
 } from "@mui/material";
 import UserRow from "./UserRow";
-import { useState, useEffect } from "react";
-import { getUsers } from "@/entities/admin/api/users";
+import { useAdminUsersQuery } from "@/entities/admin/lib/use-users";
+
+type AdminUserRow = { name: string; email: string; role: string };
 
 export default function UsersPage() {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await getUsers();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-    fetchUsers();
-  }, []);
+  const { data: users = [] } =
+    useAdminUsersQuery<AdminUserRow[]>();
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -38,14 +30,9 @@ export default function UsersPage() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map(
-            (
-              user: { name: string; email: string; role: string },
-              index,
-            ) => (
-              <UserRow key={index} user={user} />
-            ),
-          )}
+          {users.map((user, index) => (
+            <UserRow key={index} user={user} />
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

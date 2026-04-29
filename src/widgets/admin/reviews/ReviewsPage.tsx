@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+
 import {
   Table,
   TableBody,
@@ -10,39 +10,31 @@ import {
   Paper,
 } from "@mui/material";
 import { Review } from "./Review";
-import { useEffect } from "react";
-import { getReviews, approveReviewApi, cancelReview } from "@/entities/admin/api/reviews";
+import {
+  useAdminReviewsQuery,
+  useApproveReviewMutation,
+  useCancelReviewMutation,
+} from "@/entities/admin/lib/use-reviews";
 import type { ReviewsTypes } from "@/entities/services/model/review";
 
 export default function ReviewsTable() {
-  const [reviews, setReviews] = useState<ReviewsTypes[]>([]);
+  const { data: reviews = [] } = useAdminReviewsQuery<ReviewsTypes[]>();
 
-  const handleMarkRead = (id: string) => {
-    setReviews((prev) => prev.map((m) => (m.id === id ? { ...m, read: true } : m)));
+  const approveMutation = useApproveReviewMutation({
+    onError: (error) =>
+      console.error("Ошибка подтверждения отзыва", error),
+  });
+
+  const cancelMutation = useCancelReviewMutation({
+    onError: (error) => console.error("Ошибка отмены отзыва:", error),
+  });
+
+  const approveReview = (id: string) => {
+    approveMutation.mutate(id);
   };
 
-  useEffect(() => {
-    getReviews().then((data) => setReviews(data));
-  }, []);
-
-  const approveReview = async (id: string) => {
-    try {
-      await approveReviewApi(id);
-      handleMarkRead(id);
-      await getReviews().then((data) => setReviews(data));
-    } catch (error) {
-      console.error("Ошибка подтверждения отзыва", error);
-    }
-  };
-
-  const canceledReview = async (id: string) => {
-    try {
-      await cancelReview(id);
-      handleMarkRead(id);
-      await getReviews().then((data) => setReviews(data));
-    } catch (error) {
-      console.error("Ошибка отмены отзыва:", error);
-    }
+  const canceledReview = (id: string) => {
+    cancelMutation.mutate(id);
   };
 
   return (
@@ -60,12 +52,8 @@ export default function ReviewsTable() {
             <Review
               key={m.id}
               review={m}
-              approveReview={(id) => {
-                approveReview(id);
-              }}
-              cancelReview={(id) => {
-                canceledReview(id);
-              }}
+              approveReview={approveReview}
+              cancelReview={canceledReview}
             />
           ))}
         </TableBody>
