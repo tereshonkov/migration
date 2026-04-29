@@ -1,7 +1,9 @@
 import ServicePage from "@/views/ServicePage/ServicePage";
 import { Metadata } from "next";
 import messages from "@/messages/uk.json";
+import { buildBreadcrumbListJsonLd } from "@/shared/lib/breadcrumbJsonLd";
 import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
+import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = (key: string) =>
@@ -38,10 +40,18 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function ServicePageRoute() {
+  const breadcrumbJsonLd = buildBreadcrumbListJsonLd("uk", [
+    { name: messages.header.home, path: "" },
+    { name: messages.header.service, path: "/service" },
+  ]);
+
   return (
-    <ServicePage
-      title="Наші роботи"
-      subtitle="Індивідуальні меблі, створені з любов'ю до деталей. Кожен проєкт — унікальний."
-    />
+    <>
+      <JsonLd data={breadcrumbJsonLd} />
+      <ServicePage
+        title="Наші роботи"
+        subtitle="Індивідуальні меблі, створені з любов'ю до деталей. Кожен проєкт — унікальний."
+      />
+    </>
   );
 }

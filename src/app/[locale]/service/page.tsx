@@ -1,7 +1,9 @@
 import ServicePage from "@/views/ServicePage/ServicePage";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { buildBreadcrumbListJsonLd } from "@/shared/lib/breadcrumbJsonLd";
 import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
+import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -49,5 +51,17 @@ export default async function ServiceLocalePage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "servicePage" });
-  return <ServicePage title={t("title")} subtitle={t("subtitle")} showHeader />;
+  const tHeader = await getTranslations({ locale, namespace: "header" });
+
+  const breadcrumbJsonLd = buildBreadcrumbListJsonLd(locale, [
+    { name: tHeader("home"), path: "" },
+    { name: tHeader("service"), path: "/service" },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={breadcrumbJsonLd} />
+      <ServicePage title={t("title")} subtitle={t("subtitle")} showHeader />
+    </>
+  );
 }

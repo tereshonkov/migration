@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import messages from "@/messages/uk.json";
+import { buildBreadcrumbListJsonLd } from "@/shared/lib/breadcrumbJsonLd";
 import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
+import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 import AboutPage from "@/views/AboutPage/AboutPage";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -38,10 +40,18 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function page() {
+  const breadcrumbJsonLd = buildBreadcrumbListJsonLd("uk", [
+    { name: messages.header.home, path: "" },
+    { name: messages.header.about, path: "/about" },
+  ]);
+
   return (
-    <AboutPage
-      title={messages.aboutUsPage.title}
-      subtitle={messages.aboutUsPage.text1}
-    />
+    <>
+      <JsonLd data={breadcrumbJsonLd} />
+      <AboutPage
+        title={messages.aboutUsPage.title}
+        subtitle={messages.aboutUsPage.text1}
+      />
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import Footer from "@/widgets/footer/Footer";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { buildBreadcrumbListJsonLd } from "@/shared/lib/breadcrumbJsonLd";
 import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 import ContactsPage from "@/views/ContactsPage/ContactsPage";
 import Header from "@/widgets/header/Header";
@@ -59,25 +60,12 @@ export default async function page({
         ? "Contact us in any convenient way. We are always happy to help you!"
         : "Свяжитесь с любым удобным способом. Мы всегда рады вам помочь!";
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name:
-          locale === "uk" ? "Головна" : locale === "en" ? "Home" : "Главная",
-        item: `https://t-mebel.com.ua${locale === "uk" ? "" : "/" + locale}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: t("contactTitle"),
-        item: `https://t-mebel.com.ua${locale === "uk" ? "" : "/" + locale}/contacts`,
-      },
-    ],
-  };
+  const tHeader = await getTranslations({ locale, namespace: "header" });
+
+  const breadcrumbJsonLd = buildBreadcrumbListJsonLd(locale, [
+    { name: tHeader("home"), path: "" },
+    { name: t("contactTitle"), path: "/contacts" },
+  ]);
 
   return (
     <>

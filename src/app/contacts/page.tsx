@@ -1,6 +1,7 @@
 import Footer from "@/widgets/footer/Footer";
 import { Metadata } from "next";
 import messages from "@/messages/uk.json";
+import { buildBreadcrumbListJsonLd } from "@/shared/lib/breadcrumbJsonLd";
 import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 import ContactsPage from "@/views/ContactsPage/ContactsPage";
@@ -39,24 +40,10 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Головна",
-      item: "https://t-mebel.com.ua",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: messages.contactPage.contactTitle,
-      item: "https://t-mebel.com.ua/contacts",
-    },
-  ],
-};
+const breadcrumbJsonLd = buildBreadcrumbListJsonLd("uk", [
+  { name: messages.header.home, path: "" },
+  { name: messages.contactPage.contactTitle, path: "/contacts" },
+]);
 
 export default async function page() {
   return (
