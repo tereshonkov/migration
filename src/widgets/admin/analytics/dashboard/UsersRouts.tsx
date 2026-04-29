@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Grid,
   Paper,
@@ -10,20 +11,30 @@ import {
   TableRow,
 } from "@mui/material";
 import PageviewIcon from "@mui/icons-material/Pageview";
-import { useState, useEffect } from "react";
-import { getPageVisits } from "@/entities/admin/api/analitycs";
+import { useMemo } from "react";
+import { usePageVisitsQuery } from "@/entities/admin/lib/use-analytics";
 
 interface RoutesStats {
   page: string;
   views: number;
 }
 
+const HIDDEN_PAGES = new Set(["/admin", "/signin", "/admin/create"]);
+
 export default function UsersRouts() {
-  const [routes, setRoutes] = useState<RoutesStats[]>();
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    getPageVisits().then((data) => setRoutes(data));
-  }, [token]);
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+  const { data: routes } = usePageVisitsQuery<RoutesStats[]>({
+    enabled: Boolean(token),
+  });
+
+  const visibleRoutes = useMemo(
+    () =>
+      (routes ?? []).filter((rout) => !HIDDEN_PAGES.has(rout.page)),
+    [routes]
+  );
+
   return (
     <Grid size={{ xs: 12, sm: 6, md: 8 }}>
       <Paper
@@ -45,25 +56,24 @@ export default function UsersRouts() {
           },
         }}
       >
-        <Typography variant="subtitle2" sx={{ mb: 2, fontWeight: 600, opacity: 0.8 }}>
+        <Typography
+          variant="subtitle2"
+          sx={{ mb: 2, fontWeight: 600, opacity: 0.8 }}
+        >
           Наиболее посещаемые страницы
         </Typography>
 
         <TableContainer sx={{ maxHeight: 300 }}>
           <Table size="small">
             <TableBody>
-              {routes
-                ?.filter(
-                  (rout) => rout.page !== "/admin" && rout.page !== "/signin" && rout.page !== "/admin/create"
-                )
-                .map((rout) => (
-                  <TableRow key={rout.page} hover>
-                    <TableCell sx={{ maxWidth: 500, overflow: "hidden" }}>
-                      {rout.page}
-                    </TableCell>
-                    <TableCell align="right">{rout.views}</TableCell>
-                  </TableRow>
-                ))}
+              {visibleRoutes.map((rout) => (
+                <TableRow key={rout.page} hover>
+                  <TableCell sx={{ maxWidth: 500, overflow: "hidden" }}>
+                    {rout.page}
+                  </TableCell>
+                  <TableCell align="right">{rout.views}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

@@ -1,15 +1,26 @@
 "use client";
+
 import { Grid, Paper, Typography, Box } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
-import { useState, useEffect } from "react";
-import { getCallClick } from "@/entities/admin/api/analitycs";
+import { useCallClickQuery } from "@/entities/admin/lib/use-analytics";
+
+function resolveConversionsCount(data: unknown): number {
+  if (data == null) return 0;
+  if (Array.isArray(data)) return data.length;
+  if (typeof data === "number") return data;
+  return 0;
+}
 
 export default function UsersCall() {
-  const [users, setUsers] = useState<string | null>(null);
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    getCallClick().then((data) => setUsers(data));
-  }, [token]);
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+  const { data } = useCallClickQuery({
+    enabled: Boolean(token),
+  });
+
+  const count = resolveConversionsCount(data);
+
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
       <Paper
@@ -36,11 +47,14 @@ export default function UsersCall() {
         }}
       >
         <Box>
-          <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600, opacity: 0.8 }}>
+          <Typography
+            variant="subtitle2"
+            sx={{ mb: 1, fontWeight: 600, opacity: 0.8 }}
+          >
             Конверсий
           </Typography>
           <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-            {users?.length || 0}
+            {count}
           </Typography>
         </Box>
         <CallIcon

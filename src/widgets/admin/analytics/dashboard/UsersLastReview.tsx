@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Grid,
   Paper,
@@ -8,33 +9,22 @@ import {
   ListItemText,
 } from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
-import { useEffect, useState } from "react";
-
-interface Review {
-  id: string;
-  isApproved: boolean;
-  name: string;
-  productId: string;
-  text: string;
-}
+import { useMemo } from "react";
+import { useAllReviewsQuery } from "@/entities/reviews/lib/use-reviews-list";
 
 export default function UsersLastReview() {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    const getUsersDaily = async () => {
-      const response = await fetch("https://t-mebel.onrender.com/reviews", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setReviews(data);
-    };
-    getUsersDaily();
-  }, [token]);
-  const lastIndex = reviews.length - 1;
-  const review = reviews.length > 0 ? reviews[lastIndex] : null;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+  const { data: reviews = [] } = useAllReviewsQuery({
+    enabled: Boolean(token),
+  });
+
+  const review = useMemo(() => {
+    if (!reviews.length) return null;
+    return reviews[reviews.length - 1];
+  }, [reviews]);
+
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
       <Paper
@@ -57,7 +47,10 @@ export default function UsersLastReview() {
           },
         }}
       >
-        <Typography variant="subtitle2" sx={{ mb: 2, fontWeight: 600, opacity: 0.8 }}>
+        <Typography
+          variant="subtitle2"
+          sx={{ mb: 2, fontWeight: 600, opacity: 0.8 }}
+        >
           Последние отзыв
         </Typography>
 

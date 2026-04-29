@@ -1,15 +1,7 @@
 import type { Data } from "@/entities/product/model/type";
 import { getProducts } from "@/entities/product/api/product";
-import type { SliderReview } from "@/entities/reviews/model/type";
+import type { ReviewListItem, SliderReview } from "@/entities/reviews/model/type";
 import api from "@/shared/api/base";
-
-type ApiReview = {
-  id: string;
-  name: string;
-  text: string;
-  productId: string;
-  isApproved: boolean;
-};
 
 const FALLBACK_IMAGE =
   "https://storage.googleapis.com/t-mebel/Image/ourPage/modal/shafa/3/tablet.webp";
@@ -23,7 +15,7 @@ function coverUrl(product: Data): string | undefined {
 
 export async function getSliderReviews(): Promise<SliderReview[]> {
   const [reviewsResponse, products] = await Promise.all([
-    api.get<ApiReview[]>("/reviews"),
+    api.get<ReviewListItem[]>("/reviews"),
     getProducts(),
   ]);
 

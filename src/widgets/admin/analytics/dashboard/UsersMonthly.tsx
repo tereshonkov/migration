@@ -1,68 +1,75 @@
 "use client";
-import { Grid, Paper, Typography , Box} from "@mui/material";
+
+import { Grid, Paper, Typography, Box } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
-import { useState, useEffect } from "react";
-import { getAnalitycsMonth } from "@/entities/admin/api/analitycs";
+import { useMemo } from "react";
+import { useAnalyticsMonthQuery } from "@/entities/admin/lib/use-analytics";
 import type { UserRequest } from "@/entities/admin/model/type";
 
 export default function UsersMonthly() {
-  const [users, setUsers] = useState<number>();
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    getAnalitycsMonth().then((data) => {
-      const users = data.reduce(
-        (acc: number, item: UserRequest) => acc + Number(item.activeUsers),
-        0
-      );
-      setUsers(users);
-    });
-  }, [token]);
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+  const { data } = useAnalyticsMonthQuery<UserRequest[]>({
+    enabled: Boolean(token),
+  });
+
+  const totalActiveUsers = useMemo(() => {
+    if (!data?.length) return 0;
+    return data.reduce(
+      (acc, item) => acc + Number(item.activeUsers),
+      0
+    );
+  }, [data]);
+
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-<Paper
-  sx={{
-    p: 3,
-    position: "relative",
-    overflow: "hidden",
-    borderRadius: 3,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    height: 150,
-    background: (theme) =>
-      theme.palette.mode === "light"
-        ? "linear-gradient(155deg, rgba(255, 244, 232, 0.97), rgba(247, 210, 173, 0.9))"
-        : "linear-gradient(135deg, #2a1f18 0%, #1a1410 100%)",
-    color: (theme) => theme.palette.text.primary,
-    boxShadow: "0 8px 24px rgba(56, 29, 12, 0.12)",
-    transition: "all 0.3s ease",
-    "&:hover": {
-      transform: "translateY(-4px)",
-      boxShadow: "0 12px 32px rgba(56, 29, 12, 0.18)",
-    },
-  }}
->
-  <Box>
-    <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600, opacity: 0.8 }}>
-      Пользователи за месяц
-    </Typography>
-    <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-      {users && users}
-    </Typography>
-  </Box>
-  <PeopleIcon
-    sx={{
-      position: "absolute",
-      bottom: -10,
-      right: -10,
-      fontSize: 80,
-      color: (theme) => theme.palette.primary.main,
-      opacity: 0.15,
-      transform: "rotate(20deg)",
-    }}
-  />
-</Paper>
-
+      <Paper
+        sx={{
+          p: 3,
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: 3,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: 150,
+          background: (theme) =>
+            theme.palette.mode === "light"
+              ? "linear-gradient(155deg, rgba(255, 244, 232, 0.97), rgba(247, 210, 173, 0.9))"
+              : "linear-gradient(135deg, #2a1f18 0%, #1a1410 100%)",
+          color: (theme) => theme.palette.text.primary,
+          boxShadow: "0 8px 24px rgba(56, 29, 12, 0.12)",
+          transition: "all 0.3s ease",
+          "&:hover": {
+            transform: "translateY(-4px)",
+            boxShadow: "0 12px 32px rgba(56, 29, 12, 0.18)",
+          },
+        }}
+      >
+        <Box>
+          <Typography
+            variant="subtitle2"
+            sx={{ mb: 1, fontWeight: 600, opacity: 0.8 }}
+          >
+            Пользователи за месяц
+          </Typography>
+          <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+            {totalActiveUsers}
+          </Typography>
+        </Box>
+        <PeopleIcon
+          sx={{
+            position: "absolute",
+            bottom: -10,
+            right: -10,
+            fontSize: 80,
+            color: (theme) => theme.palette.primary.main,
+            opacity: 0.15,
+            transform: "rotate(20deg)",
+          }}
+        />
+      </Paper>
     </Grid>
   );
 }

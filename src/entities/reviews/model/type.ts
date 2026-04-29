@@ -5,3 +5,12 @@ export type SliderReview = {
   text: string;
   image: string;
 };
+
+/** Raw row from GET /reviews */
+export type ReviewListItem = {
+  id: string;
+  isApproved: boolean;
+  name: string;
+  productId: string;
+  text: string;
+};
