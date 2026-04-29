@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+
 import {
   Table,
   TableBody,
@@ -10,29 +10,22 @@ import {
   Paper,
 } from "@mui/material";
 import { MessageRow } from "./Message";
-import { useEffect } from "react";
-import { getMessages, markMessageAsRead } from "@/entities/admin/api/messages";
-import { MessagesTypes } from "@/entities/admin/model/type";
+import {
+  useAdminMessagesQuery,
+  useMarkMessageReadMutation,
+} from "@/entities/admin/lib/use-messages";
+import type { MessagesTypes } from "@/entities/admin/model/type";
 
 export default function MessagesTable() {
-  const [messages, setMessages] = useState<MessagesTypes[]>([]);
+  const { data: messages = [] } = useAdminMessagesQuery<MessagesTypes[]>();
 
-  const handleMarkRead = (id: string) => {
-    setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, read: true } : m)));
-  };
+  const markRead = useMarkMessageReadMutation({
+    onError: (error) =>
+      console.error("Failed to mark message as read:", error),
+  });
 
-  useEffect(() => {
-    getMessages().then((data) => setMessages(data));
-  }, []);
-
-  const readMessage = async (id: string) => {
-    try {
-      await markMessageAsRead(id);
-      handleMarkRead(id);
-      await getMessages().then((data) => setMessages(data));
-    } catch (error) {
-      console.error("Failed to mark message as read:", error);
-    }
+  const readMessage = (id: string) => {
+    markRead.mutate(id);
   };
 
   return (
@@ -51,9 +44,7 @@ export default function MessagesTable() {
             <MessageRow
               key={m.id}
               msg={m}
-              onMarkRead={(id) => {
-                readMessage(id);
-              }}
+              onMarkRead={readMessage}
             />
           ))}
         </TableBody>
