@@ -332,6 +332,7 @@ declare const messages: {
   },
   "productGallery": {
     "loading": "Завантаження...",
+    "loadError": "Не вдалося завантажити товар",
     "prevPhoto": "Попереднє фото",
     "nextPhoto": "Наступне фото",
     "goToPhoto": "Перейти до фото",

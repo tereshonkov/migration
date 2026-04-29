@@ -14,8 +14,8 @@ import {
 import MailIcon from "@mui/icons-material/Mail";
 import { useTabContext } from "@/context/TabContext";
 import { getMessages } from "@/entities/admin/api/messages";
-import type { MessagesTypes } from "@/types/messages";
-import type { ReviewsTypes } from "@/types/reviews";
+import type { MessagesTypes } from "@/entities/admin/model/type";
+import type { ReviewsTypes } from "@/entities/services/model/review";
 import { useEffect, useState } from "react";
 import { getReviews } from "@/entities/admin/api/reviews";
 

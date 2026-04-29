@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { useState } from "react";
-import type { ReviewsTypes } from "@/types/reviews";
+import type { ReviewsTypes } from "@/entities/services/model/review";
 
 export function Review({
   review,

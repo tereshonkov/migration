@@ -1,4 +1,4 @@
-import type { ReviewsTypes } from "@/types/reviews";
+import type { ReviewsTypes } from "@/entities/services/model/review";
 import api from "@/shared/api/base";
 
 export const sendReviewApi = async (data: ReviewsTypes) => {

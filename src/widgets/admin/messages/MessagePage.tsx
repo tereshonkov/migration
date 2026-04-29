@@ -12,7 +12,7 @@ import {
 import { MessageRow } from "./Message";
 import { useEffect } from "react";
 import { getMessages, markMessageAsRead } from "@/entities/admin/api/messages";
-import { MessagesTypes } from "@/types/messages";
+import { MessagesTypes } from "@/entities/admin/model/type";
 
 export default function MessagesTable() {
   const [messages, setMessages] = useState<MessagesTypes[]>([]);

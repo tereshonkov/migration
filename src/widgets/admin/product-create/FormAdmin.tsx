@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { uploadImage } from "@/entities/admin/api/images";
 import { createProduct } from "@/entities/product/api/product";
-import type { CreateProductPayload } from "@/types/data";
+import type { CreateProductPayload } from "@/entities/product/model/type";
 
 /** Placeholders until create-product DTO exposes these in the form. */
 const CREATE_PRODUCT_DEFAULTS = {

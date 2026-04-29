@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import type { Data } from "@/types/data";
+import type { Data } from "@/entities/product/model/type";
 import { getProducts } from "@/entities/product/api/product";
 import Image from "next/image";
 import Link from "next/link";

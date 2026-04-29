@@ -4,7 +4,7 @@ export type Review = {
   text: string;
   productId: string;
   isApproved?: boolean;
-}
+};
 
 export type Images = {
   url: string;

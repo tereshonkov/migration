@@ -12,7 +12,7 @@ import {
 import { Review } from "./Review";
 import { useEffect } from "react";
 import { getReviews, approveReviewApi, cancelReview } from "@/entities/admin/api/reviews";
-import type { ReviewsTypes } from "@/types/reviews";
+import type { ReviewsTypes } from "@/entities/services/model/review";
 
 export default function ReviewsTable() {
   const [reviews, setReviews] = useState<ReviewsTypes[]>([]);

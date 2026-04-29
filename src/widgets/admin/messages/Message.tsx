@@ -1,7 +1,7 @@
 import { TableCell, TableRow, IconButton, Button, Box, Collapse } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { useState } from "react";
-import { MessagesTypes } from "@/types/messages";
+import { MessagesTypes } from "@/entities/admin/model/type";
 
 export function MessageRow({
   msg,

@@ -329,6 +329,7 @@
   },
   "productGallery": {
     "loading": "Загрузка...",
+    "loadError": "Не удалось загрузить товар",
     "prevPhoto": "Предыдущее фото",
     "nextPhoto": "Следующее фото",
     "goToPhoto": "Перейти к фото",

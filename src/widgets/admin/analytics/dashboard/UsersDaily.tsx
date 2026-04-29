@@ -3,7 +3,7 @@ import { Grid, Paper, Typography, Box } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import { useEffect, useState } from "react";
 import { getAnalitycsDay } from "@/entities/admin/api/analitycs";
-import type { UserRequest } from "@/types/users";
+import type { UserRequest } from "@/entities/admin/model/type";
 
 export default function UsersDaily() {
   const [users, setUsers] = useState<UserRequest[]>();

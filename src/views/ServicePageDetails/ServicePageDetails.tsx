@@ -1,4 +1,5 @@
 import Footer from "@/widgets/footer/Footer";
+import Form from "@/widgets/finalCta/Form";
 import PageHeader from "@/widgets/page-title-section/PageHeader";
 import ProductGallery from "@/widgets/service-gallery/ProductGallery";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -41,6 +42,7 @@ export default async function ServicePageDetails({
       <PageHeader title={t("title")} />
       <main>
         <ProductGallery id={id} />
+        <Form />
       </main>
       <Footer />
     </>

@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { useState, useEffect } from "react";
 import { getAnalitycsWeek } from "@/entities/admin/api/analitycs";
-import { UserRequest } from "@/types/users";
+import { UserRequest } from "@/entities/admin/model/type";
 
 export default function UsersDiagramm() {
   const [data, setData] = useState<UserRequest[]>();

@@ -3,7 +3,7 @@ import { Grid, Paper, Typography , Box} from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import { useState, useEffect } from "react";
 import { getAnalitycsMonth } from "@/entities/admin/api/analitycs";
-import type { UserRequest } from "@/types/users";
+import type { UserRequest } from "@/entities/admin/model/type";
 
 export default function UsersMonthly() {
   const [users, setUsers] = useState<number>();

@@ -329,6 +329,7 @@
   },
   "productGallery": {
     "loading": "Loading...",
+    "loadError": "Could not load product",
     "prevPhoto": "Previous photo",
     "nextPhoto": "Next photo",
     "goToPhoto": "Go to photo",
