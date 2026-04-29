@@ -15,8 +15,6 @@
 | Аналітика | **Google tag** (GA4 + Google Ads), кастомні конверсії на ключові події; **Vercel Analytics**, Speed Insights |
 | Якість | ESLint (eslint-config-next), **Vitest**, Testing Library, **Husky** (pre-commit) |
 
-У `package.json` також є `mongodb`, `bcrypt` / `bcryptjs` — за потреби для скриптів або майбутнього серверного коду; основний застосунок — клієнт до зовнішнього API.
-
 ## Структура `src/`
 
 Орієнтація на **Feature-Sliced Design** (логічний поділ, не офіційний FSD-тулінг):
