@@ -223,7 +223,7 @@
   },
   "seoHome": {
     "title": "Custom Furniture in Kharkiv — Kitchens, Wardrobes, Closets",
-    "description": "We create custom furniture in Kharkiv: kitchens, wardrobes, closets. Personalized designs, honest deadlines, measurements, and delivery."
+    "description": "Custom furniture in Kharkiv — kitchens, wardrobes, closets. Measurements and delivery. +380 67 149 67 41."
   },
   "seoAbout": {
     "title": "About T-Mebel — Custom Furniture in Kharkiv",
@@ -239,31 +239,31 @@
   },
   "seoServiceCategory": {
     "KITCHEN": {
-      "title": "Custom kitchens in Kharkiv — portfolio",
-      "description": "Custom kitchen projects in Kharkiv by T-Mebel: bespoke layouts, fittings and materials tailored to your budget.",
-      "pageTitle": "Custom kitchens",
-      "pageSubtitle": "Completed kitchens in Kharkiv and the region — design, manufacturing and installation.",
+      "title": "Custom kitchens Kharkiv — Pricing and cost estimates",
+      "description": "Custom kitchens in Kharkiv built to your measurements. Fair pricing, quality hardware and in-house manufacturing. Get a cost estimate for your kitchen today.",
+      "pageTitle": "Custom kitchens in Kharkiv",
+      "pageSubtitle": "Photos of our work — we'll quote any project to your measurements.",
       "breadcrumbName": "Custom kitchens"
     },
     "WARDROBE": {
-      "title": "Custom wardrobes & sliding-door closets in Kharkiv — portfolio",
-      "description": "Built-in and freestanding wardrobes in Kharkiv by T-Mebel: sliding systems, walk-in closets, fittings and finishes tailored to your space.",
-      "pageTitle": "Wardrobes & sliding-door closets",
-      "pageSubtitle": "Completed projects in Kharkiv and the region — design, manufacturing and installation.",
+      "title": "Wardrobes made to order Kharkiv — Sliding wardrobes to your measurements",
+      "description": "Custom wardrobes in Kharkiv. Sliding, built-in and hinged wardrobes turnkey. Fair pricing, quality hardware. Get a cost estimate today!",
+      "pageTitle": "Custom wardrobes in Kharkiv",
+      "pageSubtitle": "Browse photos of our work and pick the perfect wardrobe design for your home.",
       "breadcrumbName": "Wardrobes & closets"
     },
     "STORE": {
-      "title": "Retail furniture & shelving in Kharkiv — portfolio",
-      "description": "Shopfitting in Kharkiv by T-Mebel: displays, counters, shelving and retail fixtures tailored to your store layout.",
-      "pageTitle": "Retail furniture & shop systems",
-      "pageSubtitle": "Completed retail projects in Kharkiv and the region — from shelving to turnkey shopfitting.",
+      "title": "Retail furniture made to order Kharkiv — Displays and shelving to your measurements",
+      "description": "Custom retail furniture in Kharkiv. Displays, shelving, counters and fixtures turnkey. Fair pricing, quality hardware. Get a cost estimate today!",
+      "pageTitle": "Retail furniture made to order in Kharkiv",
+      "pageSubtitle": "Browse photos of our work and pick the right solution for your store layout.",
       "breadcrumbName": "Retail & shop furniture"
     },
     "BEDROOM": {
-      "title": "Bedroom furniture made to order in Kharkiv — portfolio",
-      "description": "Bedroom sets, beds with headboards, wardrobes and nightstands in Kharkiv by T-Mebel — bespoke layouts for your space.",
-      "pageTitle": "Bedrooms & bedroom furniture",
-      "pageSubtitle": "Completed bedroom projects in Kharkiv and the region — from compact layouts to full room packages.",
+      "title": "Bedrooms made to order Kharkiv — Bedroom furniture to your measurements",
+      "description": "Custom bedroom furniture in Kharkiv. Bedroom sets, beds, wardrobes and nightstands turnkey. Fair pricing, quality hardware. Get a cost estimate today!",
+      "pageTitle": "Bedrooms made to order in Kharkiv",
+      "pageSubtitle": "Browse photos of our work and pick the perfect bedroom design for your home.",
       "breadcrumbName": "Bedrooms"
     }
   },
