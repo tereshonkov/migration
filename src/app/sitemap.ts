@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import data from "@/../public/data/data.json";
 import { routing } from "@/i18n/routing";
+import type { AppLocale } from "@/shared/lib/serviceCategories";
+import { listPublishedCategorySlugs } from "@/shared/lib/serviceCategories";
 
 const locales = routing.locales;
 
@@ -31,7 +33,15 @@ const productPages: PageDef[] = (data as { id: number }[]).map((item) => ({
   priority: 0.7,
 }));
 
-const pages: PageDef[] = [...staticPages, ...productPages];
+const categoryPages: PageDef[] = locales.flatMap((locale) =>
+  listPublishedCategorySlugs(locale as AppLocale).map((segment) => ({
+    slug: `service/${segment}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.82,
+  })),
+);
+
+const pages: PageDef[] = [...staticPages, ...productPages, ...categoryPages];
 
 function getUrl(locale: string, slug: string) {
   if (locale === "uk") {

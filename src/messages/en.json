@@ -237,6 +237,15 @@
     "title": "Our Works — Custom Furniture in Kharkiv",
     "description": "Our works: wardrobes, kitchens, bedrooms, furniture for shops and other spaces in Kharkiv. High-quality custom furniture manufacturing."
   },
+  "seoServiceCategory": {
+    "KITCHEN": {
+      "title": "Custom kitchens in Kharkiv — portfolio",
+      "description": "Custom kitchen projects in Kharkiv by T-Mebel: bespoke layouts, fittings and materials tailored to your budget.",
+      "pageTitle": "Custom kitchens",
+      "pageSubtitle": "Completed kitchens in Kharkiv and the region — design, manufacturing and installation.",
+      "breadcrumbName": "Custom kitchens"
+    }
+  },
   "servicePage": {
     "title": "Our Works",
     "subtitle": "Custom furniture created with love for details. Each project is unique."
