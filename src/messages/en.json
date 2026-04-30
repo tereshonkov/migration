@@ -244,6 +244,27 @@
       "pageTitle": "Custom kitchens",
       "pageSubtitle": "Completed kitchens in Kharkiv and the region — design, manufacturing and installation.",
       "breadcrumbName": "Custom kitchens"
+    },
+    "WARDROBE": {
+      "title": "Custom wardrobes & sliding-door closets in Kharkiv — portfolio",
+      "description": "Built-in and freestanding wardrobes in Kharkiv by T-Mebel: sliding systems, walk-in closets, fittings and finishes tailored to your space.",
+      "pageTitle": "Wardrobes & sliding-door closets",
+      "pageSubtitle": "Completed projects in Kharkiv and the region — design, manufacturing and installation.",
+      "breadcrumbName": "Wardrobes & closets"
+    },
+    "STORE": {
+      "title": "Retail furniture & shelving in Kharkiv — portfolio",
+      "description": "Shopfitting in Kharkiv by T-Mebel: displays, counters, shelving and retail fixtures tailored to your store layout.",
+      "pageTitle": "Retail furniture & shop systems",
+      "pageSubtitle": "Completed retail projects in Kharkiv and the region — from shelving to turnkey shopfitting.",
+      "breadcrumbName": "Retail & shop furniture"
+    },
+    "BEDROOM": {
+      "title": "Bedroom furniture made to order in Kharkiv — portfolio",
+      "description": "Bedroom sets, beds with headboards, wardrobes and nightstands in Kharkiv by T-Mebel — bespoke layouts for your space.",
+      "pageTitle": "Bedrooms & bedroom furniture",
+      "pageSubtitle": "Completed bedroom projects in Kharkiv and the region — from compact layouts to full room packages.",
+      "breadcrumbName": "Bedrooms"
     }
   },
   "servicePage": {

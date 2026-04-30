@@ -15,7 +15,7 @@ type ServicePageProps = {
 export default function ServicePage({
   title,
   subtitle,
-  showHeader = false,
+  showHeader = true,
 }: ServicePageProps) {
   const content = (
     <div className="container">

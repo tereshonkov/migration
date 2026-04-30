@@ -16,10 +16,25 @@ describe("resolvePortfolioSlug", () => {
       kind: "category",
       category: "KITCHEN",
     });
-    expect(resolvePortfolioSlug("ru", "kuhnya-na-zakaz-kharkov")).toEqual({
+    expect(
+      resolvePortfolioSlug("uk", "shafa-kupe-na-zamovlennia-kharkiv"),
+    ).toEqual({
       kind: "category",
-      category: "KITCHEN",
+      category: "WARDROBE",
     });
+    expect(resolvePortfolioSlug("ru", "shkaf-kupe-na-zakaz-kharkov")).toEqual({
+      kind: "category",
+      category: "WARDROBE",
+    });
+    expect(
+      resolvePortfolioSlug(
+        "uk",
+        "torgovi-mebli-ta-stelazhi-na-zamovlennia-kharkiv",
+      ),
+    ).toEqual({ kind: "category", category: "STORE" });
+    expect(
+      resolvePortfolioSlug("uk", "mebli-dlia-spalni-na-zamovlennia-kharkiv"),
+    ).toEqual({ kind: "category", category: "BEDROOM" });
   });
 
   it("returns null for unknown segment", () => {

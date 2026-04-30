@@ -47,7 +47,6 @@ export default async function ServicePortfolioSlugRoute({
       <ServicePage
         title={t(`${cat}.pageTitle`)}
         subtitle={t(`${cat}.pageSubtitle`)}
-        showHeader={locale !== "uk"}
       />
     </>
   );
