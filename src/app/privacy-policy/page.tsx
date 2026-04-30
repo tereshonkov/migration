@@ -2,7 +2,10 @@ import Footer from "@/widgets/footer/Footer";
 import { Metadata } from "next";
 import { FC } from "react";
 import styles from "./page.module.css";
+import messages from "@/messages/uk.json";
+import { buildBreadcrumbListJsonLd } from "@/shared/lib/breadcrumbJsonLd";
 import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
+import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = "https://t-mebel.com.ua";
@@ -37,8 +40,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+const breadcrumbJsonLd = buildBreadcrumbListJsonLd("uk", [
+  { name: messages.header.home, path: "" },
+  { name: "Політика конфіденційності", path: "/privacy-policy" },
+]);
+
 const PrivacyPolicy: FC = () => (
   <div className="container">
+    <JsonLd data={breadcrumbJsonLd} />
     <main className={styles.main}>
       <h1 className={styles.title}>Політика конфіденційності</h1>
       <section className={styles.section}>

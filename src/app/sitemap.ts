@@ -2,9 +2,13 @@ import type { MetadataRoute } from "next";
 import data from "@/../public/data/data.json";
 import { routing } from "@/i18n/routing";
 import type { AppLocale } from "@/shared/lib/serviceCategories";
-import { listPublishedCategorySlugs } from "@/shared/lib/serviceCategories";
+import {
+  getCategorySlug,
+  listPublishedCategorySlugs,
+  resolveCategoryFromSlug,
+} from "@/shared/lib/serviceCategories";
 
-const locales = routing.locales;
+const locales = routing.locales as readonly AppLocale[];
 
 type PageDef = {
   slug: string;
@@ -17,6 +21,8 @@ type PageDef = {
     | "weekly"
     | "never";
   priority: number;
+  /** If set, emit only these locales (category URLs use locale-specific slug segments). */
+  emitLocales?: readonly AppLocale[];
 };
 
 const staticPages: PageDef[] = [
@@ -34,10 +40,11 @@ const productPages: PageDef[] = (data as { id: number }[]).map((item) => ({
 }));
 
 const categoryPages: PageDef[] = locales.flatMap((locale) =>
-  listPublishedCategorySlugs(locale as AppLocale).map((segment) => ({
+  listPublishedCategorySlugs(locale).map((segment) => ({
     slug: `service/${segment}`,
     changeFrequency: "monthly" as const,
     priority: 0.82,
+    emitLocales: [locale],
   })),
 );
 
@@ -52,11 +59,53 @@ function getUrl(locale: string, slug: string) {
     : `https://t-mebel.com.ua/${locale}`;
 }
 
+function standardAlternates(
+  slug: string,
+): MetadataRoute.Sitemap[0]["alternates"] {
+  return {
+    languages: {
+      uk: getUrl("uk", slug),
+      ru: getUrl("ru", slug),
+      en: getUrl("en", slug),
+      "x-default": getUrl("uk", slug),
+    },
+  };
+}
+
+function buildAlternates(
+  page: PageDef,
+  rowLocale: AppLocale,
+): MetadataRoute.Sitemap[0]["alternates"] {
+  const m = page.slug.match(/^service\/([^/]+)$/);
+  if (!m) return standardAlternates(page.slug);
+
+  const segment = m[1];
+  if (/^\d+$/.test(segment)) return standardAlternates(page.slug);
+
+  const code = resolveCategoryFromSlug(rowLocale, segment);
+  if (!code) return standardAlternates(page.slug);
+
+  const ukSeg = getCategorySlug("uk", code);
+  const ruSeg = getCategorySlug("ru", code);
+  const enSeg = getCategorySlug("en", code);
+  if (!ukSeg || !ruSeg || !enSeg) return standardAlternates(page.slug);
+
+  return {
+    languages: {
+      uk: getUrl("uk", `service/${ukSeg}`),
+      ru: getUrl("ru", `service/${ruSeg}`),
+      en: getUrl("en", `service/${enSeg}`),
+      "x-default": getUrl("uk", `service/${ukSeg}`),
+    },
+  };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const result: MetadataRoute.Sitemap = [];
 
   for (const page of pages) {
-    for (const locale of locales) {
+    const localeList = page.emitLocales ?? locales;
+    for (const locale of localeList) {
       const url = getUrl(locale, page.slug);
 
       result.push({
@@ -64,14 +113,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: page.changeFrequency,
         priority: page.priority,
-        alternates: {
-          languages: {
-            uk: getUrl("uk", page.slug),
-            ru: getUrl("ru", page.slug),
-            en: getUrl("en", page.slug),
-            "x-default": getUrl("uk", page.slug),
-          },
-        },
+        alternates: buildAlternates(page, locale),
       });
     }
   }
