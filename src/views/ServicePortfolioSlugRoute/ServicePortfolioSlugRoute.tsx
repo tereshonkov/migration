@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { buildBreadcrumbListJsonLd } from "@/shared/lib/breadcrumbJsonLd";
 import type { AppLocale } from "@/shared/lib/serviceCategories";
 import { getCategorySlug } from "@/shared/lib/serviceCategories";
@@ -30,6 +34,12 @@ export default async function ServicePortfolioSlugRoute({
 
   const cat = resolved.category;
   const t = await getTranslations({ locale, namespace: "seoServiceCategory" });
+  const messages = await getMessages();
+  const categoryBlock = (
+    messages as { seoServiceCategory?: Record<string, Record<string, string>> }
+  ).seoServiceCategory?.[cat];
+  const pageHeading = categoryBlock?.pageHeading;
+  const h1Title = pageHeading ?? t(`${cat}.pageTitle`);
   const tHeader = await getTranslations({ locale, namespace: "header" });
 
   const breadcrumbJsonLd = buildBreadcrumbListJsonLd(locale, [
@@ -44,10 +54,7 @@ export default async function ServicePortfolioSlugRoute({
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      <ServicePage
-        title={t(`${cat}.pageTitle`)}
-        subtitle={t(`${cat}.pageSubtitle`)}
-      />
+      <ServicePage title={h1Title} subtitle={t(`${cat}.pageSubtitle`)} />
     </>
   );
 }
