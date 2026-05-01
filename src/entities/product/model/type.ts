@@ -21,7 +21,6 @@ export type Data = {
   id?: number;
   title: string;
   description: string;
-  furnitures?: string;
   images: Images[];
   category?: "KITCHEN" | "WARDROBE" | "STORE" | "BEDROOM";
   reviews?: Review[];
