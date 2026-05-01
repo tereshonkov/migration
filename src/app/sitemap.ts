@@ -7,6 +7,7 @@ import {
   listPublishedCategorySlugs,
   resolveCategoryFromSlug,
 } from "@/shared/lib/serviceCategories";
+import { ALL_GUIDES } from "@/content/guides/registry";
 
 const locales = routing.locales as readonly AppLocale[];
 
@@ -23,6 +24,8 @@ type PageDef = {
   priority: number;
   /** If set, emit only these locales (category URLs use locale-specific slug segments). */
   emitLocales?: readonly AppLocale[];
+  /** For guide articles only: UA vs RU path segments after `guides/`. */
+  guideHreflangSlugs?: { slugUk: string; slugRu: string };
 };
 
 const staticPages: PageDef[] = [
@@ -48,7 +51,41 @@ const categoryPages: PageDef[] = locales.flatMap((locale) =>
   })),
 );
 
-const pages: PageDef[] = [...staticPages, ...productPages, ...categoryPages];
+const guideLocalesSubset = ["uk", "ru"] as const satisfies readonly AppLocale[];
+
+const guideArticlePages: PageDef[] = ALL_GUIDES.flatMap((g) => [
+  {
+    slug: `guides/${g.slugUk}`,
+    changeFrequency: "monthly",
+    priority: 0.55,
+    emitLocales: ["uk"] as const,
+    guideHreflangSlugs: { slugUk: g.slugUk, slugRu: g.slugRu },
+  },
+  {
+    slug: `guides/${g.slugRu}`,
+    changeFrequency: "monthly",
+    priority: 0.55,
+    emitLocales: ["ru"] as const,
+    guideHreflangSlugs: { slugUk: g.slugUk, slugRu: g.slugRu },
+  },
+]);
+
+const guidesPages: PageDef[] = [
+  {
+    slug: "guides",
+    changeFrequency: "monthly",
+    priority: 0.58,
+    emitLocales: guideLocalesSubset,
+  },
+  ...guideArticlePages,
+];
+
+const pages: PageDef[] = [
+  ...staticPages,
+  ...guidesPages,
+  ...productPages,
+  ...categoryPages,
+];
 
 function getUrl(locale: string, slug: string) {
   if (locale === "uk") {
@@ -76,6 +113,27 @@ function buildAlternates(
   page: PageDef,
   rowLocale: AppLocale,
 ): MetadataRoute.Sitemap[0]["alternates"] {
+  if (page.guideHreflangSlugs) {
+    const { slugUk, slugRu } = page.guideHreflangSlugs;
+    return {
+      languages: {
+        uk: getUrl("uk", `guides/${slugUk}`),
+        ru: getUrl("ru", `guides/${slugRu}`),
+        "x-default": getUrl("uk", `guides/${slugUk}`),
+      },
+    };
+  }
+
+  if (page.slug === "guides" || page.slug.startsWith("guides/")) {
+    return {
+      languages: {
+        uk: getUrl("uk", page.slug),
+        ru: getUrl("ru", page.slug),
+        "x-default": getUrl("uk", page.slug),
+      },
+    };
+  }
+
   const m = page.slug.match(/^service\/([^/]+)$/);
   if (!m) return standardAlternates(page.slug);
 

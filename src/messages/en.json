@@ -355,6 +355,19 @@
     "description": "Standard prices per linear meter are often misleading. We will prepare a personalized offer that takes into account every millimeter of your space, reliable hardware and real budget — no hidden charges at the installation stage",
     "button": "Get a quote"
   },
+  "guides": {
+    "breadcrumb": "Guides",
+    "hubTitle": "Guides & articles",
+    "hubSubtitle": "Budget, materials, and ordering custom furniture in Kharkiv — with real project photos.",
+    "seoHubTitle": "Guides: custom furniture Kharkiv | T-Mebel",
+    "seoHubDescription": "Articles on kitchens, wardrobes, and how pricing and production work at T-Mebel.",
+    "clusterKitchen": "Kitchens",
+    "clusterBedroom": "Bedroom wardrobes",
+    "clusterGeneral": "General",
+    "readArticle": "Read",
+    "relatedHeading": "Portfolio by topic",
+    "portfolioProjectPrefix": "Portfolio"
+  },
   "pageHeader": {
     "backButton": "Back"
   },
