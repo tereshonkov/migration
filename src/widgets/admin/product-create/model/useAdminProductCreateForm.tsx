@@ -6,15 +6,6 @@ import { useUploadImageMutation } from "@/entities/admin/lib/use-images";
 import { useCreateProductMutation } from "@/entities/product/lib/use-products";
 import type { CreateProductPayload } from "@/entities/product/model/type";
 
-/** Placeholders until create-product DTO exposes these in the form. */
-const CREATE_PRODUCT_DEFAULTS = {
-  color: "Standard",
-  furnitures: "Standard",
-  width: 100,
-  height: 100,
-  rating: 5,
-} as const;
-
 export type ProductFormData = {
   titleRu: string;
   titleUk: string;
@@ -63,7 +54,6 @@ export function useAdminProductCreateForm() {
       title: data.titleRu,
       description: data.descriptionRu,
       category: data.category,
-      ...CREATE_PRODUCT_DEFAULTS,
       translations: {
         ru: {
           title: data.titleRu,
