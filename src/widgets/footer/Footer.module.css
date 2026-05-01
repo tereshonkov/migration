@@ -1,11 +1,78 @@
 .wrapper {
-  display: flex;
-  justify-content: space-between;
   background-color: var(--background-color-primary);
-  padding: 20px 62px;
+  padding: 20px clamp(24px, 6vw, 62px);
   position: relative;
   z-index: 10000;
 }
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: center;
+  width: 100%;
+}
+
+.colLeft {
+  justify-self: stretch;
+  align-self: center;
+  min-width: 0;
+}
+
+.colCenter {
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+}
+
+.colRight {
+  justify-self: stretch;
+  align-self: center;
+  min-width: 0;
+}
+
+.logoFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tagline {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  color: var(--text-color-secondary);
+  font-size: var(--text-regular);
+  font-weight: 600;
+  line-height: 1.38;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+.socialStack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  min-width: 0;
+}
+
 .insta,
 .telega,
 .facebook {
@@ -25,50 +92,72 @@
   width: 52px;
   height: 50px;
 }
-.logoFooter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-.logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50px;
-  overflow: hidden;
-}
-.logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.logoFooter p {
-  color: var(--text-color-secondary);
-  font-size: var(--text-regular);
-  text-align: center;
-  font-weight: 600;
-}
-.socialWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
+
 .social {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
 }
-.socialWrapper p {
+
+.guidesLink {
+  font-size: calc(var(--text-regular) - 1px);
+  font-weight: 600;
   color: var(--text-color-secondary);
-  font-size: var(--text-regular);
+  text-decoration: none;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+.guidesLink:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+.copyright {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  color: var(--text-color-secondary);
+  font-size: calc(var(--text-regular) - 1px);
   text-align: center;
   font-weight: 600;
+  line-height: 1.38;
+  overflow-wrap: break-word;
 }
-@media (max-width: 768px) {
-  .wrapper {
-    flex-direction: column;
+
+@media (max-width: 760px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .colLeft,
+  .colCenter,
+  .colRight {
+    justify-self: center;
+  }
+
+  .logoFooter {
     align-items: center;
-    gap: 20px;
+  }
+
+  .tagline {
+    text-align: center;
+  }
+
+  .socialStack {
+    align-items: center;
+  }
+
+  .social {
+    justify-content: center;
+  }
+
+  .copyright {
+    text-align: center;
   }
 }
