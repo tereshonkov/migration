@@ -55,10 +55,10 @@ describe("getSliderReviews", () => {
     get.mockResolvedValue({ data: reviews });
     getProducts.mockResolvedValue(products);
 
-    const result = await getSliderReviews();
+    const result = await getSliderReviews("uk");
 
     expect(get).toHaveBeenCalledWith("/reviews");
-    expect(getProducts).toHaveBeenCalledTimes(1);
+    expect(getProducts).toHaveBeenCalledWith("uk");
     expect(result).toEqual([
       {
         id: "r1",

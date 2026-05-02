@@ -7,7 +7,9 @@ import {
   type UseMutationOptions,
   type UseQueryOptions,
 } from "@tanstack/react-query";
+import { useLocale } from "next-intl";
 import type { CreateProductPayload } from "@/entities/product/model/type";
+import type { AppLocale } from "@/shared/lib/serviceCategories";
 import {
   createProduct,
   getProductById,
@@ -23,9 +25,10 @@ export function useProductsQuery<
     "queryKey" | "queryFn"
   >,
 ) {
+  const locale = useLocale() as AppLocale;
   return useQuery({
-    queryKey: productQueryKeys.list(),
-    queryFn: getProducts,
+    queryKey: productQueryKeys.list(locale),
+    queryFn: () => getProducts(locale),
     ...options,
   });
 }
@@ -39,9 +42,10 @@ export function useProductQuery<
     "queryKey" | "queryFn"
   >,
 ) {
+  const locale = useLocale() as AppLocale;
   return useQuery({
-    queryKey: productQueryKeys.detail(id),
-    queryFn: () => getProductById(id),
+    queryKey: productQueryKeys.detail(id, locale),
+    queryFn: () => getProductById(id, locale),
     enabled: Boolean(id),
     ...options,
   });
@@ -60,7 +64,7 @@ export function useCreateProductMutation(
     mutationFn: createProduct,
     onSuccess: async (data, variables, onMutateResult, context) => {
       await queryClient.invalidateQueries({
-        queryKey: productQueryKeys.list(),
+        queryKey: productQueryKeys.all,
       });
       await options?.onSuccess?.(data, variables, onMutateResult, context);
     },

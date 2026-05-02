@@ -4,6 +4,10 @@ import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createTestQueryClient } from "@/test/query-client-wrapper";
 
+vi.mock("next-intl", () => ({
+  useLocale: () => "uk",
+}));
+
 const reviewsApi = vi.hoisted(() => ({
   getAllReviews: vi.fn(),
   getSliderReviews: vi.fn(),
@@ -62,5 +66,6 @@ describe("useSliderReviewsQuery", () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(reviewsApi.getSliderReviews).toHaveBeenCalledTimes(1);
+    expect(reviewsApi.getSliderReviews).toHaveBeenCalledWith("uk");
   });
 });

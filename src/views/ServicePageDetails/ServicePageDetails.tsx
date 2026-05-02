@@ -5,7 +5,11 @@ import ProductGallery from "@/widgets/service-gallery/ProductGallery";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Header from "@/widgets/header/Header";
 import { buildBreadcrumbListJsonLd } from "@/shared/lib/breadcrumbJsonLd";
+import { mergeProductCopy } from "@/shared/lib/productCopyMerge";
+import { getMessageProductFallback } from "@/shared/lib/productMessageFallback";
 import { getCatalogPrimaryImageUrl } from "@/shared/lib/productCatalog";
+import type { AppLocale } from "@/shared/lib/serviceCategories";
+import { fetchProductForLocale } from "@/shared/lib/server-product";
 import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 
 type ServicePageDetailsProps = {
@@ -18,21 +22,26 @@ export default async function ServicePageDetails({
   id,
 }: ServicePageDetailsProps) {
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: `data_${id}` });
+  const loc = locale as AppLocale;
+
+  const apiProduct = await fetchProductForLocale(id, loc);
+  const fallback = getMessageProductFallback(loc, id);
+  const copy = mergeProductCopy(apiProduct ?? {}, fallback);
+
   const tHeader = await getTranslations({ locale, namespace: "header" });
   const previewImage = getCatalogPrimaryImageUrl(id);
 
   const breadcrumbJsonLd = buildBreadcrumbListJsonLd(locale, [
     { name: tHeader("home"), path: "" },
     { name: tHeader("service"), path: "/service" },
-    { name: t("title"), path: `/service/${id}` },
+    { name: copy.title, path: `/service/${id}` },
   ]);
 
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: t("title"),
-    description: t("description"),
+    name: copy.title,
+    description: copy.description,
     ...(previewImage ? { image: previewImage } : {}),
     brand: {
       "@type": "Brand",
@@ -51,7 +60,7 @@ export default async function ServicePageDetails({
       <Header />
       <JsonLd data={breadcrumbJsonLd} />
       <JsonLd data={productJsonLd} />
-      <PageHeader title={t("title")} />
+      <PageHeader title={copy.title} />
       <main>
         <ProductGallery id={id} />
         <Form />

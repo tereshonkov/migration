@@ -18,23 +18,27 @@ describe("product api", () => {
     vi.clearAllMocks();
   });
 
-  it("getProducts calls GET /product/products and returns data", async () => {
-    const data = [{ id: 1, title: "x", description: "", images: [] }];
+  it("getProducts calls GET /product/products with locale", async () => {
+    const data = [{ id: "1", title: "x", description: "", images: [] }];
     get.mockResolvedValue({ data });
 
-    const result = await getProducts();
+    const result = await getProducts("uk");
 
-    expect(get).toHaveBeenCalledWith("/product/products");
+    expect(get).toHaveBeenCalledWith("/product/products", {
+      params: { locale: "uk" },
+    });
     expect(result).toBe(data);
   });
 
-  it("getProductById calls GET with id", async () => {
-    const one = { id: 1, title: "a", description: "", images: [] };
+  it("getProductById calls GET with id and locale", async () => {
+    const one = { id: "1", title: "a", description: "", images: [] };
     get.mockResolvedValue({ data: one });
 
-    const result = await getProductById("7");
+    const result = await getProductById("7", "en");
 
-    expect(get).toHaveBeenCalledWith("/product/product/7");
+    expect(get).toHaveBeenCalledWith("/product/product/7", {
+      params: { locale: "en" },
+    });
     expect(result).toBe(one);
   });
 
@@ -56,7 +60,7 @@ describe("product api", () => {
     const err = new Error("network");
     get.mockRejectedValue(err);
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
-    await expect(getProducts()).rejects.toBe(err);
+    await expect(getProducts("ru")).rejects.toBe(err);
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
   });
@@ -65,7 +69,7 @@ describe("product api", () => {
     const err = new Error("fail");
     get.mockRejectedValue(err);
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
-    await expect(getProductById("1")).rejects.toBe(err);
+    await expect(getProductById("1", "uk")).rejects.toBe(err);
     spy.mockRestore();
   });
 

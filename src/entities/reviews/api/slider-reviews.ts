@@ -1,3 +1,4 @@
+import type { AppLocale } from "@/shared/lib/serviceCategories";
 import type { Data } from "@/entities/product/model/type";
 import { getProducts } from "@/entities/product/api/product";
 import type {
@@ -16,10 +17,12 @@ function coverUrl(product: Data): string | undefined {
   return cover?.url ?? imgs[0]?.url;
 }
 
-export async function getSliderReviews(): Promise<SliderReview[]> {
+export async function getSliderReviews(
+  locale: AppLocale = "uk",
+): Promise<SliderReview[]> {
   const [reviewsResponse, products] = await Promise.all([
     api.get<ReviewListItem[]>("/reviews"),
-    getProducts(),
+    getProducts(locale),
   ]);
 
   const rawReviews = reviewsResponse.data;

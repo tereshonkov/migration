@@ -17,8 +17,14 @@ export type Images = {
 /** Payload image shape for POST /create-product (server assigns ids). */
 export type CreateProductImage = Pick<Images, "url" | "isCover">;
 
-export type Data = {
-  id?: number;
+export type LocalizedProductCopy = {
+  localeApplied?: string;
+  translationFallback?: boolean;
+  titleSeo?: string;
+};
+
+export type Data = LocalizedProductCopy & {
+  id?: string;
   title: string;
   description: string;
   images: Images[];

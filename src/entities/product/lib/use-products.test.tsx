@@ -4,6 +4,10 @@ import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createTestQueryClient } from "@/test/query-client-wrapper";
 
+vi.mock("next-intl", () => ({
+  useLocale: () => "uk",
+}));
+
 const productApi = vi.hoisted(() => ({
   getProducts: vi.fn(),
   getProductById: vi.fn(),
@@ -37,7 +41,7 @@ describe("use-products hooks", () => {
 
   it("useProductsQuery resolves from getProducts", async () => {
     const client = createTestQueryClient();
-    const data = [{ id: 1, title: "x", description: "", images: [] }];
+    const data = [{ id: "1", title: "x", description: "", images: [] }];
     productApi.getProducts.mockResolvedValue(data);
 
     const { result } = renderHook(() => useProductsQuery(), {
@@ -46,7 +50,7 @@ describe("use-products hooks", () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(result.current.data).toEqual(data);
-    expect(productApi.getProducts).toHaveBeenCalledTimes(1);
+    expect(productApi.getProducts).toHaveBeenCalledWith("uk");
   });
 
   it("useProductQuery is disabled when id is empty", () => {
@@ -59,7 +63,7 @@ describe("use-products hooks", () => {
     expect(productApi.getProductById).not.toHaveBeenCalled();
   });
 
-  it("useCreateProductMutation calls createProduct and invalidates list", async () => {
+  it("useCreateProductMutation calls createProduct and invalidates product queries", async () => {
     const client = createTestQueryClient();
     const payload = {
       title: "t",
@@ -79,6 +83,8 @@ describe("use-products hooks", () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(productApi.createProduct.mock.calls[0]?.[0]).toEqual(payload);
-    expect(invalidateSpy).toHaveBeenCalled();
+    expect(invalidateSpy).toHaveBeenCalledWith({
+      queryKey: ["product"],
+    });
   });
 });

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getCatalogPrimaryImageUrl } from "@/shared/lib/productCatalog";
+import { mergeProductCopy } from "@/shared/lib/productCopyMerge";
+import { getMessageProductFallback } from "@/shared/lib/productMessageFallback";
 import { openGraphAlternateLocale } from "@/shared/lib/openGraphLocale";
 import type { AppLocale } from "@/shared/lib/serviceCategories";
 import {
@@ -9,6 +11,7 @@ import {
   type ServiceCategoryCode,
 } from "@/shared/lib/serviceCategories";
 import { resolvePortfolioSlug } from "@/shared/lib/serviceSlug";
+import { fetchProductForLocale } from "@/shared/lib/server-product";
 
 const BASE_URL = "https://t-mebel.com.ua";
 
@@ -34,7 +37,10 @@ export async function generateServicePortfolioMetadata(
 
   if (resolved.kind === "product") {
     const { productId: id } = resolved;
-    const t = await getTranslations({ locale, namespace: `data_${id}` });
+
+    const apiProduct = await fetchProductForLocale(id, locale);
+    const fallback = getMessageProductFallback(locale, id);
+    const copy = mergeProductCopy(apiProduct ?? {}, fallback);
 
     const path = `/service/${id}`;
     const canonical =
@@ -42,11 +48,11 @@ export async function generateServicePortfolioMetadata(
     const heroImage = getCatalogPrimaryImageUrl(id);
 
     return {
-      title: t("titleSeo"),
-      description: t("description"),
+      title: copy.titleSeo,
+      description: copy.description,
       openGraph: {
-        title: t("titleSeo"),
-        description: t("description"),
+        title: copy.titleSeo,
+        description: copy.description,
         url: canonical,
         siteName: "T-Mebel",
         locale: openGraphAlternateLocale(locale),
@@ -56,7 +62,7 @@ export async function generateServicePortfolioMetadata(
                 url: heroImage,
                 width: 1200,
                 height: 630,
-                alt: t("title"),
+                alt: copy.title,
               },
             ]
           : [

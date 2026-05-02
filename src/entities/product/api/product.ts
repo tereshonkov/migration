@@ -1,9 +1,12 @@
 import type { CreateProductPayload, Data } from "@/entities/product/model/type";
+import type { AppLocale } from "@/shared/lib/serviceCategories";
 import api from "@/shared/api/base";
 
-export const getProducts = async (): Promise<Data[]> => {
+export const getProducts = async (locale: AppLocale): Promise<Data[]> => {
   try {
-    const response = await api.get<Data[]>("/product/products");
+    const response = await api.get<Data[]>("/product/products", {
+      params: { locale },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -11,9 +14,14 @@ export const getProducts = async (): Promise<Data[]> => {
   }
 };
 
-export const getProductById = async (id: string): Promise<Data> => {
+export const getProductById = async (
+  id: string,
+  locale: AppLocale,
+): Promise<Data> => {
   try {
-    const response = await api.get<Data>(`/product/product/${id}`);
+    const response = await api.get<Data>(`/product/product/${id}`, {
+      params: { locale },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching product:", error);
