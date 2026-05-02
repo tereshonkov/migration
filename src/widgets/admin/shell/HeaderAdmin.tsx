@@ -13,7 +13,7 @@ export default function HeaderAdmin() {
   const logoutMutation = useLogoutMutation({
     onSuccess: () => {
       queryClient.clear();
-      router.push("/signin");
+      router.push("/");
     },
     onError: (error) => console.error("Ошибка при выходе:", error),
   });
