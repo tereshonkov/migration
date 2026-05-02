@@ -8,6 +8,7 @@ import {
   resolveCategoryFromSlug,
 } from "@/shared/lib/serviceCategories";
 import { ALL_GUIDES } from "@/content/guides/registry";
+import { isPortfolioProductUuidSegment } from "@/shared/lib/serviceSlug";
 
 const locales = routing.locales as readonly AppLocale[];
 
@@ -138,7 +139,9 @@ function buildAlternates(
   if (!m) return standardAlternates(page.slug);
 
   const segment = m[1];
-  if (/^\d+$/.test(segment)) return standardAlternates(page.slug);
+  if (/^\d+$/.test(segment) || isPortfolioProductUuidSegment(segment)) {
+    return standardAlternates(page.slug);
+  }
 
   const code = resolveCategoryFromSlug(rowLocale, segment);
   if (!code) return standardAlternates(page.slug);

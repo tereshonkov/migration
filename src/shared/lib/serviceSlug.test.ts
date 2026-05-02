@@ -9,6 +9,18 @@ describe("resolvePortfolioSlug", () => {
     });
   });
 
+  it("detects UUID product id", () => {
+    const id = "c171a41d-02ce-4228-88d2-39b7aa9fc683";
+    expect(resolvePortfolioSlug("uk", id)).toEqual({
+      kind: "product",
+      productId: id,
+    });
+    expect(resolvePortfolioSlug("en", id.toUpperCase())).toEqual({
+      kind: "product",
+      productId: id.toUpperCase(),
+    });
+  });
+
   it("detects category slug per locale", () => {
     expect(
       resolvePortfolioSlug("uk", "kukhnia-na-zamovlennia-kharkiv"),
