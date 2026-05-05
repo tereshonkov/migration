@@ -41,6 +41,13 @@ export default function ProductGallery({ id }: ProductGalleryProps) {
           <div className={styles.mainImage}>
             <Image
               src={imageUrls[currentIndex]}
+              alt=""
+              fill
+              aria-hidden
+              className={styles.imageBlur}
+            />
+            <Image
+              src={imageUrls[currentIndex]}
               alt={t("imageAlt", {
                 title: data.title,
                 photoNumber: currentIndex + 1,
