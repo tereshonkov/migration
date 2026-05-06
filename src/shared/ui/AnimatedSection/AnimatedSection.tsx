@@ -28,8 +28,9 @@ export default function AnimatedSection({
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
+        // Fire as soon as any pixel intersects the viewport (above-the-fold content becomes visible without scroll gymnastics)
+        threshold: 0,
+        rootMargin: "0px",
       },
     );
 

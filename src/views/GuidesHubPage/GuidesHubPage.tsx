@@ -102,18 +102,18 @@ export default function GuidesHubPage({ locale, copy }: Props) {
         </nav>
 
         <main className={styles.main}>
-          <AnimatedSection>
-            <header className={styles.header}>
-              <h1 className={styles.title}>{copy.hubTitle}</h1>
-              <p className={styles.subtitle}>{copy.hubSubtitle}</p>
-            </header>
+          <header className={styles.header}>
+            <h1 className={styles.title}>{copy.hubTitle}</h1>
+            <p className={styles.subtitle}>{copy.hubSubtitle}</p>
+          </header>
 
-            {clusters.map((clusterKey) => {
-              const list = guidesInCluster(clusterKey);
-              if (!list.length) return null;
+          {clusters.map((clusterKey) => {
+            const list = guidesInCluster(clusterKey);
+            if (!list.length) return null;
 
-              return (
-                <section key={clusterKey} className={styles.cluster}>
+            return (
+              <AnimatedSection key={clusterKey}>
+                <section className={styles.cluster}>
                   <h2 className={styles.clusterTitle}>
                     {clusterTitle(copy, clusterKey)}
                   </h2>
@@ -128,9 +128,9 @@ export default function GuidesHubPage({ locale, copy }: Props) {
                     ))}
                   </div>
                 </section>
-              );
-            })}
-          </AnimatedSection>
+              </AnimatedSection>
+            );
+          })}
         </main>
         <Footer />
       </div>

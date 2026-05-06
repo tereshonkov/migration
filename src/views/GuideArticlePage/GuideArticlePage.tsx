@@ -3,7 +3,6 @@ import Footer from "@/widgets/footer/Footer";
 import Header from "@/widgets/header/Header";
 import Image from "next/image";
 import Link from "next/link";
-import AnimatedSection from "@/shared/ui/AnimatedSection/AnimatedSection";
 import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 import {
   buildBreadcrumbListJsonLd,
@@ -128,133 +127,125 @@ export default function GuideArticlePage({ locale, guide, copy }: Props) {
         </nav>
 
         <main className={styles.main}>
-          <AnimatedSection>
-            <h1 className={styles.title}>{block.h1}</h1>
-            <div className={styles.lead}>
-              {block.lead.map((line) => (
-                <p key={line}>{line}</p>
-              ))}
-            </div>
+          <h1 className={styles.title}>{block.h1}</h1>
+          <div className={styles.lead}>
+            {block.lead.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
 
-            <div className={styles.heroGrid}>
-              {heroImages.map((img) => (
-                <figure key={img.productId} className={styles.heroFigure}>
-                  <div className={styles.heroImageWrap}>
-                    <Image
-                      className={styles.coverImage}
-                      src={img.url}
-                      alt={img.title}
-                      width={900}
-                      height={600}
-                      sizes="(max-width: 940px) 100vw, 900px"
-                    />
-                  </div>
-                  <figcaption className={styles.heroCaption}>
-                    <Link
-                      prefetch={false}
-                      className={styles.projectLink}
-                      href={
-                        locale === "uk"
-                          ? `/service/${img.productId}`
-                          : `/${locale}/service/${img.productId}`
-                      }
-                    >
-                      {copy.portfolioProjectPrefix} · #{img.productId}
-                    </Link>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
+          <div className={styles.heroGrid}>
+            {heroImages.map((img) => (
+              <figure key={img.productId} className={styles.heroFigure}>
+                <div className={styles.heroImageWrap}>
+                  <Image
+                    className={styles.coverImage}
+                    src={img.url}
+                    alt={img.title}
+                    width={900}
+                    height={600}
+                    sizes="(max-width: 940px) 100vw, 900px"
+                  />
+                </div>
+                <figcaption className={styles.heroCaption}>
+                  <Link
+                    prefetch={false}
+                    className={styles.projectLink}
+                    href={
+                      locale === "uk"
+                        ? `/service/${img.productId}`
+                        : `/${locale}/service/${img.productId}`
+                    }
+                  >
+                    {copy.portfolioProjectPrefix} · #{img.productId}
+                  </Link>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
 
-            {block.sections.map((section, sIdx) => {
-              const imgsAfter = section.imageIdsAfter?.length
-                ? resolveGuideImages(section.imageIdsAfter)
-                : [];
+          {block.sections.map((section, sIdx) => {
+            const imgsAfter = section.imageIdsAfter?.length
+              ? resolveGuideImages(section.imageIdsAfter)
+              : [];
 
-              return (
-                <AnimatedSection
-                  key={section.heading ?? `sec-${String(sIdx)}`}
-                  delay={60}
-                >
-                  <section className={styles.section}>
-                    {section.heading ? (
-                      <h2 className={styles.sectionHeading}>
-                        {section.heading}
-                      </h2>
-                    ) : null}
-                    <div className={styles.sectionBody}>
-                      {section.paragraphs.map((p) => (
-                        <p key={p} className={styles.paragraph}>
-                          {p}
-                        </p>
-                      ))}
-                      {section.bullets?.length ? (
-                        <ul className={styles.bulletList}>
-                          {section.bullets.map((b) => (
-                            <li key={b}>{b}</li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </div>
-
-                    {imgsAfter.length ? (
-                      <div className={styles.inlineFigureRow}>
-                        {imgsAfter.map((img) => (
-                          <figure
-                            key={img.productId}
-                            className={styles.inlineFigure}
-                          >
-                            <div className={styles.inlineImgWrap}>
-                              <Image
-                                className={styles.coverImage}
-                                src={img.url}
-                                alt={img.title}
-                                width={740}
-                                height={480}
-                                sizes="(max-width: 800px) 100vw, 740px"
-                              />
-                            </div>
-                            <figcaption className={styles.inlineCaption}>
-                              <Link
-                                prefetch={false}
-                                className={styles.projectLink}
-                                href={
-                                  locale === "uk"
-                                    ? `/service/${img.productId}`
-                                    : `/${locale}/service/${img.productId}`
-                                }
-                              >
-                                {copy.portfolioProjectPrefix} · #{img.productId}
-                              </Link>
-                            </figcaption>
-                          </figure>
-                        ))}
-                      </div>
-                    ) : null}
-                  </section>
-                </AnimatedSection>
-              );
-            })}
-
-            <AnimatedSection delay={120}>
-              <aside className={styles.related}>
-                <h2 className={styles.relatedHeading}>{copy.relatedHeading}</h2>
-                <ul className={styles.relatedList}>
-                  {guide.linkCategories.map((code) => (
-                    <li key={code}>
-                      <Link
-                        prefetch={false}
-                        className={styles.relatedLink}
-                        href={localizedServiceCategoryPath(locale, code)}
-                      >
-                        {categoryPortfolioLabel(copy, code)}
-                      </Link>
-                    </li>
+            return (
+              <section
+                key={section.heading ?? `sec-${String(sIdx)}`}
+                className={styles.section}
+              >
+                {section.heading ? (
+                  <h2 className={styles.sectionHeading}>{section.heading}</h2>
+                ) : null}
+                <div className={styles.sectionBody}>
+                  {section.paragraphs.map((p) => (
+                    <p key={p} className={styles.paragraph}>
+                      {p}
+                    </p>
                   ))}
-                </ul>
-              </aside>
-            </AnimatedSection>
-          </AnimatedSection>
+                  {section.bullets?.length ? (
+                    <ul className={styles.bulletList}>
+                      {section.bullets.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+
+                {imgsAfter.length ? (
+                  <div className={styles.inlineFigureRow}>
+                    {imgsAfter.map((img) => (
+                      <figure
+                        key={img.productId}
+                        className={styles.inlineFigure}
+                      >
+                        <div className={styles.inlineImgWrap}>
+                          <Image
+                            className={styles.coverImage}
+                            src={img.url}
+                            alt={img.title}
+                            width={740}
+                            height={480}
+                            sizes="(max-width: 800px) 100vw, 740px"
+                          />
+                        </div>
+                        <figcaption className={styles.inlineCaption}>
+                          <Link
+                            prefetch={false}
+                            className={styles.projectLink}
+                            href={
+                              locale === "uk"
+                                ? `/service/${img.productId}`
+                                : `/${locale}/service/${img.productId}`
+                            }
+                          >
+                            {copy.portfolioProjectPrefix} · #{img.productId}
+                          </Link>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                ) : null}
+              </section>
+            );
+          })}
+
+          <aside className={styles.related}>
+            <h2 className={styles.relatedHeading}>{copy.relatedHeading}</h2>
+            <ul className={styles.relatedList}>
+              {guide.linkCategories.map((code) => (
+                <li key={code}>
+                  <Link
+                    prefetch={false}
+                    className={styles.relatedLink}
+                    href={localizedServiceCategoryPath(locale, code)}
+                  >
+                    {categoryPortfolioLabel(copy, code)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </aside>
         </main>
 
         <Footer />
