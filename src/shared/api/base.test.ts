@@ -68,21 +68,25 @@ describe("shared api base interceptors", () => {
     localStorage.setItem("token", "tok");
     const config = { headers: {} as Record<string, string> };
     const out = ctx.state.requestOnFulfilled!(config);
-    expect(out.headers.Authorization).toBe("Bearer tok");
+    expect(out.headers?.Authorization).toBe("Bearer tok");
   });
 
   it("request: leaves headers without Authorization when no token", () => {
     const config = { headers: {} as Record<string, string> };
     const out = ctx.state.requestOnFulfilled!(config);
-    expect(out.headers.Authorization).toBeUndefined();
+    expect(out.headers?.Authorization).toBeUndefined();
   });
 
   it("response: on 401 refreshes token, saves it, retries with new header", async () => {
     localStorage.setItem("token", "old");
     refreshToken.mockResolvedValue("newtok");
 
-    const originalRequest = {
-      headers: {} as Record<string, string>,
+    const originalRequest: {
+      headers: Record<string, string>;
+      url: string;
+      _retry?: boolean;
+    } = {
+      headers: {},
       url: "/x",
     };
     const error = {
