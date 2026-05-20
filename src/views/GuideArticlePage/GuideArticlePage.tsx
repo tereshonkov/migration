@@ -3,6 +3,7 @@ import Footer from "@/widgets/footer/Footer";
 import Header from "@/widgets/header/Header";
 import Image from "next/image";
 import Link from "next/link";
+import PopupForm from "@/widgets/popup-form/PopupForm";
 import { JsonLd } from "@/shared/ui/JsonLd/JsonLd";
 import {
   buildBreadcrumbListJsonLd,
@@ -25,6 +26,11 @@ export type GuideArticleCopy = {
   portfolioBedroom: string;
   portfolioStore: string;
   portfolioProjectPrefix: string;
+  ctaHomeIntro: string;
+  ctaHomeLinkText: string;
+  ctaTitle: string;
+  ctaSubtitle: string;
+  ctaButton: string;
 };
 
 function categoryPortfolioLabel(
@@ -134,6 +140,17 @@ export default function GuideArticlePage({ locale, guide, copy }: Props) {
             ))}
           </div>
 
+          <p className={styles.homeCtaLine}>
+            {copy.ctaHomeIntro}{" "}
+            <Link
+              href={locale === "uk" ? "/" : `/${locale}`}
+              className={styles.homeCtaLink}
+            >
+              {copy.ctaHomeLinkText}
+            </Link>
+            .
+          </p>
+
           <div className={styles.heroGrid}>
             {heroImages.map((img) => (
               <figure key={img.productId} className={styles.heroFigure}>
@@ -229,6 +246,18 @@ export default function GuideArticlePage({ locale, guide, copy }: Props) {
               </section>
             );
           })}
+
+          {guide.showCta && (
+            <section className={styles.guideCta}>
+              <h2 className={styles.guideCtaTitle}>{copy.ctaTitle}</h2>
+              <p className={styles.guideCtaSubtitle}>{copy.ctaSubtitle}</p>
+              <PopupForm
+                triggerLabel={copy.ctaButton}
+                triggerClassName={styles.guideCtaButton}
+                useDefaultTriggerStyles={false}
+              />
+            </section>
+          )}
 
           <aside className={styles.related}>
             <h2 className={styles.relatedHeading}>{copy.relatedHeading}</h2>

@@ -24,6 +24,7 @@ export type GuideDefinition = {
   linkCategories: ServiceCategoryCode[];
   heroImageIds: number[];
   datePublished: string;
+  showCta?: boolean;
   uk: GuideLocaleBlock;
   ru: GuideLocaleBlock;
 };

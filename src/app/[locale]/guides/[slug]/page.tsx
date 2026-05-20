@@ -75,6 +75,11 @@ export default async function Page({
           portfolioBedroom: messages.furniture.bedrooms,
           portfolioStore: messages.furniture.stores,
           portfolioProjectPrefix: messages.guides.portfolioProjectPrefix,
+          ctaHomeIntro: messages.guides.ctaHomeIntro,
+          ctaHomeLinkText: messages.guides.ctaHomeLinkText,
+          ctaTitle: messages.guides.ctaTitle,
+          ctaSubtitle: messages.guides.ctaSubtitle,
+          ctaButton: messages.guides.ctaButton,
         }}
       />
     );
@@ -97,6 +102,11 @@ export default async function Page({
         portfolioBedroom: tFurniture("bedrooms"),
         portfolioStore: tFurniture("stores"),
         portfolioProjectPrefix: tGuide("portfolioProjectPrefix"),
+        ctaHomeIntro: tGuide("ctaHomeIntro"),
+        ctaHomeLinkText: tGuide("ctaHomeLinkText"),
+        ctaTitle: tGuide("ctaTitle"),
+        ctaSubtitle: tGuide("ctaSubtitle"),
+        ctaButton: tGuide("ctaButton"),
       }}
     />
   );

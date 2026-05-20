@@ -262,7 +262,12 @@
     "clusterGeneral": "Общие темы",
     "readArticle": "Читать",
     "relatedHeading": "Портфолио по теме",
-    "portfolioProjectPrefix": "Портфолио"
+    "portfolioProjectPrefix": "Портфолио",
+    "ctaHomeIntro": "Готовы заказать? Посмотрите нашу",
+    "ctaHomeLinkText": "мебель на заказ в Харькове",
+    "ctaTitle": "Рассчитайте стоимость вашего проекта",
+    "ctaSubtitle": "Оставьте заявку — менеджер позвонит и озвучит стоимость под ваши размеры и материалы",
+    "ctaButton": "Получить расчёт"
   },
   "pageHeader": {
     "backButton": "Назад"

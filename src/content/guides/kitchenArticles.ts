@@ -8,6 +8,7 @@ export const kitchenGuides: GuideDefinition[] = [
     linkCategories: ["KITCHEN"],
     heroImageIds: [1],
     datePublished: "2026-05-01",
+    showCta: true,
     uk: {
       title:
         "Вартість кухні на замовлення 2026: матеріали, фурнітура та розмір | T-Mebel",
