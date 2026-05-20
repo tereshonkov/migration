@@ -41,7 +41,7 @@ export default async function middleware(
     const targetPath = rest.length > 0 ? `/${rest.join("/")}` : "/";
     const targetUrl = new URL(targetPath, req.url);
     targetUrl.search = req.nextUrl.search;
-    return NextResponse.redirect(targetUrl, 308);
+    return NextResponse.redirect(targetUrl, 301);
   }
 
   return i18nMiddleware(req);

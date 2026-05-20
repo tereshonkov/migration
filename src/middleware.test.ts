@@ -47,14 +47,14 @@ describe("middleware legacy redirects", () => {
   it("redirects /uk to /", async () => {
     const req = new NextRequest(new URL("http://localhost/uk"));
     const res = await middleware(req);
-    expect(res.status).toBe(308);
+    expect(res.status).toBe(301);
     expect(res.headers.get("location")).toBe("http://localhost/");
   });
 
   it("redirects /uk/contacts to /contacts", async () => {
     const req = new NextRequest(new URL("http://localhost/uk/contacts"));
     const res = await middleware(req);
-    expect(res.status).toBe(308);
+    expect(res.status).toBe(301);
     expect(res.headers.get("location")).toBe("http://localhost/contacts");
   });
 });

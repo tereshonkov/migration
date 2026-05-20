@@ -276,5 +276,25 @@
     "goToPhoto": "Go to photo",
     "ctaButton": "Order similar project",
     "note": "Free consultation and cost estimate"
+  },
+  "seoPrivacyPolicy": {
+    "title": "Privacy Policy | T-Mebel",
+    "description": "Learn about T-Mebel's privacy policy: how we collect, use and protect your personal data.",
+    "breadcrumb": "Privacy Policy"
+  },
+  "privacyPolicy": {
+    "heading": "Privacy Policy",
+    "section1Title": "1. General Provisions",
+    "section1Text": "This Privacy Policy defines the procedure for obtaining, storing, processing and using personal data of users of the website t-mebel.com.ua (hereinafter — the \"Website\").",
+    "section2Title": "2. Collection and Use of Information",
+    "section2Text": "We collect only the personal data that you voluntarily provide when using the Website (for example, when placing an order, registering, or subscribing to a newsletter).",
+    "section3Title": "3. Protection of Personal Data",
+    "section3Text": "We take all necessary measures to protect your personal data from unauthorized access, alteration, disclosure or destruction.",
+    "section4Title": "4. Transfer of Data to Third Parties",
+    "section4Text": "We do not transfer your personal data to third parties, except in cases provided for by the legislation of Ukraine.",
+    "section5Title": "5. Changes to the Policy",
+    "section5Text": "We may periodically update this Privacy Policy. Changes take effect from the moment of their publication on the Website.",
+    "section6Title": "6. Contact Information",
+    "section6Text": "If you have any questions regarding this Privacy Policy, please contact us through the feedback form on the Website."
   }
 }
